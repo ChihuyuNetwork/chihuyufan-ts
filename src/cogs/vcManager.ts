@@ -1,6 +1,6 @@
 import { client } from '..'
 
-const defaultName = 'vc1'
+const defaultName = 'VC'
 const voiceChannelId = '928983010081124393'
 
 client.on('messageCreate', async (message) => {
