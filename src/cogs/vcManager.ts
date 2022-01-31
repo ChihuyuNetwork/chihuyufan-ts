@@ -11,12 +11,12 @@ client.on('messageCreate', async (message) => {
   const noDiff = name === message.member?.voice.channel?.name
   let response: string | undefined
 
-  if (!joinedVC) response = 'bois plz join channel first :)'
-  if (name === '') response = 'bois plz give me a name :(('
-  if (noDiff) response = 'bois plz give me a different name :(((((((('
+  if (!joinedVC) response = 'Bois plz join channel first :)'
+  if (name === '') response = 'Bois plz give me a name :(('
+  if (noDiff) response = 'Bois plz give me a different name :(((((((('
   if (response === undefined) {
     await message.member?.voice.channel?.edit({ name })
-    response = `vc name changed to ${name}\nyou have rate limited for 10m`
+    response = `Voice chat name changed to \`${name}\`\n※You have rate limited for 10m`
   }
   await message.channel.send(response)
 })
