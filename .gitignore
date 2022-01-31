@@ -74,3 +74,6 @@ dist
 .dynamodb/
 # TernJS port file
 .tern-port
+
+# modded
+opt
