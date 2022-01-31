@@ -1,15 +1,18 @@
 import { client } from '..'
 import { MessageButton, MessageActionRow } from 'discord.js'
+import outdent from 'outdent'
 
-const serverIP = 'mc.hirosuke.works'
+const serverIP =
+  'mc.hirosuke.works\n繋がらなかった場合は運営にお申し付けください。'
 const discordInviteURL = 'https://discord.gg/gWTWVsqZB6'
 const scrapboxInviteURL =
   'https://scrapbox.io/projects/hiro-hub/invitations/c687d9ed3a7fdc50a01730e9227d01c5'
 
 client.on('messageCreate', async (message) => {
-  if (message.author.id !== '743393055113216093') return // hirosuke only
+  const botAuthors = ['608242236546613259', '743393055113216093']
+  if (!botAuthors.includes(message.author.id)) return // hirosuke only
 
-  if (message.content.startsWith('?button')) {
+  if (message.content.startsWith('.button')) {
     const buttonShowServerIP = new MessageButton()
       .setCustomId('showServerIP')
       .setStyle('PRIMARY')
@@ -28,9 +31,20 @@ client.on('messageCreate', async (message) => {
       buttonShowScrapboxInviteURL
     ]
 
+    const content = outdent`
+    【　ようこそ　】
+    このサーバーは、暇なときに遊戯<ｱｿ>ぶ鯖です。──
+
+    【　ちなみに　】
+    全て運営の判断で処罰が下されます。
+
+    【　さておき　】
+    ボタンをタップ / クリックすることで情報が見れます。
+    何も表示されない場合は Discord アプリのアップデートを試してみてください。
+    `
+
     await message.channel.send({
-      content:
-        'ボタンをタップ / クリックしてください。\nボタンが表示されない場合は、Discord のアップデートをお試しください。 ',
+      content: content,
       components: [new MessageActionRow().addComponents(buttons)]
     })
   }
