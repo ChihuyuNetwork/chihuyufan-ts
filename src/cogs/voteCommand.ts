@@ -23,7 +23,7 @@ client.on('messageCreate', async (message) => {
     for (let i = 0; i < args.length - 1; i++) {
       const emoji = String.fromCodePoint(constEmojiLargeA + i)
       emojis.push(emoji)
-      choices.push(`${emoji}: ${args[i + 1]}`)
+      choices.push(`${emoji} ${args[i + 1]}`)
     }
   }
 
