@@ -27,14 +27,15 @@ client.on('messageCreate', async (message) => {
     }
   }
 
+  const author = await message.author.fetch()
   const embed = new MessageEmbed()
     .setAuthor({
-      name: message.author.username,
+      name: author.username,
       url: message.url,
-      iconURL: message.author.avatarURL()!
+      iconURL: author.avatarURL()!
     })
     .setTitle(args[0])
-    .setColor(message.author.hexAccentColor || '#ffffff')
+    .setColor(author.hexAccentColor || '#ffffff')
     .setTimestamp()
     .setDescription(choices.join('\n'))
 
