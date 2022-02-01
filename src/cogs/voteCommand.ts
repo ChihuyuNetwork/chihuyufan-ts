@@ -1,5 +1,7 @@
-import { MessageEmbed } from 'discord.js'
+import { MessageEmbed, User, HexColorString } from 'discord.js'
 import { client } from '..'
+import { getAverageColor } from 'fast-average-color-node'
+import fetch from 'node-fetch'
 
 client.on('messageCreate', async (message) => {
   if (!message.content.startsWith('.vote')) return
@@ -35,10 +37,17 @@ client.on('messageCreate', async (message) => {
       iconURL: author.avatarURL()!
     })
     .setTitle(args[0])
-    .setColor(author.hexAccentColor || '#ffffff')
+    .setColor((await user2color(author)) || '#ffffff')
     .setTimestamp()
     .setDescription(choices.join('\n'))
 
   const voteBoard = await message.channel.send({ embeds: [embed] })
   emojis.map((emoji) => voteBoard.react(emoji))
 })
+
+const user2color = async (user: User): Promise<HexColorString> => {
+  const url =
+    user.avatarURL({ format: 'png', size: 16 }) || user.defaultAvatarURL
+  const image = await (await fetch(url)).buffer()
+  return (await getAverageColor(image)).hex as HexColorString
+}
