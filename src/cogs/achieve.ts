@@ -2,7 +2,10 @@ import { GuildMember, RoleResolvable } from 'discord.js'
 import { client } from '..'
 
 client.on('messageCreate', async (message) => {
-  if (message.content.startsWith('.achieve')) {
+  if (
+    message.content.startsWith('.achieve') &&
+    message.member?.permissions.has('ADMINISTRATOR')
+  ) {
     const args = message.content.split(' ').slice(1)
 
     const target =
