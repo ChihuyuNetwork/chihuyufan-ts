@@ -31,7 +31,7 @@ client.on('messageCreate', async (message) => {
       target?.roles.add(role as RoleResolvable)
 
       await message.channel.send(
-        `${target?.displayName} has unlocked achivement: **${role?.name}**`
+        `${target} has unlocked achivement: "**${role?.name}**"`
       )
     } else {
       await message.channel.send(
