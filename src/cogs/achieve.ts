@@ -25,9 +25,9 @@ client.on('messageCreate', async (message) => {
     }
 
     if (target.roles.cache.find((r) => r.name === args[1]) === undefined) {
-      const role = await message.guild?.roles.create({
-        name: args.slice(1).join(' ')
-      })
+      const role =
+        message.guild?.roles.cache.find((r) => r.name === args[1]) ||
+        (await message.guild?.roles.create({ name: args.slice(1).join(' ') }))
       target?.roles.add(role as RoleResolvable)
 
       await message.channel.send(
