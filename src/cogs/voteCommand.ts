@@ -8,8 +8,9 @@ client.on('messageCreate', async (message) => {
   const args = message.content.split(' ').slice(1)
 
   let response: string | undefined
-  if (args.length === 0) response = 'Plz provide the title of the poll.'
-  if (args.length >= 22) response = 'Too many arguments. Please less than 20.'
+  if (args.length === 0) response = 'タイトルを入力してください。'
+  if (args.length >= 22)
+    response = '選択肢が多すぎます。20個以下にしてください。'
   if (response !== undefined) {
     await message.channel.send(response)
     return

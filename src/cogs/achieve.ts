@@ -15,12 +15,12 @@ client.on('messageCreate', async (message) => {
       )
 
     if (target === undefined) {
-      await message.channel.send('Specify user not found.')
+      await message.channel.send('ユーザーが見つかりませんでした。')
       return
     }
 
     if (args.length < 2) {
-      await message.channel.send('Please provide a role name.')
+      await message.channel.send('ロール名を入力してください。')
       return
     }
 
@@ -31,12 +31,10 @@ client.on('messageCreate', async (message) => {
       target?.roles.add(role as RoleResolvable)
 
       await message.channel.send(
-        `${target} has unlocked achivement: "**${role?.name}**"`
+        `${target}が実績解除しました: "**${role?.name}**"`
       )
     } else {
-      await message.channel.send(
-        `The user has already unlocked that achivement.`
-      )
+      await message.channel.send(`ユーザーは既に実績を解除しています。`)
     }
   }
 })

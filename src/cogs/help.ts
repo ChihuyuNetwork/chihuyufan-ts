@@ -4,15 +4,15 @@ import { client } from '..'
 client.on('messageCreate', async (message) => {
   if (message.content.startsWith('.help')) {
     const cmds = [
-      `**.neko**: meow`,
-      `**.achieve**: unlock user's achievement.`,
-      `**.vc**: change joining vc name.`,
-      `**.vote**: start a vote.`,
-      `**.help**: show this.`
+      `**.neko**: にゃー`,
+      `**.achieve**: ユーザーを実績を解除します`,
+      `**.vc**: 参加しているVCの名前を変更します`,
+      `**.vote**: 投票を開始します`,
+      `**.help**: これ`
     ]
 
     const embed = new MessageEmbed()
-      .setTitle('Chihuyu fan Commands List')
+      .setTitle('Chihuyu fan - コマンドリファレンス')
       .setColor('AQUA')
       .setDescription(cmds.join('\n'))
       .setTimestamp()

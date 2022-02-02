@@ -11,12 +11,12 @@ client.on('messageCreate', async (message) => {
   const noDiff = name === message.member?.voice.channel?.name
   let response: string | undefined
 
-  if (!joinedVC) response = 'Bois plz join channel first :)'
-  if (name === '') response = 'Bois plz give me a name :(('
-  if (noDiff) response = 'Bois plz give me a different name :(((((((('
+  if (!joinedVC) response = 'チャンネルに参加してください。'
+  if (name === '') response = '名前を入力してください。'
+  if (noDiff) response = '既にその名前です。'
   if (response === undefined) {
     await message.member?.voice.channel?.edit({ name })
-    response = `Voice chat name changed to \`${name}\`\n※You have rate limited for 10m`
+    response = `チャンネル名を\`${name}\`に変更しました。\n※10分のレートリミットがあります。`
   }
   await message.channel.send(response)
 })
