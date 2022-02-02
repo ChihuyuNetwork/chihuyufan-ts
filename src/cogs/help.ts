@@ -1,4 +1,3 @@
-import { GuildMember, RoleResolvable } from 'discord.js'
 import { client } from '..'
 
 client.on('messageCreate', async (message) => {
