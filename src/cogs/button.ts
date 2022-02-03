@@ -4,7 +4,7 @@ import outdent from 'outdent'
 
 const serverIP =
   '繋がらない場合は運営に連絡してください。\n\n`mc.hirosuke.works`'
-const discordInviteURL = 'https://discord.gg/mrtwuPPxAh'
+const discordInviteURL = 'https://chihuyu.love/'
 const scrapboxInviteURL =
   'https://scrapbox.io/projects/hiro-hub/invitations/c687d9ed3a7fdc50a01730e9227d01c5'
 
