@@ -17,14 +17,13 @@ client.on('messageCreate', async (message) => {
   const [, target, ...tmp] = message.content.split(' ')
   const member =
     message.mentions.members?.first() ||
-    message.guild.members.cache.find((m) => isTarget(m, target)) ||
-    (await message.guild.members.fetch(target))
+    message.guild.members?.cache.find((m) => isTarget(m, target))
   const achieve = tmp.join(' ')
 
   let err: string | undefined
-  if (!member) err = 'ユーザーが見つかりませんでした。'
+  if (member?.roles.cache.has(achieve)) err = '既に実績を解除しています。'
   if (achieve.length === 0) err = 'ロール名を入力してください。'
-  if (member.roles.cache.has(achieve)) err = '既に実績を解除しています。'
+  if (!member) err = 'ユーザーが見つかりませんでした。'
   if (err) {
     await message.channel.send(err)
     return
@@ -33,7 +32,7 @@ client.on('messageCreate', async (message) => {
   const role =
     message.guild.roles.cache.find((r) => isAchieve(r, achieve)) ||
     (await message.guild.roles.create({ name: achieve }))
-  await member.roles.add(role)
+  await member?.roles.add(role)
   await message.channel.send(`${member}が実績解除しました: "**${role.name}**"`)
   await message.delete()
 })
