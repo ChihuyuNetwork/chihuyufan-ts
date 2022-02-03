@@ -1,4 +1,4 @@
-import { MessageEmbed, User, HexColorString } from 'discord.js'
+import { GuildMember, HexColorString, MessageEmbed } from 'discord.js'
 import { client } from '..'
 import { getAverageColor } from 'fast-average-color-node'
 import fetch from 'node-fetch'
@@ -30,12 +30,12 @@ client.on('messageCreate', async (message) => {
     }
   }
 
-  const author = await message.author.fetch()
+  const author = message.guild?.members?.cache.get(message.author.id)!
   const embed = new MessageEmbed()
     .setAuthor({
-      name: author.username,
+      name: author.user.username,
       url: message.url,
-      iconURL: author.avatarURL()!
+      iconURL: author.displayAvatarURL()
     })
     .setTitle(args[0])
     .setColor((await user2color(author)) || '#ffffff')
@@ -46,9 +46,8 @@ client.on('messageCreate', async (message) => {
   emojis.map((emoji) => voteBoard.react(emoji))
 })
 
-const user2color = async (user: User): Promise<HexColorString> => {
-  const url =
-    user.avatarURL({ format: 'png', size: 16 }) || user.defaultAvatarURL
+const user2color = async (user: GuildMember): Promise<HexColorString> => {
+  const url = user.displayAvatarURL({ format: 'png', size: 16 })
   const image = await (await fetch(url)).buffer()
   return (await getAverageColor(image)).hex as HexColorString
 }
