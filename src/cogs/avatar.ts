@@ -19,7 +19,7 @@ client.on('messageCreate', async (message) => {
   const url =
     member?.avatarURL({ format: 'png', size: 1024 }) ||
     member?.user.avatarURL({ format: 'png', size: 1024 }) ||
-    'undefined'
+    member?.user.defaultAvatarURL!
 
   const embed = new MessageEmbed()
     .setColor(
