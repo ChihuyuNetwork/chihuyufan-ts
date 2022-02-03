@@ -35,7 +35,7 @@ client.on('messageCreate', async (message) => {
     .setAuthor({
       name: author.username,
       url: message.url,
-      iconURL: author.avatarURL()!
+      iconURL: message.guild?.members?.cache.get(message.author.id)!.avatarURL() || author.avatarURL() || 'undefined'
     })
     .setTitle(args[0])
     .setColor((await user2color(author)) || '#ffffff')
