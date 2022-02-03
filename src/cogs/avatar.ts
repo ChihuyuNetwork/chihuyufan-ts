@@ -17,7 +17,7 @@ client.on('messageCreate', async (message) => {
     message.guild.members?.cache.find((m) => isTarget(m, args.join(' '))) ||
     message.guild.members?.cache.find((m) => m.id === message.author.id)
   const url =
-    member?.avatarURL({ format: 'png', size: 512 }) ||
+    member?.avatarURL({ format: 'png', size: 1024 }) ||
     member?.user.avatarURL() ||
     'undefined'
 
