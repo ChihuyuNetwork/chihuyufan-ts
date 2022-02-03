@@ -35,4 +35,5 @@ client.on('messageCreate', async (message) => {
     (await message.guild.roles.create({ name: achieve }))
   await member.roles.add(role)
   await message.channel.send(`${member}が実績解除しました: "**${role.name}**"`)
+  await message.delete()
 })
