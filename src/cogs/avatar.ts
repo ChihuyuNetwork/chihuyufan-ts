@@ -17,8 +17,8 @@ client.on('messageCreate', async (message) => {
     message.guild.members?.cache.find((m) => isTarget(m, args.join(' '))) ||
     message.guild.members?.cache.find((m) => m.id === message.author.id)
   const url =
-    member?.avatarURL({ format: 'png', size: 1024 }) ||
-    member?.user.avatarURL({ format: 'png', size: 1024 }) ||
+    member?.avatarURL({ dynamic: true, format: 'png', size: 1024 }) ||
+    member?.user.avatarURL({ dynamic: true, format: 'png', size: 1024 }) ||
     'undefined'
 
   const embed = new MessageEmbed()
