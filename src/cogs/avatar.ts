@@ -15,11 +15,9 @@ client.on('messageCreate', async (message) => {
   let member =
     message.mentions.members?.first() ||
     message.guild.members?.cache.find((m) => isTarget(m, args.join(' '))) ||
-    message.guild.members?.cache.find((m) => m.id === message.author.id)
+    message.guild.members?.cache.get(message.author.id)
   const url =
-    member?.avatarURL({ dynamic: true, format: 'png', size: 4096 }) ||
-    member?.user.avatarURL({ dynamic: true, format: 'png', size: 4096 }) ||
-    member?.user.defaultAvatarURL!
+    member?.displayAvatarURL({ dynamic: true, format: 'png', size: 4096 })!
 
   const embed = new MessageEmbed()
     .setColor(
