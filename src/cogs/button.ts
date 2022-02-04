@@ -1,6 +1,6 @@
-import { client } from '..'
-import { MessageButton, MessageActionRow } from 'discord.js'
+import { MessageActionRow, MessageButton } from 'discord.js'
 import outdent from 'outdent'
+import { client } from '..'
 
 const serverIP =
   '繋がらない場合は運営に連絡してください。\n\n`mc.hirosuke.works`'

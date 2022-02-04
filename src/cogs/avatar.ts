@@ -1,7 +1,7 @@
-import { GuildMember, MessageEmbed, HexColorString } from 'discord.js'
-import { client } from '..'
+import { GuildMember, HexColorString, MessageEmbed } from 'discord.js'
 import { getAverageColor } from 'fast-average-color-node'
 import fetch from 'node-fetch'
+import { client } from '..'
 
 const isTarget = (m: GuildMember, str: string) => {
   return [m.displayName, m.nickname, m.user.username, m.user.id].includes(str)
@@ -16,8 +16,11 @@ client.on('messageCreate', async (message) => {
     message.mentions.members?.first() ||
     message.guild.members?.cache.find((m) => isTarget(m, args.join(' '))) ||
     message.guild.members?.cache.get(message.author.id)
-  const url =
-    member?.displayAvatarURL({ dynamic: true, format: 'png', size: 4096 })!
+  const url = member?.displayAvatarURL({
+    dynamic: true,
+    format: 'png',
+    size: 4096
+  })!
 
   const embed = new MessageEmbed()
     .setColor(

@@ -1,6 +1,6 @@
-import { client } from '..'
-import { GuildMember, MessageButton, MessageActionRow } from 'discord.js'
+import { GuildMember, MessageActionRow, MessageButton } from 'discord.js'
 import outdent from 'outdent'
+import { client } from '..'
 
 const roleId = '929124332561641502'
 

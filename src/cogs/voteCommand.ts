@@ -1,7 +1,7 @@
 import { GuildMember, HexColorString, MessageEmbed } from 'discord.js'
-import { client } from '..'
 import { getAverageColor } from 'fast-average-color-node'
 import fetch from 'node-fetch'
+import { client } from '..'
 
 client.on('messageCreate', async (message) => {
   if (!message.content.startsWith('.vote')) return
