@@ -11,7 +11,8 @@ client.on('messageCreate', async (message) => {
   if (!message.guild || !message.member) return
   if (!message.content.startsWith('.avatar')) return
 
-  const args = message.content.split(' ').slice(1)
+  const [prefix, ...args] = message.content.split(' ')
+  if (prefix != '.avatar') return
   let member =
     message.mentions.members?.first() ||
     message.guild.members?.cache.find((m) => isTarget(m, args.join(' '))) ||

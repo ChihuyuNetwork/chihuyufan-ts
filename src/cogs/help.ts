@@ -2,7 +2,7 @@ import { MessageEmbed } from 'discord.js'
 import { client } from '..'
 
 client.on('messageCreate', async (message) => {
-  if (message.content.startsWith('.help')) {
+  if (message.content === '.help') {
     const cmds = [
       `**.neko**: にゃー`,
       `**.achieve**: ユーザーを実績を解除します`,

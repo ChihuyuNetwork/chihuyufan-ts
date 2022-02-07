@@ -5,7 +5,8 @@ import { client } from '..'
 
 client.on('messageCreate', async (message) => {
   if (!message.content.startsWith('.vote')) return
-  const args = message.content.split(' ').slice(1)
+  const [prefix, ...args] = message.content.split(' ')
+  if (prefix != '.vote') return
 
   let response: string | undefined
   if (args.length === 0) response = 'タイトルを入力してください。'
