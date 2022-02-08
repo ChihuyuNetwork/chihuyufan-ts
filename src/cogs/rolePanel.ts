@@ -208,7 +208,7 @@ client.on('messageCreate', async (message) => {
 
               await askMsg
                 .edit({
-                  content: `${label}で上書きしました。`,
+                  content: `\`${label}\`で上書きしました。`,
                   components: []
                 })
                 .then(() => {
@@ -331,7 +331,7 @@ client.on('messageCreate', async (message) => {
         })
         await message
           .reply(
-            `<@&${id}>用のボタンを${roleName}のラベルをつけて作成しました。`
+            `<@&${id}>用のボタンを\`${roleName}\`のラベルをつけて作成しました。`
           )
           .then((replyMessage) => {
             if (targetMsg?.channel !== message.channel) return
