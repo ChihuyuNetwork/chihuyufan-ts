@@ -149,6 +149,9 @@ client.on('messageCreate', async (message) => {
           content: outdent`
           すでに<@&${id}>用のボタンが作成されているようです。
           既存のボタンをどうしますか。`,
+          allowedMentions: {
+            repliedUser: true
+          },
           components: [
             new MessageActionRow().addComponents([
               new MessageButton()
@@ -239,6 +242,9 @@ client.on('messageCreate', async (message) => {
               await askMsg
                 .edit({
                   content: `<@&${id}>用のボタンを削除しました。`,
+                  allowedMentions: {
+                    repliedUser: true
+                  },
                   components: []
                 })
                 .then(() => {
@@ -293,9 +299,12 @@ client.on('messageCreate', async (message) => {
           ]
         })
         await message
-          .reply(
-            `<@&${id}>用のボタンを\`${roleName}\`のラベルをつけて作成しました。`
-          )
+          .reply({
+            content: `<@&${id}>用のボタンを\`${roleName}\`のラベルをつけて作成しました。`,
+            allowedMentions: {
+              repliedUser: true
+            }
+          })
           .then((replyMessage) => {
             if (targetMsg?.channel !== message.channel) return
             deleteMessage(message)
@@ -317,9 +326,12 @@ client.on('messageCreate', async (message) => {
         })
 
         await message
-          .reply(
-            `<@&${id}>用のボタンを\`${roleName}\`のラベルをつけて作成しました。`
-          )
+          .reply({
+            content: `<@&${id}>用のボタンを\`${roleName}\`のラベルをつけて作成しました。`,
+            allowedMentions: {
+              repliedUser: true
+            }
+          })
           .then((replyMessage) => {
             if (targetMsg?.channel !== message.channel) return
             deleteMessage(message)
@@ -336,9 +348,12 @@ client.on('messageCreate', async (message) => {
           components: panelComponents
         })
         await message
-          .reply(
-            `<@&${id}>用のボタンを\`${roleName}\`のラベルをつけて作成しました。`
-          )
+          .reply({
+            content: `<@&${id}>用のボタンを\`${roleName}\`のラベルをつけて作成しました。`,
+            allowedMentions: {
+              repliedUser: true
+            }
+          })
           .then((replyMessage) => {
             if (targetMsg?.channel !== message.channel) return
             deleteMessage(message)
