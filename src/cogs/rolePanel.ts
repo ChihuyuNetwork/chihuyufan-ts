@@ -23,6 +23,12 @@ client.on('messageCreate', async (message) => {
       }, 5000)
     }
   }
+  if (
+    !message.guild ||
+    !message.member ||
+    !message.member.permissions.has('ADMINISTRATOR')
+  )
+    return
   if (message.content.startsWith('.panel')) {
     const args = message.content.split(' ')
     if (args[0] != '.panel') return
