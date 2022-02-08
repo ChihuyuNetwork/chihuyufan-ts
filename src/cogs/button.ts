@@ -12,7 +12,7 @@ client.on('messageCreate', async (message) => {
   const botAuthors = ['608242236546613259', '743393055113216093']
   if (!botAuthors.includes(message.author.id)) return // hirosuke only
 
-  if (message.content.startsWith('.button')) {
+  if (message.content === '.button') {
     const buttonShowServerIP = new MessageButton()
       .setCustomId('showServerIP')
       .setStyle('PRIMARY')
