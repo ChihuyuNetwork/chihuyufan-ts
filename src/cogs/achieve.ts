@@ -19,7 +19,8 @@ client.on('messageCreate', async (message) => {
   if (!message.content.startsWith('.achieve')) return
   if (!message.member.permissions.has('ADMINISTRATOR')) return
 
-  const [, target, ...tmp] = message.content.split(' ')
+  const [prefix, target, ...tmp] = message.content.split(' ')
+  if (prefix != '.achieve') return
   const member =
     message.mentions.members?.first() ||
     message.guild.members?.cache.find((m) => isTarget(m, target)) ||

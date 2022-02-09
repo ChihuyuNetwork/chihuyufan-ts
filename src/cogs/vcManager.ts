@@ -6,7 +6,9 @@ const voiceChannelId = '928983010081124393'
 client.on('messageCreate', async (message) => {
   if (!message.content.startsWith('.vc')) return
 
-  const name = message.content.split(' ').slice(1).join(' ')
+  const [prefix, ...nameArray] = message.content.split(' ')
+  const name = nameArray.join(' ')
+  if (prefix != '.vc') return
   const joinedVC = message.member?.voice.channel?.id === voiceChannelId
   const noDiff = name === message.member?.voice.channel?.name
   let response: string | undefined
