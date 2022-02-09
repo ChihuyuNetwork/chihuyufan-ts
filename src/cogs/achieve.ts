@@ -1,4 +1,9 @@
-import { GuildMember, Role } from 'discord.js'
+import {
+  GuildMember,
+  ReplyMessageOptions,
+  ReplyOptions,
+  Role
+} from 'discord.js'
 import { client } from '..'
 
 const isTarget = (m: GuildMember, str: string) => {
@@ -17,12 +22,17 @@ client.on('messageCreate', async (message) => {
   const [, target, ...tmp] = message.content.split(' ')
   const member =
     message.mentions.members?.first() ||
-    message.guild.members?.cache.find((m) => isTarget(m, target))
-  const achieve = tmp.join(' ')
+    message.guild.members?.cache.find((m) => isTarget(m, target)) ||
+    (await message.channel.messages.fetch(message.reference?.messageId!)).member
+  var achieve = tmp.join(' ')
+
+  if (!achieve && message.reference) {
+    achieve = target
+  }
 
   let err: string | undefined
   if (member?.roles.cache.has(achieve)) err = '既に実績を解除しています。'
-  if (achieve.length === 0) err = 'ロール名を入力してください。'
+  if (!achieve) err = 'ロール名を入力してください。'
   if (!member) err = 'ユーザーが見つかりませんでした。'
   if (err) {
     await message.channel.send(err)
