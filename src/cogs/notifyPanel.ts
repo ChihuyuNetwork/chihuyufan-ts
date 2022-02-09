@@ -84,7 +84,11 @@ client.on('messageCreate', async (message) => {
     if (targetLink == null) {
       await message.channel
         .send({
-          content: 'ボタンを押すとロールの付与状態を切り替えられます。',
+          content: outdent`
+          【　通知　】
+          お知らせ通知の受け取りを設定できます。
+          ボタンをタップ/クリックすることでオン・オフを切り替えられます。
+          `,
           components: [
             new MessageActionRow().addComponents(
               new MessageButton()
@@ -124,8 +128,7 @@ client.on('messageCreate', async (message) => {
       if (
         !(
           targetMsg.author == client.user &&
-          targetMsg.content ==
-            'ボタンを押すとロールの付与状態を切り替えられます。'
+          targetMsg.content.includes('【　通知　】')
         )
       ) {
         await message
