@@ -43,6 +43,7 @@ client.on('messageCreate', async (message) => {
     .setTimestamp()
     .setDescription(choices.join('\n'))
 
+  await message.delete()
   const voteBoard = await message.channel.send({ embeds: [embed] })
   emojis.map((emoji) => voteBoard.react(emoji))
 })
