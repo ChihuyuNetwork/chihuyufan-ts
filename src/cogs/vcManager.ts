@@ -1,7 +1,7 @@
 import { client } from '..'
 
 const defaultName = 'VC'
-const voiceChannelId = '928983010081124393'
+const voiceChannelsId = ['928983010081124393', '941561562810966036']
 
 client.on('messageCreate', async (message) => {
   if (!message.content.startsWith('.vc')) return
@@ -9,7 +9,7 @@ client.on('messageCreate', async (message) => {
   const [prefix, ...nameArray] = message.content.split(' ')
   const name = nameArray.join(' ')
   if (prefix != '.vc') return
-  const joinedVC = message.member?.voice.channel?.id === voiceChannelId
+  const joinedVC = voiceChannelsId.includes(message.member?.voice.channel?.id!)
   const noDiff = name === message.member?.voice.channel?.name
   let response: string | undefined
 
@@ -27,7 +27,7 @@ client.on('voiceStateUpdate', async (oldState, newState) => {
   const channel = newState.channel ? newState.channel : oldState.channel
   if (
     !channel ||
-    channel.id !== voiceChannelId ||
+    !voiceChannelsId.includes(channel.id) ||
     channel.members.size !== 0 ||
     channel.name === defaultName
   ) {
