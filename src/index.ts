@@ -15,3 +15,4 @@ const chihuyu = new MyBot({
 })()
 
 export const client = chihuyu
+export const guildId = '928978742825586708'
