@@ -1,10 +1,5 @@
-import {
-  GuildMember,
-  ReplyMessageOptions,
-  ReplyOptions,
-  Role
-} from 'discord.js'
-import { client } from '..'
+import { GuildMember, Role } from 'discord.js'
+import { client, guildId } from '..'
 
 const isTarget = (m: GuildMember, str: string) => {
   return [m.displayName, m.nickname, m.user.username, m.user.id].includes(str)
@@ -13,6 +8,55 @@ const isTarget = (m: GuildMember, str: string) => {
 const isAchieve = (r: Role, str: string) => {
   return [r.name, r.id].includes(str)
 }
+
+client.once('ready', async () => {
+  client.application?.commands.create(
+    {
+      name: 'achieve',
+      description: 'ユーザーの実績を解除します',
+      options: [
+        {
+          type: 'USER',
+          name: 'member',
+          description: '対象ユーザー',
+          required: true
+        },
+        {
+          type: 'STRING',
+          name: 'achieve',
+          description: '実績名',
+          required: true
+        }
+      ]
+    },
+    guildId
+  )
+})
+
+client.on('interactionCreate', async (interaction) => {
+  if (!interaction.isCommand() || interaction.commandName !== 'achieve') return
+  if (!(interaction.member as GuildMember).permissions.has('ADMINISTRATOR')) {
+    await interaction.reply({
+      content: 'このコマンドは管理者権限を持つ人のみ実行できます。',
+      ephemeral: true
+    })
+    return
+  }
+  const member = interaction.options.get('member')?.member
+  const achieve = interaction.options.get('achieve')?.value as string
+  let err: string | undefined
+  if ((member as GuildMember).roles.cache.has(achieve))
+    err = '既に実績を解除しています。'
+  if (err) {
+    await interaction.reply({ content: err, ephemeral: true })
+    return
+  }
+  const role =
+    interaction.guild!.roles.cache.find((r) => isAchieve(r, achieve)) ||
+    (await interaction.guild!.roles.create({ name: achieve }))
+  await (member as GuildMember).roles.add(role)
+  await interaction.reply(`${member}が実績解除しました: "**${role.name}**"`)
+})
 
 client.on('messageCreate', async (message) => {
   if (!message.guild || !message.member) return
