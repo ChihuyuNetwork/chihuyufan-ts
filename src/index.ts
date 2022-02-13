@@ -9,6 +9,8 @@ const chihuyu = new MyBot({
 ;(async () => {
   await chihuyu.loadCogs()
   await chihuyu.login(discordBotToken)
+  await chihuyu.application?.fetch()
+  await chihuyu.application?.commands.set([])
   console.log('Bot is online!')
 })()
 
