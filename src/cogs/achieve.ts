@@ -34,8 +34,9 @@ client.once('ready', async () => {
 })
 
 client.on('interactionCreate', async (interaction) => {
-  if (!interaction.isCommand() || interaction.commandName !== 'achieve') return
-  if (!(interaction.member as GuildMember).permissions.has('ADMINISTRATOR')) {
+  // Guildで使われたコマンドか判定してないけど大丈夫？
+  if (!interaction.inCachedGuild() || !interaction.isCommand() || interaction.commandName !== 'achieve') return
+  if (!(interaction.member.permissions.has('ADMINISTRATOR'))) {
     await interaction.reply({
       content: 'このコマンドは管理者権限を持つ人のみ実行できます。',
       ephemeral: true
@@ -43,7 +44,7 @@ client.on('interactionCreate', async (interaction) => {
     return
   }
   // Required Optionならこうすることで not nullにすることができる
-  const member = interaction.options.get('member', true).member as GuildMember
+  const member = interaction.options.get('member', true).member!
   const achieve = interaction.options.get('achieve', true).value as string
   let err: string | undefined
   if (member.roles.cache.has(achieve))
