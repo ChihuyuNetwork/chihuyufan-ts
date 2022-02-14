@@ -70,7 +70,7 @@ client.on('messageCreate', async (message) => {
     message.mentions.members?.first() ||
     message.guild.members?.cache.find((m) => isTarget(m, target)) ||
     (await message.channel.messages.fetch(message.reference?.messageId!)).member
-  var achieve = tmp.join(' ')
+  let achieve = tmp.join(' ')
 
   if (!achieve && message.reference) {
     achieve = target
