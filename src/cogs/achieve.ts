@@ -42,8 +42,9 @@ client.on('interactionCreate', async (interaction) => {
     })
     return
   }
-  const member = interaction.options.get('member')?.member
-  const achieve = interaction.options.get('achieve')?.value as string
+  // Required Optionならこうすることで not nullにすることができる
+  const member = interaction.options.get('member', true).member
+  const achieve = interaction.options.get('achieve', true).value as string
   let err: string | undefined
   if ((member as GuildMember).roles.cache.has(achieve))
     err = '既に実績を解除しています。'
