@@ -43,10 +43,10 @@ client.on('interactionCreate', async (interaction) => {
     return
   }
   // Required Optionならこうすることで not nullにすることができる
-  const member = interaction.options.get('member', true).member
+  const member = interaction.options.get('member', true).member as GuildMember
   const achieve = interaction.options.get('achieve', true).value as string
   let err: string | undefined
-  if ((member as GuildMember).roles.cache.has(achieve))
+  if (member.roles.cache.has(achieve))
     err = '既に実績を解除しています。'
   if (err) {
     await interaction.reply({ content: err, ephemeral: true })
@@ -55,7 +55,7 @@ client.on('interactionCreate', async (interaction) => {
   const role =
     interaction.guild!.roles.cache.find((r) => isAchieve(r, achieve)) ||
     (await interaction.guild!.roles.create({ name: achieve }))
-  await (member as GuildMember).roles.add(role)
+  await member.roles.add(role)
   await interaction.reply(`${member}が実績解除しました: "**${role.name}**"`)
 })
 
