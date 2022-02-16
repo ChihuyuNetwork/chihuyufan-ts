@@ -2,7 +2,7 @@
   "name": "chihuyufan",
   "version": "1.0.0",
   "description": "a Discord bot",
-  "main": "index.js",
+  "main": "opt/index.js",
   "scripts": {
     "start": "node opt/index.js",
     "debug": "ts-node src/index.ts",
