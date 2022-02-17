@@ -49,7 +49,7 @@ client.on('messageCreate', async (message) => {
       .setColor('AQUA')
       .setDescription(cmds.join('\n'))
       .setTimestamp()
-      .setFooter('スラッシュコマンドも使用可能です')
+      .setFooter({ text: 'スラッシュコマンドも使用可能です' })
     await message.channel.send({ embeds: [embed] })
   }
 })
