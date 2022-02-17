@@ -34,7 +34,6 @@ client.once('ready', async () => {
 })
 
 client.on('interactionCreate', async (interaction) => {
-  // Guildで使われたコマンドか判定してないけど大丈夫？
   if (!interaction.inCachedGuild() || !interaction.isCommand() || interaction.commandName !== 'achieve') return
   if (!(interaction.member.permissions.has('ADMINISTRATOR'))) {
     await interaction.reply({
@@ -43,7 +42,6 @@ client.on('interactionCreate', async (interaction) => {
     })
     return
   }
-  // Required Optionならこうすることで not nullにすることができる
   const member = interaction.options.get('member', true).member!
   const achieve = interaction.options.get('achieve', true).value as string
   let err: string | undefined
