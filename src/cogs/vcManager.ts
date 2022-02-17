@@ -1,4 +1,4 @@
-import { GuildMember, InteractionReplyOptions } from 'discord.js'
+import { InteractionReplyOptions } from 'discord.js'
 import { client, guildId } from '..'
 
 const defaultName = 'VC'
@@ -23,13 +23,17 @@ client.once('ready', async () => {
 })
 
 client.on('interactionCreate', async (interaction) => {
-  if (!interaction.isCommand() || interaction.commandName !== 'vc') return
-  const name = interaction.options.getString('name')!.trim()
-  const joinedVC = voiceChannelsId.includes(
-    (interaction.member as GuildMember).voice.channel?.id!
+  if (
+    !interaction.inCachedGuild() ||
+    !interaction.isCommand() ||
+    interaction.commandName !== 'vc'
   )
-  const noDiff =
-    name === (interaction.member as GuildMember).voice.channel?.name
+    return
+  const name = interaction.options.getString('name', true).trim()
+  const joinedVC = voiceChannelsId.includes(
+    interaction.member.voice.channel?.id!
+  )
+  const noDiff = name === interaction.member.voice.channel?.name
   let response: string | InteractionReplyOptions | undefined
   if (!joinedVC)
     response = { content: 'チャンネルに参加してください。', ephemeral: true }
@@ -37,7 +41,7 @@ client.on('interactionCreate', async (interaction) => {
     response = { content: '名前を入力してください。', ephemeral: true }
   else if (noDiff) response = { content: '既にその名前です。', ephemeral: true }
   else {
-    await (interaction.member as GuildMember).voice.channel?.edit({ name })
+    await interaction.member.voice.channel?.edit({ name })
     response = `チャンネル名を\`${name}\`に変更しました。\n※10分のレートリミットがあります。`
   }
   await interaction.reply(response)

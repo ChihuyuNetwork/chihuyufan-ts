@@ -1,4 +1,4 @@
-import { GuildMember, HexColorString, Message, MessageEmbed } from 'discord.js'
+import { GuildMember, HexColorString, MessageEmbed } from 'discord.js'
 import { getAverageColor } from 'fast-average-color-node'
 import fetch from 'node-fetch'
 import { client, guildId } from '..'
@@ -27,7 +27,12 @@ client.once('ready', async () => {
 })
 
 client.on('interactionCreate', async (interaction) => {
-  if (!interaction.isCommand() || interaction.commandName !== 'vote') return
+  if (
+    !interaction.inCachedGuild() ||
+    !interaction.isCommand() ||
+    interaction.commandName !== 'vote'
+  )
+    return
   const args = (interaction.options.getString('choice') || '').split(/\s+/)
   if (args.length > 20) {
     await interaction.reply({
@@ -50,17 +55,16 @@ client.on('interactionCreate', async (interaction) => {
     }
   }
 
-  const author = interaction.member as GuildMember
   const embed = new MessageEmbed()
-    .setTitle(interaction.options.getString('title')!)
-    .setColor((await user2color(author)) || '#ffffff')
+    .setTitle(interaction.options.getString('title', true))
+    .setColor((await user2color(interaction.member)) || '#ffffff')
     .setTimestamp()
     .setDescription(choices.join('\n'))
 
-  const voteBoard = (await interaction.reply({
+  const voteBoard = await interaction.reply({
     embeds: [embed],
     fetchReply: true
-  })) as Message
+  })
   emojis.map((emoji) => voteBoard.react(emoji))
 })
 

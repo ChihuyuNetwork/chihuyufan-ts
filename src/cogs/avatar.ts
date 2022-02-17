@@ -25,21 +25,25 @@ client.once('ready', async () => {
 })
 
 client.on('interactionCreate', async (interaction) => {
-  if (!interaction.isCommand() || interaction.commandName !== 'avatar') return
-  const member = (interaction.options.getMember('member') ||
-    interaction.member) as GuildMember
-  const url = member?.displayAvatarURL({
+  if (
+    !interaction.inCachedGuild() ||
+    !interaction.isCommand() ||
+    interaction.commandName !== 'avatar'
+  )
+    return
+  const member = interaction.options.getMember('member') || interaction.member
+  const url = member.displayAvatarURL({
     dynamic: true,
     format: 'png',
     size: 4096
-  })!
+  })
 
   const embed = new MessageEmbed()
     .setColor(
       ((await getAverageColor(await (await fetch(url)).buffer()))
         .hex as HexColorString) || '#ffffff'
     )
-    .setTitle(member?.user.tag || 'undefined')
+    .setTitle(member.user.tag)
     .setImage(url)
     .setTimestamp()
   await interaction.reply({ embeds: [embed] })
