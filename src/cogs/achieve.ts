@@ -34,18 +34,20 @@ client.once('ready', async () => {
 })
 
 client.on('interactionCreate', async (interaction) => {
-  if (!interaction.isCommand() || interaction.commandName !== 'achieve') return
-  if (!(interaction.member as GuildMember).permissions.has('ADMINISTRATOR')) {
+  // Guildで使われたコマンドか判定してないけど大丈夫？
+  if (!interaction.inCachedGuild() || !interaction.isCommand() || interaction.commandName !== 'achieve') return
+  if (!(interaction.member.permissions.has('ADMINISTRATOR'))) {
     await interaction.reply({
       content: 'このコマンドは管理者権限を持つ人のみ実行できます。',
       ephemeral: true
     })
     return
   }
-  const member = interaction.options.get('member')?.member
-  const achieve = interaction.options.get('achieve')?.value as string
+  // Required Optionならこうすることで not nullにすることができる
+  const member = interaction.options.get('member', true).member!
+  const achieve = interaction.options.get('achieve', true).value as string
   let err: string | undefined
-  if ((member as GuildMember).roles.cache.has(achieve))
+  if (member.roles.cache.has(achieve))
     err = '既に実績を解除しています。'
   if (err) {
     await interaction.reply({ content: err, ephemeral: true })
@@ -54,7 +56,7 @@ client.on('interactionCreate', async (interaction) => {
   const role =
     interaction.guild!.roles.cache.find((r) => isAchieve(r, achieve)) ||
     (await interaction.guild!.roles.create({ name: achieve }))
-  await (member as GuildMember).roles.add(role)
+  await member.roles.add(role)
   await interaction.reply(`${member}が実績解除しました: "**${role.name}**"`)
 })
 
@@ -69,7 +71,7 @@ client.on('messageCreate', async (message) => {
     message.mentions.members?.first() ||
     message.guild.members?.cache.find((m) => isTarget(m, target)) ||
     (await message.channel.messages.fetch(message.reference?.messageId!)).member
-  var achieve = tmp.join(' ')
+  let achieve = tmp.join(' ')
 
   if (!achieve && message.reference) {
     achieve = target
