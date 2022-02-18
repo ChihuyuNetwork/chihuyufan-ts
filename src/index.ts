@@ -6,13 +6,13 @@ const chihuyu = new MyBot({
   partials: ['MESSAGE', 'USER']
 })
 
+export const guildId = '928978742825586708'
 ;(async () => {
   await chihuyu.loadCogs()
   await chihuyu.login(discordBotToken)
   await chihuyu.application?.fetch()
-  await chihuyu.application?.commands.set([])
+  await chihuyu.application?.commands.set([], guildId)
   console.log('Bot is online!')
 })()
 
 export const client = chihuyu
-export const guildId = '928978742825586708'
