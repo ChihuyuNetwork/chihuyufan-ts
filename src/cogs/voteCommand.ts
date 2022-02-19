@@ -1,7 +1,72 @@
 import { GuildMember, HexColorString, MessageEmbed } from 'discord.js'
 import { getAverageColor } from 'fast-average-color-node'
 import fetch from 'node-fetch'
-import { client } from '..'
+import { client, guildId } from '..'
+
+client.once('ready', async () => {
+  client.application?.commands.create(
+    {
+      name: 'vote',
+      description: '投票を開始します',
+      options: [
+        {
+          type: 'STRING',
+          name: 'title',
+          description: 'タイトル',
+          required: true
+        },
+        {
+          type: 'STRING',
+          name: 'choice',
+          description: '選択肢'
+        }
+      ]
+    },
+    guildId
+  )
+})
+
+client.on('interactionCreate', async (interaction) => {
+  if (
+    !interaction.inCachedGuild() ||
+    !interaction.isCommand() ||
+    interaction.commandName !== 'vote'
+  )
+    return
+  const args = (interaction.options.getString('choice') || '').split(/\s+/)
+  if (args.length > 20) {
+    await interaction.reply({
+      content: '選択肢が多すぎます。20個以下にしてください。',
+      ephemeral: true
+    })
+    return
+  }
+  let emojis: string[] = []
+  let choices: string[] = []
+  const constEmojiLargeA = 0x1f1e6
+
+  if (args[0] === '') {
+    emojis = ['<:GOOD:931715830444621824>', '<:NO:931715830620778556>']
+  } else {
+    for (let i = 0; i < args.length; i++) {
+      const emoji = String.fromCodePoint(constEmojiLargeA + i)
+      emojis.push(emoji)
+      choices.push(`${emoji} ${args[i]}`)
+    }
+  }
+
+  const embed = new MessageEmbed()
+    .setTitle(interaction.options.getString('title', true))
+    .setColor((await user2color(interaction.member)) || '#ffffff')
+    .setTimestamp()
+    .setDescription(choices.join('\n'))
+
+  const voteBoard = await interaction.reply({
+    embeds: [embed],
+    fetchReply: true
+  })
+  emojis.map((emoji) => voteBoard.react(emoji))
+})
 
 client.on('messageCreate', async (message) => {
   if (!message.content.startsWith('.vote')) return
