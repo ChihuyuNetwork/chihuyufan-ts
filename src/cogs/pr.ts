@@ -1,6 +1,6 @@
 import { client, guildId } from '..'
 
-client.once('ready', async () => {
+client.on('commandsReset', async () => {
   client.application?.commands.create(
     {
       name: 'pr',
