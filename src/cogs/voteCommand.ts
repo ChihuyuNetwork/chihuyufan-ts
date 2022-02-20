@@ -3,7 +3,7 @@ import { getAverageColor } from 'fast-average-color-node'
 import fetch from 'node-fetch'
 import { client, guildId } from '..'
 
-client.once('ready', async () => {
+client.on('commandsReset', async () => {
   client.application?.commands.create(
     {
       name: 'vote',

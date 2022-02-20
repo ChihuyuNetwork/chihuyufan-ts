@@ -4,7 +4,7 @@ import { client, guildId } from '..'
 const defaultName = 'VC'
 const voiceChannelsId = ['928983010081124393', '941561562810966036']
 
-client.once('ready', async () => {
+client.on('commandsReset', async () => {
   client.application?.commands.create(
     {
       name: 'vc',

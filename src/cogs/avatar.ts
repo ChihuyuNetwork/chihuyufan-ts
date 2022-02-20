@@ -7,7 +7,7 @@ const isTarget = (m: GuildMember, str: string) => {
   return [m.displayName, m.nickname, m.user.username, m.user.id].includes(str)
 }
 
-client.once('ready', async () => {
+client.on('commandsReset', async () => {
   client.application?.commands.create(
     {
       name: 'avatar',

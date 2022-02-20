@@ -2,7 +2,7 @@ import { MessageEmbed } from 'discord.js'
 import { text } from 'stream/consumers'
 import { client, guildId } from '..'
 
-client.once('ready', async () => {
+client.on('commandsReset', async () => {
   client.application?.commands.create(
     {
       name: 'help',
