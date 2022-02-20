@@ -9,7 +9,7 @@ const isAchieve = (r: Role, str: string) => {
   return [r.name, r.id].includes(str)
 }
 
-client.once('ready', async () => {
+client.on('commandsReset', async () => {
   client.application?.commands.create(
     {
       name: 'achieve',
