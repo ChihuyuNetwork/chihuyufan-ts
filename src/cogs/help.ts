@@ -1,5 +1,4 @@
 import { MessageEmbed } from 'discord.js'
-import { text } from 'stream/consumers'
 import { client, guildId } from '..'
 
 client.on('commandsReset', async () => {
