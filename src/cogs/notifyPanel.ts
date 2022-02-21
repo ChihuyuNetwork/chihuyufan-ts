@@ -10,8 +10,8 @@ import {
   MessageButton,
   TextChannel
 } from 'discord.js'
-import { client } from '..'
 import { outdent } from 'outdent'
+import { client } from '..'
 
 client.on('messageCreate', async (message) => {
   const deleteMessage = (msg: Message) => {
