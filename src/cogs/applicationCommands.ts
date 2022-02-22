@@ -1,4 +1,5 @@
-import { client, guildId } from '..'
+import { client } from '..'
+import { guildId } from '../constant'
 
 client.once('ready', async () => {
   await client.application?.fetch()

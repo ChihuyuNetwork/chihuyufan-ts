@@ -1,5 +1,6 @@
 import { InteractionReplyOptions } from 'discord.js'
-import { client, guildId } from '..'
+import { client } from '..'
+import { guildId } from '../constant'
 
 const defaultName = 'VC'
 const voiceChannelsId = ['928983010081124393', '941561562810966036']
