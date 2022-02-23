@@ -1,7 +1,8 @@
 import { GuildMember, HexColorString, MessageEmbed } from 'discord.js'
 import { getAverageColor } from 'fast-average-color-node'
 import fetch from 'node-fetch'
-import { client, guildId } from '..'
+import { client } from '..'
+import { guildId } from '../constant'
 
 client.on('commandsReset', async () => {
   client.application?.commands.create(

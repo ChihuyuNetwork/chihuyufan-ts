@@ -1,11 +1,11 @@
 import { Message, TextChannel } from 'discord.js'
 import { client } from '..'
+import { nothingChannelId } from '../constant'
 
 let queue: Message[] = []
 const logCount = 10
 
 let targetChannel: TextChannel
-const targetChannelId = '938000977217331230'
 
 const deleteLog = async () => {
   const target = queue.shift()!
@@ -13,7 +13,7 @@ const deleteLog = async () => {
 }
 
 client.on('ready', async () => {
-  targetChannel = (await client.channels.fetch(targetChannelId)) as TextChannel
+  targetChannel = (await client.channels.fetch(nothingChannelId)) as TextChannel
   const messages = await targetChannel.messages.fetch()
   queue.push(...messages.reverse().values())
 
@@ -22,7 +22,7 @@ client.on('ready', async () => {
 })
 
 client.on('messageCreate', async (message) => {
-  if (message.channel.id !== targetChannelId) return
+  if (message.channel.id !== nothingChannelId) return
   if (queue.push(message) <= logCount) return
   await deleteLog()
 })
