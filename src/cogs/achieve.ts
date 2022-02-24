@@ -1,5 +1,6 @@
 import { GuildMember, Role } from 'discord.js'
-import { client, guildId } from '..'
+import { client } from '..'
+import { guildId } from '../constant'
 
 const isTarget = (m: GuildMember, str: string) => {
   return [m.displayName, m.nickname, m.user.username, m.user.id].includes(str)
