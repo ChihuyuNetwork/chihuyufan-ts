@@ -21,6 +21,7 @@ client.on('interactionCreate', async (interaction) => {
     `**/vote**: 投票を開始します`,
     `**/pr**: 文句言うな黙ってPR出せ`,
     `**/avatar**: ユーザーのアイコンを表示します`,
+    `**/dice**: ランダムに抽選します`,
     `**/help**: これ`
   ]
 
