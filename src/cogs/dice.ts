@@ -10,6 +10,7 @@ client.on('messageCreate', async (message) => {
     const channel = message.channel
     if (err !== null) {
       await channel.send(err)
+      return
     }
     await channel.send(args[Math.floor(Math.random() * args.length)])
   }
