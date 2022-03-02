@@ -16,7 +16,7 @@ client.on('interactionCreate', async (interaction) => {
   if (!interaction.isCommand() || interaction.commandName !== 'help') return
   const cmds = [
     `**/neko**: にゃー`,
-    `**/achieve**: ユーザーを実績を解除します`,
+    `**/achieve**: ユーザーの実績を解除します`,
     `**/vc**: 参加しているVCの名前を変更します`,
     `**/vote**: 投票を開始します`,
     `**/pr**: 文句言うな黙ってPR出せ`,
