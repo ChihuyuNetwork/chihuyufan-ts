@@ -3,7 +3,7 @@ import { client } from '..'
 import { guildId } from '../constant'
 
 const defaultName = 'VC'
-const voiceChannelsId = ['928983010081124393', '941561562810966036']
+const voiceChannelsId = ['928983010081124393', '953922831924731935']
 
 client.on('commandsReset', async () => {
   client.application?.commands.create(
