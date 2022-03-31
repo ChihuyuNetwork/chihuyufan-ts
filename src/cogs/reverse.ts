@@ -2,8 +2,13 @@ import { DMChannel, GuildChannel, PartialGroupDMChannel } from 'discord.js'
 import { client } from '..'
 import { guildId } from '../constant'
 
+const nullableFetch = async (
+  fetchable: { fetch: (arg0: any) => Promise<any> },
+  options: string
+) => await fetchable.fetch(options).catch(() => null)
+
 const getChannelName = async (id: string) => {
-  const channel = await client.channels.fetch(id).catch(() => null)
+  const channel = await nullableFetch(client.channels, id)
   if (!channel) return null
   if (channel instanceof DMChannel) return channel.recipient.username
   if (
@@ -37,15 +42,14 @@ client.on('interactionCreate', async (interaction) => {
   const id = interaction.options.getString('id', true).trim()
   const name =
     (interaction.inCachedGuild()
-      ? (await interaction.guild.members.fetch(id).catch(() => null))
-          ?.displayName ??
+      ? (await nullableFetch(interaction.guild.members, id))?.displayName ??
         (await interaction.guild.roles.fetch(id))?.name ??
-        (await interaction.guild.emojis.fetch(id).catch(() => null))?.name
+        (await nullableFetch(interaction.guild.emojis, id))?.name
       : null) ??
-    (await client.users.fetch(id).catch(() => null))?.username ??
-    (await client.guilds.fetch(id).catch(() => null))?.name ??
+    (await nullableFetch(client.users, id))?.username ??
+    (await nullableFetch(client.guilds, id))?.name ??
     (await getChannelName(id)) ??
     client.emojis.cache.get(id)?.name ??
-    '> `' + id + '`をみつけられませんでした。'
+    `> \`${id}\`をみつけられませんでした。`
   await interaction.reply({ content: name, ephemeral: true })
 })
