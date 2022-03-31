@@ -22,7 +22,7 @@ const getChannelName = async (id: string) => {
 client.on('commandsReset', async () => {
   client.application?.commands.create(
     {
-      name: 'reverse',
+      name: 'resolve',
       description: 'IDから名前を逆引きします',
       options: [
         {
@@ -38,7 +38,7 @@ client.on('commandsReset', async () => {
 })
 
 client.on('interactionCreate', async (interaction) => {
-  if (!interaction.isCommand() || interaction.commandName !== 'reverse') return
+  if (!interaction.isCommand() || interaction.commandName !== 'resolve') return
   const id = interaction.options.getString('id', true).trim()
   const name =
     (interaction.inCachedGuild()
