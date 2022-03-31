@@ -2,8 +2,15 @@ import { InteractionReplyOptions } from 'discord.js'
 import { client } from '..'
 import { guildId } from '../constant'
 
-const defaultName = 'VC'
-const voiceChannelsId = ['928983010081124393', '941561562810966036']
+interface DefaultNameDictionary {
+  [index: string]: string
+}
+
+const defaultNames: DefaultNameDictionary = {
+  '928983010081124393': 'VC',
+  '953922831924731935': 'VC2'
+}
+const voiceChannelsId = ['928983010081124393', '953922831924731935']
 
 client.on('commandsReset', async () => {
   client.application?.commands.create(
@@ -68,15 +75,15 @@ client.on('messageCreate', async (message) => {
   await message.channel.send(response)
 })
 
-client.on('voiceStateUpdate', async (oldState, newState) => {
-  const channel = newState.channel ? newState.channel : oldState.channel
+client.on('voiceStateUpdate', async (oldState) => {
+  const channel = oldState.channel
   if (
     !channel ||
     !voiceChannelsId.includes(channel.id) ||
     channel.members.size !== 0 ||
-    channel.name === defaultName
+    channel.name === defaultNames[channel.id]
   ) {
     return
   }
-  await channel.edit({ name: defaultName })
+  await channel.edit({ name: defaultNames[channel.id] })
 })
