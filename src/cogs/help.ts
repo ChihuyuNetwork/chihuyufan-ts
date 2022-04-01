@@ -22,6 +22,7 @@ client.on('interactionCreate', async (interaction) => {
     `**/pr**: 文句言うな黙ってPR出せ`,
     `**/avatar**: ユーザーのアイコンを表示します`,
     `**/dice**: ランダムに抽選します`,
+    `**/resolve**: IDからユーザーを逆引きします`,
     `**/help**: これ`
   ]
 
@@ -43,6 +44,7 @@ client.on('messageCreate', async (message) => {
       `**/pr**: 文句言うな黙ってPR出せ`,
       `**/avatar**: ユーザーのアイコンを表示します`,
       `**/dice**: ランダムに抽選します`,
+      `**/resolve**: IDからユーザーを逆引きします`,
       `**/help**: これ`
     ]
 
