@@ -3,6 +3,7 @@ import { getAverageColor } from 'fast-average-color-node'
 import fetch from 'node-fetch'
 import { client } from '..'
 import { guildId } from '../constant'
+import { fastReact } from '../utils'
 
 client.on('commandsReset', async () => {
   client.application?.commands.create(
@@ -66,7 +67,7 @@ client.on('interactionCreate', async (interaction) => {
     embeds: [embed],
     fetchReply: true
   })
-  emojis.map((emoji) => voteBoard.react(emoji))
+  emojis.map((emoji) => fastReact(voteBoard, emoji))
 })
 
 client.on('messageCreate', async (message) => {
@@ -111,7 +112,7 @@ client.on('messageCreate', async (message) => {
 
   await message.delete()
   const voteBoard = await message.channel.send({ embeds: [embed] })
-  emojis.map((emoji) => voteBoard.react(emoji))
+  emojis.map((emoji) => fastReact(voteBoard, emoji))
 })
 
 const user2color = async (user: GuildMember): Promise<HexColorString> => {
