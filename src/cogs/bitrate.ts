@@ -45,11 +45,11 @@ client.on('interactionCreate', async (interaction) => {
       bitrate,
       `${interaction.user.tag}(${interaction.user.id})によって要求されました。`
     )
-    return `${joinedVC.bitrate / 1000}kbpsに変更しました。`
+    return `${joinedVC.toString()}: ${joinedVC.bitrate / 1000}kbpsに変更しました。`
   }
   const response =
     !inputBitrateK || Math.floor(inputBitrateK * 1000) === joinedVC.bitrate
-      ? `現在、${joinedVC.bitrate / 1000}kbpsです。`
+      ? `${joinedVC.toString()}: ${joinedVC.bitrate / 1000}kbpsです。`
       : await changeBitrate(inputBitrateK)
   await interaction.reply({
     content: response
