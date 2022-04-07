@@ -23,6 +23,7 @@ client.on('interactionCreate', async (interaction) => {
     `**/avatar**: ユーザーのアイコンを表示します`,
     `**/dice**: ランダムに抽選します`,
     `**/resolve**: IDからユーザーを逆引きします`,
+    `**/bitrate**: 参加しているVCのビットレートを変更します`,
     `**/help**: これ`
   ]
 
@@ -45,6 +46,7 @@ client.on('messageCreate', async (message) => {
       `**/avatar**: ユーザーのアイコンを表示します`,
       `**/dice**: ランダムに抽選します`,
       `**/resolve**: IDからユーザーを逆引きします`,
+      `**/bitrate**: 参加しているVCのビットレートを変更します`,
       `**/help**: これ`
     ]
 
