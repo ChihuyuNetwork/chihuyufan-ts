@@ -32,14 +32,6 @@ client.on('interactionCreate', async (interaction) => {
   if (interaction.customId === 'verifyMe') {
     const member = interaction.member as GuildMember
     await member.roles.add(roleId)
-    await interaction.reply({
-      content: outdent`
-      ちふゆサーバーへようこそ。
-      この鯖については、 <#929074802281570374> を見ると大体わかります。`,
-      allowedMentions: {
-        repliedUser: true
-      }
-    })
     await interaction.deferUpdate().catch(() => {}) // インタラクションに失敗しました と表示させないため
   }
 })
