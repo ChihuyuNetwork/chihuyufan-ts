@@ -1,4 +1,4 @@
-import { MessageActionRow, MessageButton } from 'discord.js'
+import { GuildMember, MessageActionRow, MessageButton } from 'discord.js'
 import outdent from 'outdent'
 import { client } from '..'
 
@@ -25,10 +25,15 @@ client.on('messageCreate', async (message) => {
       .setCustomId('showScrapboxInviteURL')
       .setStyle('PRIMARY')
       .setLabel('Scrapboxの招待リンク')
+    const addSeeArchiveRole = new MessageButton()
+      .setCustomId('addSeeArchiveRole')
+      .setStyle('PRIMARY')
+      .setLabel('アーカイブ表示/非表示')
     const buttons = [
       buttonShowServerIP,
       buttonShowDiscordInviteURL,
-      buttonShowScrapboxInviteURL
+      buttonShowScrapboxInviteURL,
+      addSeeArchiveRole
     ]
 
     const content = outdent`
@@ -68,6 +73,25 @@ client.on('interactionCreate', async (interaction) => {
   if (interaction.customId === 'showScrapboxInviteURL') {
     await interaction.reply({
       content: scrapboxInviteURL,
+      ephemeral: true
+    })
+  }
+  if (interaction.customId === 'addSeeArchiveRole') {
+    const member = interaction.member as GuildMember
+    let msg: string
+    if (member?.roles.cache.has('1006924113551568988')) {
+      msg = `<:NO:931715830620778556> <@&1006924113551568988>を外しました。`
+      await member.roles.remove('1006924113551568988')
+    } else {
+      msg = `<:GOOD:931715830444621824> <@&1006924113551568988>を付けました。`
+      await member.roles.add('1006924113551568988')
+    }
+
+    await interaction.reply({
+      content: msg,
+      allowedMentions: {
+        parse: ['roles']
+      },
       ephemeral: true
     })
   }
