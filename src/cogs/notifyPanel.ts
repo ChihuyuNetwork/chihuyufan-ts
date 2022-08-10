@@ -33,29 +33,19 @@ client.on('messageCreate', async (message) => {
     const args = message.content.split(' ')
     if (args[0] != '.panel') return
     if (args.length === 1) {
-      await message
-        .reply({
-          content: outdent`
+      await message.reply({
+        content: outdent`
       \`.panel 役職のID\` もしくは \`.panel 役職のID ボタンに表示するラベル\` と入力してください。`
-        })
-        .then((replyMessage) => {
-          deleteMessage(message)
-          deleteMessage(replyMessage)
-        })
+      })
       return
     }
     const [, id, ...labelArray] = args
     const roleName = (await message.guild?.roles.fetch(id))?.name
     if (roleName == null) {
-      await message
-        .reply({
-          content: outdent`対象とする役職が見つかりませんでした。
+      await message.reply({
+        content: outdent`対象とする役職が見つかりませんでした。
         ロールIDを確認してください。`
-        })
-        .then((replyMessage) => {
-          deleteMessage(message)
-          deleteMessage(replyMessage)
-        })
+      })
       return
     }
     const targetLinkIndex = labelArray.findIndex((t) =>
@@ -69,38 +59,29 @@ client.on('messageCreate', async (message) => {
     let label = labelArray.join(' ').trim()
 
     if (label.length > 80) {
-      await message
-        .reply({
-          content: outdent`ラベルは80字以内にしてください。
+      await message.reply({
+        content: outdent`ラベルは80字以内にしてください。
         <https://discord.com/developers/docs/interactions/message-components#button-object-button-structure>`
-        })
-        .then((replyMessage) => {
-          deleteMessage(message)
-          deleteMessage(replyMessage)
-        })
+      })
       return
     }
     if (label.length === 0) label = roleName!
     if (targetLink == null) {
-      await message.channel
-        .send({
-          content: outdent`
+      await message.channel.send({
+        content: outdent`
           【　通知　】
           お知らせ通知の受け取りを設定できます。
           ボタンをタップ/クリックすることでオン・オフを切り替えられます。
           `,
-          components: [
-            new MessageActionRow().addComponents(
-              new MessageButton()
-                .setCustomId(id)
-                .setStyle('PRIMARY')
-                .setLabel(label)
-            )
-          ]
-        })
-        .then(() => {
-          deleteMessage(message)
-        })
+        components: [
+          new MessageActionRow().addComponents(
+            new MessageButton()
+              .setCustomId(id)
+              .setStyle('PRIMARY')
+              .setLabel(label)
+          )
+        ]
+      })
     } else {
       const urlPattern =
         /https?:\/\/(?:canary\.|(?:ptb\.))?discord(?:app)?\.com\/channels\/\d{17,19}\/(?<channelId>\d{17,19})\/(?<messageId>\d{17,19})/
@@ -112,16 +93,11 @@ client.on('messageCreate', async (message) => {
           (await client.channels.fetch(found.groups!.channelId)) as TextChannel
         ).messages.fetch(found.groups!.messageId)) as Message
       } catch (e) {
-        await message
-          .reply({
-            content: outdent`
+        await message.reply({
+          content: outdent`
           メッセージリンク先を特定できませんでした。
           URLが正しいか確認してください。`
-          })
-          .then((replyMessage) => {
-            deleteMessage(message)
-            deleteMessage(replyMessage)
-          })
+        })
         return
       }
       if (targetMsg == null) return
@@ -131,16 +107,11 @@ client.on('messageCreate', async (message) => {
           targetMsg.content.includes('【　通知　】')
         )
       ) {
-        await message
-          .reply({
-            content: outdent`
+        await message.reply({
+          content: outdent`
           役職付与ボタンのあるメッセージではないようです。
           URLが正しいか確認してください。`
-          })
-          .then((replyMessage) => {
-            deleteMessage(message)
-            deleteMessage(replyMessage)
-          })
+        })
         return
       }
       let panelComponents = targetMsg.components
@@ -189,10 +160,7 @@ client.on('messageCreate', async (message) => {
                 content,
                 components: []
               }
-              await askMsg.edit(message_data).then(() => {
-                deleteMessage(message)
-                deleteMessage(askMsg)
-              })
+              await askMsg.edit(message_data)
               return
 
             case 'messageDelete':
@@ -218,16 +186,10 @@ client.on('messageCreate', async (message) => {
                 components: panelComponents
               })
 
-              await askMsg
-                .edit({
-                  content: `\`${label}\`で上書きしました。`,
-                  components: []
-                })
-                .then(() => {
-                  if (targetMsg?.channel !== message.channel) return
-                  deleteMessage(message)
-                  deleteMessage(askMsg)
-                })
+              await askMsg.edit({
+                content: `\`${label}\`で上書きしました。`,
+                components: []
+              })
               await interaction.deferUpdate().catch(() => {})
               return
             case 'delete':
@@ -242,31 +204,20 @@ client.on('messageCreate', async (message) => {
               await targetMsg!.edit({
                 components: panelComponents
               })
-              await askMsg
-                .edit({
-                  content: `<@&${id}>用のボタンを削除しました。`,
-                  allowedMentions: {
-                    repliedUser: true
-                  },
-                  components: []
-                })
-                .then(() => {
-                  if (targetMsg?.channel !== message.channel) return
-                  deleteMessage(message)
-                  deleteMessage(askMsg)
-                })
+              await askMsg.edit({
+                content: `<@&${id}>用のボタンを削除しました。`,
+                allowedMentions: {
+                  repliedUser: true
+                },
+                components: []
+              })
               await interaction.deferUpdate().catch(() => {})
               return
             case 'cancel':
-              await askMsg
-                .edit({
-                  content: `キャンセルしました。`,
-                  components: []
-                })
-                .then(() => {
-                  deleteMessage(message)
-                  deleteMessage(askMsg)
-                })
+              await askMsg.edit({
+                content: `キャンセルしました。`,
+                components: []
+              })
               await interaction.deferUpdate().catch(() => {})
               return
           }
@@ -301,18 +252,12 @@ client.on('messageCreate', async (message) => {
             )
           ]
         })
-        await message
-          .reply({
-            content: `<@&${id}>用のボタンを\`${roleName}\`のラベルをつけて作成しました。`,
-            allowedMentions: {
-              repliedUser: true
-            }
-          })
-          .then((replyMessage) => {
-            if (targetMsg?.channel !== message.channel) return
-            deleteMessage(message)
-            deleteMessage(replyMessage)
-          })
+        await message.reply({
+          content: `<@&${id}>用のボタンを\`${roleName}\`のラベルをつけて作成しました。`,
+          allowedMentions: {
+            repliedUser: true
+          }
+        })
       } else if (
         panelComponents[panelComponents.length - 1].components.length === 5
       ) {
@@ -328,18 +273,12 @@ client.on('messageCreate', async (message) => {
           ]
         })
 
-        await message
-          .reply({
-            content: `<@&${id}>用のボタンを\`${roleName}\`のラベルをつけて作成しました。`,
-            allowedMentions: {
-              repliedUser: true
-            }
-          })
-          .then((replyMessage) => {
-            if (targetMsg?.channel !== message.channel) return
-            deleteMessage(message)
-            deleteMessage(replyMessage)
-          })
+        await message.reply({
+          content: `<@&${id}>用のボタンを\`${roleName}\`のラベルをつけて作成しました。`,
+          allowedMentions: {
+            repliedUser: true
+          }
+        })
       } else {
         panelComponents[panelComponents.length - 1].addComponents(
           new MessageButton()
@@ -350,18 +289,12 @@ client.on('messageCreate', async (message) => {
         targetMsg.edit({
           components: panelComponents
         })
-        await message
-          .reply({
-            content: `<@&${id}>用のボタンを\`${roleName}\`のラベルをつけて作成しました。`,
-            allowedMentions: {
-              repliedUser: true
-            }
-          })
-          .then((replyMessage) => {
-            if (targetMsg?.channel !== message.channel) return
-            deleteMessage(message)
-            deleteMessage(replyMessage)
-          })
+        await message.reply({
+          content: `<@&${id}>用のボタンを\`${roleName}\`のラベルをつけて作成しました。`,
+          allowedMentions: {
+            repliedUser: true
+          }
+        })
       }
     }
   }
