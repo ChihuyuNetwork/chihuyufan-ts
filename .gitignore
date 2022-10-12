@@ -77,3 +77,7 @@ dist
 
 # modded
 opt/
+
+# settings
+.vscode
+.fleet
