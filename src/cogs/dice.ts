@@ -1,9 +1,10 @@
 import {client} from '..'
+import { guildId } from '../constant'
 
 client.on('commandsReset', async () => {
     client.application?.commands.create(
         {
-            name: commandName,
+            name: 'dice',
             description: 'ランダムに抽選を行います',
             options: [
                 {

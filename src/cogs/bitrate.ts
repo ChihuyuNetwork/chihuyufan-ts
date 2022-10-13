@@ -2,12 +2,10 @@ import { VoiceChannel } from 'discord.js'
 import { client } from '..'
 import { guildId } from '../constant'
 
-const commandName = 'bitrate'
-
 client.on('commandsReset', async () => {
   client.application?.commands.create(
     {
-      name: commandName,
+      name: 'bitrate',
       description: '参加しているVCのビットレートを変更します',
       options: [
         {
@@ -25,7 +23,7 @@ client.on('interactionCreate', async (interaction) => {
   if (
     !interaction.inCachedGuild() ||
     !interaction.isCommand() ||
-    interaction.commandName !== commandName
+    interaction.commandName !== 'bitrate'
   )
     return
   const joinedVC = interaction.member?.voice.channel
