@@ -10,9 +10,9 @@ const chihuyu = new MyBot({
 })
 
 ;(async () => {
+  await setMaxListeners(Infinity)
   await chihuyu.loadCogs()
   await chihuyu.login(discordBotToken)
-  await setMaxListeners(Infinity)
   console.log('Bot is online!')
 })()
 
