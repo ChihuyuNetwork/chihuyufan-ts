@@ -7,6 +7,7 @@ const serverIP =
 const discordInviteURL = 'https://chihuyu.love/'
 const scrapboxInviteURL =
   'https://scrapbox.io/projects/hiro-hub/invitations/c687d9ed3a7fdc50a01730e9227d01c5'
+const seesaaWikiURL = 'https://seesaawiki.jp/chihuyu/'
 
 client.on('messageCreate', async (message) => {
   const botAuthors = ['608242236546613259', '743393055113216093']
@@ -29,16 +30,11 @@ client.on('messageCreate', async (message) => {
       .setCustomId('showSeesaaWikiURL')
       .setStyle('PRIMARY')
       .setLabel('ちふゆ鯖のWiki')
-    const addSeeArchiveRole = new MessageButton()
-      .setCustomId('addSeeArchiveRole')
-      .setStyle('PRIMARY')
-      .setLabel('アーカイブ表示/非表示')
     const buttons = [
       buttonShowServerIP,
       buttonShowDiscordInviteURL,
       buttonShowScrapboxInviteURL,
-      buttonShowSeesaaWikiURL,
-      addSeeArchiveRole
+      buttonShowSeesaaWikiURL
     ]
 
     const content = outdent`
@@ -81,22 +77,9 @@ client.on('interactionCreate', async (interaction) => {
       ephemeral: true
     })
   }
-  if (interaction.customId === 'addSeeArchiveRole') {
-    const member = interaction.member as GuildMember
-    let msg: string
-    if (member?.roles.cache.has('1006924113551568988')) {
-      msg = `<:NO:931715830620778556> <@&1006924113551568988>を外しました。`
-      await member.roles.remove('1006924113551568988')
-    } else {
-      msg = `<:GOOD:931715830444621824> <@&1006924113551568988>を付けました。`
-      await member.roles.add('1006924113551568988')
-    }
-
+  if (interaction.customId === 'showSeesaaWikiURL') {
     await interaction.reply({
-      content: msg,
-      allowedMentions: {
-        parse: ['roles']
-      },
+      content: seesaaWikiURL,
       ephemeral: true
     })
   }
