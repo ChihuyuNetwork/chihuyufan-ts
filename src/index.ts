@@ -1,4 +1,5 @@
 import { REST } from '@discordjs/rest'
+import { setMaxListeners } from 'events';
 import { EventEmitter } from 'stream';
 import { discordBotToken } from './constant'
 import { MyBot } from './lib/discordBot'
@@ -11,7 +12,7 @@ const chihuyu = new MyBot({
 ;(async () => {
   await chihuyu.loadCogs()
   await chihuyu.login(discordBotToken)
-  await EventEmitter.setMaxListeners(Infinity)
+  await setMaxListeners(Infinity)
   console.log('Bot is online!')
 })()
 
