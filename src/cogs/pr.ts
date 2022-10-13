@@ -18,11 +18,11 @@ client.on('interactionCreate', async (interaction) => {
   )
 })
 
-client.on('messageCreate', async (message) => {
-  if (message.content === '.pr') {
-    const channel = message.channel
-    await channel.send(
-      'https://twitter.com/hirosukt/status/1489252498540212224'
-    )
-  }
-})
+// client.on('messageCreate', async (message) => {
+//   if (message.content === '.pr') {
+//     const channel = message.channel
+//     await channel.send(
+//       'https://twitter.com/hirosukt/status/1489252498540212224'
+//     )
+//   }
+// })

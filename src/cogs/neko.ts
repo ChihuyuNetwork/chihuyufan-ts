@@ -16,9 +16,9 @@ client.on('interactionCreate', async (interaction) => {
   await interaction.reply('にゃー')
 })
 
-client.on('messageCreate', async (message) => {
-  if (message.content === '.neko') {
-    const channel = message.channel
-    await channel.send('にゃー')
-  }
-})
+// client.on('messageCreate', async (message) => {
+//   if (message.content === '.neko') {
+//     const channel = message.channel
+//     await channel.send('にゃー')
+//   }
+// })

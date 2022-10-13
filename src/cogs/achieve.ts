@@ -64,36 +64,36 @@ client.on('interactionCreate', async (interaction) => {
   await interaction.reply(`${member}が実績解除しました: "**${role.name}**"`)
 })
 
-client.on('messageCreate', async (message) => {
-  if (!message.guild || !message.member) return
-  if (!message.content.startsWith('.achieve')) return
-  if (!message.member.permissions.has('ADMINISTRATOR')) return
-
-  const [prefix, target, ...tmp] = message.content.split(' ')
-  if (prefix != '.achieve') return
-  const member =
-    message.mentions.members?.first() ||
-    message.guild.members?.cache.find((m) => isTarget(m, target)) ||
-    (await message.channel.messages.fetch(message.reference?.messageId!)).member
-  let achieve = tmp.join(' ')
-
-  if (!achieve && message.reference) {
-    achieve = target
-  }
-
-  let err: string | undefined
-  if (member?.roles.cache.has(achieve)) err = '既に実績を解除しています。'
-  if (!achieve) err = 'ロール名を入力してください。'
-  if (!member) err = 'ユーザーが見つかりませんでした。'
-  if (err) {
-    await message.channel.send(err)
-    return
-  }
-
-  const role =
-    message.guild.roles.cache.find((r) => isAchieve(r, achieve)) ||
-    (await message.guild.roles.create({ name: achieve }))
-  await member?.roles.add(role)
-  await message.channel.send(`${member}が実績解除しました: "**${role.name}**"`)
-  await message.delete()
-})
+// client.on('messageCreate', async (message) => {
+//   if (!message.guild || !message.member) return
+//   if (!message.content.startsWith('.achieve')) return
+//   if (!message.member.permissions.has('ADMINISTRATOR')) return
+//
+//   const [prefix, target, ...tmp] = message.content.split(' ')
+//   if (prefix != '.achieve') return
+//   const member =
+//     message.mentions.members?.first() ||
+//     message.guild.members?.cache.find((m) => isTarget(m, target)) ||
+//     (await message.channel.messages.fetch(message.reference?.messageId!)).member
+//   let achieve = tmp.join(' ')
+//
+//   if (!achieve && message.reference) {
+//     achieve = target
+//   }
+//
+//   let err: string | undefined
+//   if (member?.roles.cache.has(achieve)) err = '既に実績を解除しています。'
+//   if (!achieve) err = 'ロール名を入力してください。'
+//   if (!member) err = 'ユーザーが見つかりませんでした。'
+//   if (err) {
+//     await message.channel.send(err)
+//     return
+//   }
+//
+//   const role =
+//     message.guild.roles.cache.find((r) => isAchieve(r, achieve)) ||
+//     (await message.guild.roles.create({ name: achieve }))
+//   await member?.roles.add(role)
+//   await message.channel.send(`${member}が実績解除しました: "**${role.name}**"`)
+//   await message.delete()
+// })

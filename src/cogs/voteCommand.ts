@@ -70,50 +70,50 @@ client.on('interactionCreate', async (interaction) => {
   emojis.map((emoji) => fastReact(voteBoard, emoji))
 })
 
-client.on('messageCreate', async (message) => {
-  if (!message.content.startsWith('.vote')) return
-  const [prefix, ...args] = message.content.split(' ')
-  if (prefix != '.vote') return
+// client.on('messageCreate', async (message) => {
+//   if (!message.content.startsWith('.vote')) return
+//   const [prefix, ...args] = message.content.split(' ')
+//   if (prefix != '.vote') return
 
-  let response: string | undefined
-  if (args.length === 0) response = 'タイトルを入力してください。'
-  if (args.length >= 22)
-    response = '選択肢が多すぎます。20個以下にしてください。'
-  if (response !== undefined) {
-    await message.channel.send(response)
-    return
-  }
+//   let response: string | undefined
+//   if (args.length === 0) response = 'タイトルを入力してください。'
+//   if (args.length >= 22)
+//     response = '選択肢が多すぎます。20個以下にしてください。'
+//   if (response !== undefined) {
+//     await message.channel.send(response)
+//     return
+//   }
 
-  let emojis: string[] = []
-  let choices: string[] = []
-  const constEmojiLargeA = 0x1f1e6
+//   let emojis: string[] = []
+//   let choices: string[] = []
+//   const constEmojiLargeA = 0x1f1e6
 
-  if (args.length === 1) {
-    emojis = ['<:GOOD:931715830444621824>', '<:NO:931715830620778556>']
-  } else {
-    for (let i = 0; i < args.length - 1; i++) {
-      const emoji = String.fromCodePoint(constEmojiLargeA + i)
-      emojis.push(emoji)
-      choices.push(`${emoji} ${args[i + 1]}`)
-    }
-  }
+//   if (args.length === 1) {
+//     emojis = ['<:GOOD:931715830444621824>', '<:NO:931715830620778556>']
+//   } else {
+//     for (let i = 0; i < args.length - 1; i++) {
+//       const emoji = String.fromCodePoint(constEmojiLargeA + i)
+//       emojis.push(emoji)
+//       choices.push(`${emoji} ${args[i + 1]}`)
+//     }
+//   }
 
-  const author = message.guild?.members?.cache.get(message.author.id)!
-  const embed = new MessageEmbed()
-    .setAuthor({
-      name: author.user.username,
-      url: message.url,
-      iconURL: author.displayAvatarURL()
-    })
-    .setTitle(args[0])
-    .setColor((await user2color(author)) || '#ffffff')
-    .setTimestamp()
-    .setDescription(choices.join('\n'))
+//   const author = message.guild?.members?.cache.get(message.author.id)!
+//   const embed = new MessageEmbed()
+//     .setAuthor({
+//       name: author.user.username,
+//       url: message.url,
+//       iconURL: author.displayAvatarURL()
+//     })
+//     .setTitle(args[0])
+//     .setColor((await user2color(author)) || '#ffffff')
+//     .setTimestamp()
+//     .setDescription(choices.join('\n'))
 
-  await message.delete()
-  const voteBoard = await message.channel.send({ embeds: [embed] })
-  emojis.map((emoji) => fastReact(voteBoard, emoji))
-})
+//   await message.delete()
+//   const voteBoard = await message.channel.send({ embeds: [embed] })
+//   emojis.map((emoji) => fastReact(voteBoard, emoji))
+// })
 
 const user2color = async (user: GuildMember): Promise<HexColorString> => {
   const url = user.displayAvatarURL({ format: 'png', size: 16 })

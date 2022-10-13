@@ -18,12 +18,12 @@ client.on('interactionCreate', async (interaction) => {
   await interaction.reply(makeRanzozo())
 })
 
-client.on('messageCreate', async (message) => {
-  if (message.content === '.zuzudaze') {
-    const channel = message.channel
-    await channel.send(makeRanzozo())
-  }
-})
+// client.on('messageCreate', async (message) => {
+//   if (message.content === '.zuzudaze') {
+//     const channel = message.channel
+//     await channel.send(makeRanzozo())
+//   }
+// })
 
 function makeRanzozo() {
   var zuzudazo = ''

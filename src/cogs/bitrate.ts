@@ -13,7 +13,7 @@ client.on('commandsReset', async () => {
         {
           type: 'NUMBER',
           name: 'value',
-          description: '変換後の値'
+          description: 'ビットレート'
         }
       ]
     },

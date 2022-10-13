@@ -25,6 +25,10 @@ client.on('messageCreate', async (message) => {
       .setCustomId('showScrapboxInviteURL')
       .setStyle('PRIMARY')
       .setLabel('Scrapboxの招待リンク')
+    const buttonShowSeesaaWikiURL = new MessageButton()
+      .setCustomId('showSeesaaWikiURL')
+      .setStyle('PRIMARY')
+      .setLabel('ちふゆ鯖のWiki')
     const addSeeArchiveRole = new MessageButton()
       .setCustomId('addSeeArchiveRole')
       .setStyle('PRIMARY')
@@ -33,6 +37,7 @@ client.on('messageCreate', async (message) => {
       buttonShowServerIP,
       buttonShowDiscordInviteURL,
       buttonShowScrapboxInviteURL,
+      buttonShowSeesaaWikiURL,
       addSeeArchiveRole
     ]
 
