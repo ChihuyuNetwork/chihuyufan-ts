@@ -20,7 +20,7 @@ const getChannelName = async (id: string) => {
 }
 
 client.on('commandsReset', async () => {
-  client.application?.commands.create(
+  client.application!.commands.create(
     {
       name: 'resolve',
       description: 'IDから名前を逆引きします',
@@ -28,7 +28,7 @@ client.on('commandsReset', async () => {
         {
           type: 'STRING',
           name: 'id',
-          description: '変換したいID',
+          description: '調べたいID',
           required: true
         }
       ]

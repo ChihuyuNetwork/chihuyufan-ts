@@ -9,7 +9,7 @@ const isTarget = (m: GuildMember, str: string) => {
 }
 
 client.on('commandsReset', async () => {
-  client.application?.commands.create(
+  client.application!.commands.create(
     {
       name: 'avatar',
       description: 'ユーザーのアイコンを表示します',

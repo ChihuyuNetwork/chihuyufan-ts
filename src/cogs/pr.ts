@@ -2,7 +2,7 @@ import { client } from '..'
 import { guildId } from '../constant'
 
 client.on('commandsReset', async () => {
-  client.application?.commands.create(
+  client.application!.commands.create(
     {
       name: 'pr',
       description: '文句言うな黙ってPR出せ'

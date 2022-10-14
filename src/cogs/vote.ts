@@ -6,7 +6,7 @@ import { guildId } from '../constant'
 import { fastReact } from '../utils'
 
 client.on('commandsReset', async () => {
-  client.application?.commands.create(
+  client.application!.commands.create(
     {
       name: 'vote',
       description: '投票を開始します',

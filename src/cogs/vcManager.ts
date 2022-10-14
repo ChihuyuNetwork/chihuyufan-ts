@@ -13,7 +13,7 @@ const defaultNames: DefaultNameDictionary = {
 const voiceChannelsId = ['928983010081124393', '953922831924731935']
 
 client.on('commandsReset', async () => {
-  client.application?.commands.create(
+  client.application!.commands.create(
     {
       name: 'vc',
       description: '参加しているVCの名前を変更します',
@@ -21,7 +21,7 @@ client.on('commandsReset', async () => {
         {
           type: 'STRING',
           name: 'name',
-          description: '変更後のVC名',
+          description: '今何してる？',
           required: true
         }
       ]

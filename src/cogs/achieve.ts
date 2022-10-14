@@ -11,7 +11,7 @@ const isAchieve = (r: Role, str: string) => {
 }
 
 client.on('commandsReset', async () => {
-  client.application?.commands.create(
+  client.application!.commands.create(
     {
       name: 'achieve',
       description: 'ユーザーの実績を解除します',

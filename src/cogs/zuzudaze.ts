@@ -1,10 +1,10 @@
 import { client } from '..'
 import { guildId } from '../constant'
 
-const zuzudaze = ['ず', 'ず', 'だ', 'ぜ', 'ざ', 'じ']
+const zuzudaze = ['ず', 'ず', 'だ', 'ぜ', 'ざ', 'じ', 'ぞ']
 
 client.on('commandsReset', async () => {
-  client.application?.commands.create(
+  client.application!.commands.create(
     {
       name: 'zuzudaze',
       description: 'ずずだぜジェネレーター'

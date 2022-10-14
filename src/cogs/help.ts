@@ -3,7 +3,7 @@ import { client } from '..'
 import { guildId } from '../constant'
 
 client.on('commandsReset', async () => {
-  client.application?.commands.create(
+  client.application!.commands.create(
     {
       name: 'help',
       description: 'コマンドリファレンスを表示します'

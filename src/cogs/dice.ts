@@ -2,20 +2,32 @@ import {client} from '..'
 import { guildId } from '../constant'
 
 client.on('commandsReset', async () => {
-    client.application?.commands.create(
+    client.application!.commands.create(
         {
             name: 'dice',
             description: 'ランダムに抽選を行います',
             options: [
                 {
-                    type: 'NUMBER',
-                    name: 'value',
-                    description: 'ビットレート'
+                    type: 'STRING',
+                    name: 'choices',
+                    description: '選択肢',
+                    required: true
                 }
             ]
         },
         guildId
     )
+})
+
+client.on('interactionCreate', async (interaction) => {
+    if (
+      !interaction.inCachedGuild() ||
+      !interaction.isCommand() ||
+      interaction.commandName !== 'dice'
+    ) 
+        return
+    const [...args] = interaction.options.getString('choices')!.split(' ')
+    await interaction.reply(args[Math.floor(Math.random() * args.length)])
 })
 
 // client.on('messageCreate', async (message) => {
