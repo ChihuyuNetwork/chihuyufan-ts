@@ -1,5 +1,5 @@
 import { Routes } from 'discord-api-types/v9'
-import { EmojiIdentifierResolvable, Message, TextChannel } from 'discord.js'
+import { EmojiIdentifierResolvable, Message, TextChannel, DMChannel, GuildChannel, PartialGroupDMChannel } from 'discord.js'
 import { client, rest } from '.'
 
 export const isTextChannel = (channel: unknown): channel is TextChannel => {
@@ -25,4 +25,21 @@ export const fastReact = async (
       encodeURIComponent(emoji.toString().replace(/<|>/g, ''))
     )
   )
+}
+
+export const nullableFetch = async (
+  fetchable: { fetch: (arg0: any) => Promise<any> },
+  options: string
+) => await fetchable.fetch(options).catch(() => null)
+
+export const getChannelName = async (id: string) => {
+  const channel = await nullableFetch(client.channels, id)
+  if (!channel) return null
+  if (channel instanceof DMChannel) return channel.recipient.username
+  if (
+    channel instanceof GuildChannel ||
+    channel instanceof PartialGroupDMChannel
+  )
+    return channel.name
+  return null
 }

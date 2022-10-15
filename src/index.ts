@@ -1,6 +1,6 @@
 import { REST } from '@discordjs/rest'
 import { setMaxListeners } from 'events';
-import { EventEmitter } from 'stream';
+import { EventEmitter, Stream } from 'stream';
 import { discordBotToken } from './constant'
 import { MyBot } from './lib/discordBot'
 

@@ -1,23 +1,6 @@
-import { DMChannel, GuildChannel, PartialGroupDMChannel } from 'discord.js'
 import { client } from '..'
 import { guildId } from '../constant'
-
-const nullableFetch = async (
-  fetchable: { fetch: (arg0: any) => Promise<any> },
-  options: string
-) => await fetchable.fetch(options).catch(() => null)
-
-const getChannelName = async (id: string) => {
-  const channel = await nullableFetch(client.channels, id)
-  if (!channel) return null
-  if (channel instanceof DMChannel) return channel.recipient.username
-  if (
-    channel instanceof GuildChannel ||
-    channel instanceof PartialGroupDMChannel
-  )
-    return channel.name
-  return null
-}
+import { nullableFetch, getChannelName } from '../utils'
 
 client.on('commandsReset', async () => {
   client.application!.commands.create(
