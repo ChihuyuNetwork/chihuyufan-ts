@@ -1,3 +1,4 @@
+import { ApplicationCommandOptionType } from 'discord.js'
 import { client } from '..'
 import { guildId } from '../constant'
 
@@ -8,7 +9,7 @@ client.on('commandsReset', async () => {
       description: 'ランダムに抽選を行います',
       options: [
         {
-          type: 'STRING',
+          type: ApplicationCommandOptionType.String,
           name: 'choices',
           description: '選択肢',
           required: true
@@ -22,7 +23,7 @@ client.on('commandsReset', async () => {
 client.on('interactionCreate', async (interaction) => {
   if (
     !interaction.inCachedGuild() ||
-    !interaction.isCommand() ||
+    !interaction.isChatInputCommand() ||
     interaction.commandName !== 'dice'
   )
     return

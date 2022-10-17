@@ -1,4 +1,4 @@
-import { GuildMember, MessageActionRow, MessageButton } from 'discord.js'
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js'
 import outdent from 'outdent'
 import { client } from '..'
 
@@ -14,21 +14,21 @@ client.on('messageCreate', async (message) => {
   if (!botAuthors.includes(message.author.id)) return // hirosuke only
 
   if (message.content === '.button') {
-    const buttonShowServerIP = new MessageButton()
+    const buttonShowServerIP = new ButtonBuilder()
       .setCustomId('showServerIP')
-      .setStyle('PRIMARY')
+      .setStyle(ButtonStyle.Primary)
       .setLabel('マイクラサーバーのIP')
-    const buttonShowDiscordInviteURL = new MessageButton()
+    const buttonShowDiscordInviteURL = new ButtonBuilder()
       .setCustomId('showDiscordInviteURL')
-      .setStyle('PRIMARY')
+      .setStyle(ButtonStyle.Primary)
       .setLabel('Discordの招待リンク')
-    const buttonShowScrapboxInviteURL = new MessageButton()
+    const buttonShowScrapboxInviteURL = new ButtonBuilder()
       .setCustomId('showScrapboxInviteURL')
-      .setStyle('PRIMARY')
+      .setStyle(ButtonStyle.Primary)
       .setLabel('Scrapboxの招待リンク')
-    const buttonShowSeesaaWikiURL = new MessageButton()
+    const buttonShowSeesaaWikiURL = new ButtonBuilder()
       .setCustomId('showSeesaaWikiURL')
-      .setStyle('PRIMARY')
+      .setStyle(ButtonStyle.Primary)
       .setLabel('ちふゆ鯖のWiki')
     const buttons = [
       buttonShowServerIP,
@@ -51,7 +51,7 @@ client.on('messageCreate', async (message) => {
 
     await message.channel.send({
       content: content,
-      components: [new MessageActionRow().addComponents(buttons)]
+      components: [new ActionRowBuilder<ButtonBuilder>().addComponents(buttons)]
     })
   }
 })

@@ -1,4 +1,4 @@
-import { Routes } from 'discord-api-types/v9'
+import { Routes } from 'discord-api-types/v10'
 import {
   EmojiIdentifierResolvable,
   Message,
@@ -42,7 +42,8 @@ export const nullableFetch = async (
 export const getChannelName = async (id: string) => {
   const channel = await nullableFetch(client.channels, id)
   if (!channel) return null
-  if (channel instanceof DMChannel) return channel.recipient.username
+  if (channel instanceof DMChannel)
+    return await client.users.fetch(channel.recipientId)
   if (
     channel instanceof GuildChannel ||
     channel instanceof PartialGroupDMChannel

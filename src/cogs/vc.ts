@@ -1,4 +1,7 @@
-import { InteractionReplyOptions } from 'discord.js'
+import {
+  ApplicationCommandOptionType,
+  InteractionReplyOptions
+} from 'discord.js'
 import { client } from '..'
 import { guildId } from '../constant'
 
@@ -19,7 +22,7 @@ client.on('commandsReset', async () => {
       description: '参加しているVCの名前を変更します',
       options: [
         {
-          type: 'STRING',
+          type: ApplicationCommandOptionType.String,
           name: 'name',
           description: '今何してる？',
           required: true
@@ -33,7 +36,7 @@ client.on('commandsReset', async () => {
 client.on('interactionCreate', async (interaction) => {
   if (
     !interaction.inCachedGuild() ||
-    !interaction.isCommand() ||
+    !interaction.isChatInputCommand() ||
     interaction.commandName !== 'vc'
   )
     return

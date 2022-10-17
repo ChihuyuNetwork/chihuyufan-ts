@@ -1,4 +1,9 @@
-import { GuildMember, HexColorString, MessageEmbed } from 'discord.js'
+import {
+  ApplicationCommandOptionType,
+  EmbedBuilder,
+  GuildMember,
+  HexColorString
+} from 'discord.js'
 import { getAverageColor } from 'fast-average-color-node'
 import fetch from 'node-fetch'
 import { client } from '..'
@@ -15,7 +20,7 @@ client.on('commandsReset', async () => {
       description: 'ユーザーのアイコンを表示します',
       options: [
         {
-          type: 'USER',
+          type: ApplicationCommandOptionType.User,
           name: 'member',
           description: 'ユーザー'
         }
@@ -28,18 +33,18 @@ client.on('commandsReset', async () => {
 client.on('interactionCreate', async (interaction) => {
   if (
     !interaction.inCachedGuild() ||
-    !interaction.isCommand() ||
+    !interaction.isChatInputCommand() ||
     interaction.commandName !== 'avatar'
   )
     return
   const member = interaction.options.getMember('member') || interaction.member
   const url = member.displayAvatarURL({
-    dynamic: true,
-    format: 'png',
+    extension: 'png',
+    forceStatic: false,
     size: 4096
   })
 
-  const embed = new MessageEmbed()
+  const embed = new EmbedBuilder()
     .setColor(
       ((await getAverageColor(await (await fetch(url)).buffer()))
         .hex as HexColorString) || '#ffffff'

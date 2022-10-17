@@ -1,4 +1,4 @@
-import { VoiceChannel } from 'discord.js'
+import { ApplicationCommandOptionType, VoiceChannel } from 'discord.js'
 import { client } from '..'
 import { guildId } from '../constant'
 
@@ -9,7 +9,7 @@ client.on('commandsReset', async () => {
       description: '参加しているVCのビットレートを変更します',
       options: [
         {
-          type: 'NUMBER',
+          type: ApplicationCommandOptionType.Number,
           name: 'value',
           description: 'ビットレート'
         }
@@ -22,7 +22,7 @@ client.on('commandsReset', async () => {
 client.on('interactionCreate', async (interaction) => {
   if (
     !interaction.inCachedGuild() ||
-    !interaction.isCommand() ||
+    !interaction.isChatInputCommand() ||
     interaction.commandName !== 'bitrate'
   )
     return

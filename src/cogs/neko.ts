@@ -12,7 +12,8 @@ client.on('commandsReset', async () => {
 })
 
 client.on('interactionCreate', async (interaction) => {
-  if (!interaction.isCommand() || interaction.commandName !== 'neko') return
+  if (!interaction.isChatInputCommand() || interaction.commandName !== 'neko')
+    return
   await interaction.reply('にゃー')
 })
 

@@ -1,4 +1,9 @@
-import { GuildMember, HexColorString, MessageEmbed } from 'discord.js'
+import {
+  ApplicationCommandOptionType,
+  EmbedBuilder,
+  GuildMember,
+  HexColorString
+} from 'discord.js'
 import { getAverageColor } from 'fast-average-color-node'
 import fetch from 'node-fetch'
 import { client } from '..'
@@ -12,13 +17,13 @@ client.on('commandsReset', async () => {
       description: '投票を開始します',
       options: [
         {
-          type: 'STRING',
+          type: ApplicationCommandOptionType.String,
           name: 'title',
           description: 'タイトル',
           required: true
         },
         {
-          type: 'STRING',
+          type: ApplicationCommandOptionType.String,
           name: 'choice',
           description: '選択肢'
         }
@@ -31,7 +36,7 @@ client.on('commandsReset', async () => {
 client.on('interactionCreate', async (interaction) => {
   if (
     !interaction.inCachedGuild() ||
-    !interaction.isCommand() ||
+    !interaction.isChatInputCommand() ||
     interaction.commandName !== 'vote'
   )
     return
@@ -57,7 +62,7 @@ client.on('interactionCreate', async (interaction) => {
     }
   }
 
-  const embed = new MessageEmbed()
+  const embed = new EmbedBuilder()
     .setTitle(interaction.options.getString('title', true))
     .setColor((await user2color(interaction.member)) || '#ffffff')
     .setTimestamp()
@@ -116,7 +121,11 @@ client.on('interactionCreate', async (interaction) => {
 // })
 
 const user2color = async (user: GuildMember): Promise<HexColorString> => {
-  const url = user.displayAvatarURL({ format: 'png', size: 16 })
+  const url = user.displayAvatarURL({
+    extension: 'png',
+    forceStatic: true,
+    size: 16
+  })
   const image = await (await fetch(url)).buffer()
   return (await getAverageColor(image)).hex as HexColorString
 }

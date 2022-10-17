@@ -1,4 +1,4 @@
-import { MessageEmbed } from 'discord.js'
+import { ApplicationCommandOptionType, EmbedBuilder } from 'discord.js'
 import { client } from '..'
 import { guildId } from '../constant'
 import { nullableFetch, getChannelName } from '../utils'
@@ -10,7 +10,7 @@ client.on('commandsReset', async () => {
       description: '情報を表示します',
       options: [
         {
-          type: 'USER',
+          type: ApplicationCommandOptionType.User,
           name: 'user',
           description: '調べたい対象',
           required: true
@@ -27,27 +27,29 @@ client.on('interactionCreate', async (interaction) => {
   const member = await interaction.guild?.members.fetch(
     user?.id || interaction.user
   )
-  const embed = new MessageEmbed()
+  const embed = new EmbedBuilder()
     .setTitle(`${member?.nickname} (${user?.tag})` ?? (user?.tag || 'null'))
-    .setColor(member?.displayHexColor || user?.hexAccentColor || 'BLUE')
+    .setColor(member?.displayHexColor || user?.hexAccentColor || 'Blue')
     .setTimestamp()
 
-  embed.addField('ID', user?.id || 'null')
-  embed.addField(
-    'Nitro Since',
-    member?.premiumSince?.toLocaleString() || 'null',
-    true
-  )
-  embed.addField('Created At', user?.createdAt.toLocaleString() || 'null')
-  embed.addField(
-    'Joined At',
-    member?.joinedAt?.toLocaleString() || 'null',
-    true
-  )
-  embed.addField(
-    'Roles',
-    member?.roles.cache.map((r) => `<@&${r.id}>`).join(' | ') || 'null'
-  )
+  embed.addFields([
+    { name: 'ID', value: user?.id || 'null' },
+    {
+      name: 'Nitro Since',
+      value: member?.premiumSince?.toLocaleString() || 'null',
+      inline: true
+    },
+    { name: 'Created At', value: user?.createdAt.toLocaleString() || 'null' },
+    {
+      name: 'Joined At',
+      value: member?.joinedAt?.toLocaleString() || 'null',
+      inline: true
+    },
+    {
+      name: 'Roles',
+      value: member?.roles.cache.map((r) => `<@&${r.id}>`).join(' | ') || 'null'
+    }
+  ])
 
   embed.setThumbnail(member?.displayAvatarURL() || member?.avatarURL() || '')
   embed.setImage(user?.bannerURL() || user?.avatarURL() || '')
