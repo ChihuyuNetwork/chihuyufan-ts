@@ -1,6 +1,6 @@
 import { REST } from '@discordjs/rest'
-import { setMaxListeners } from 'events';
-import { EventEmitter, Stream } from 'stream';
+import { setMaxListeners } from 'events'
+import { EventEmitter, Stream } from 'stream'
 import { discordBotToken } from './constant'
 import { MyBot } from './lib/discordBot'
 
@@ -18,4 +18,6 @@ const chihuyu = new MyBot({
 
 export const client = chihuyu
 
-export const rest = new REST({ offset: 0, version: '9' }).setToken(discordBotToken!)
+export const rest = new REST({ offset: 0, version: '9' }).setToken(
+  discordBotToken!
+)

@@ -1,5 +1,12 @@
 import { Routes } from 'discord-api-types/v9'
-import { EmojiIdentifierResolvable, Message, TextChannel, DMChannel, GuildChannel, PartialGroupDMChannel } from 'discord.js'
+import {
+  EmojiIdentifierResolvable,
+  Message,
+  TextChannel,
+  DMChannel,
+  GuildChannel,
+  PartialGroupDMChannel
+} from 'discord.js'
 import { client, rest } from '.'
 
 export const isTextChannel = (channel: unknown): channel is TextChannel => {
