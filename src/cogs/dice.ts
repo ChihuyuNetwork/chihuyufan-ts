@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionType } from 'discord.js'
+import { ApplicationCommandOptionType } from 'discord-api-types/v10'
 import { client } from '..'
 import { guildId } from '../constant'
 

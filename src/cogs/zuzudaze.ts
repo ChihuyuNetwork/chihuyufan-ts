@@ -14,7 +14,12 @@ client.on('commandsReset', async () => {
 })
 
 client.on('interactionCreate', async (interaction) => {
-  if (!interaction.isCommand() || interaction.commandName !== 'zuzudaze') return
+  if (
+    !interaction.inCachedGuild() ||
+    !interaction.isChatInputCommand() ||
+    interaction.commandName !== 'zuzudaze'
+  ) 
+    return
   await interaction.reply(makeRanzozo())
 })
 

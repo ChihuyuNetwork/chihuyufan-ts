@@ -1,4 +1,4 @@
-import { EmbedBuilder } from 'discord.js'
+import { EmbedBuilder } from '@discordjs/builders'
 import { client } from '..'
 import { guildId } from '../constant'
 
@@ -13,7 +13,11 @@ client.on('commandsReset', async () => {
 })
 
 client.on('interactionCreate', async (interaction) => {
-  if (!interaction.isChatInputCommand() || interaction.commandName !== 'help')
+  if (
+    !interaction.inCachedGuild() ||
+    !interaction.isChatInputCommand() ||
+    interaction.commandName !== 'help'
+  ) 
     return
   const cmds = [
     `**/neko**: にゃー`,
@@ -30,7 +34,7 @@ client.on('interactionCreate', async (interaction) => {
 
   const embed = new EmbedBuilder()
     .setTitle('Chihuyu fan - コマンドリファレンス')
-    .setColor('Aqua')
+    .setColor([0, 255, 128])
     .setDescription(cmds.join('\n'))
     .setTimestamp()
   await interaction.reply({ embeds: [embed], ephemeral: true })

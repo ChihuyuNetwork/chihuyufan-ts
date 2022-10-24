@@ -1,7 +1,7 @@
-import { ApplicationCommandOptionType, EmbedBuilder } from 'discord.js'
+import { EmbedBuilder } from '@discordjs/builders'
+import { ApplicationCommandOptionType } from 'discord-api-types/v10'
 import { client } from '..'
 import { guildId } from '../constant'
-import { nullableFetch, getChannelName } from '../utils'
 
 client.on('commandsReset', async () => {
   client.application!.commands.create(
@@ -22,14 +22,19 @@ client.on('commandsReset', async () => {
 })
 
 client.on('interactionCreate', async (interaction) => {
-  if (!interaction.isCommand() || interaction.commandName !== 'userinfo') return
+  if (
+    !interaction.inCachedGuild() ||
+    !interaction.isChatInputCommand() ||
+    interaction.commandName !== 'userinfo'
+  ) 
+    return
   const user = await interaction.options.getUser('user')?.fetch()
   const member = await interaction.guild?.members.fetch(
     user?.id || interaction.user
   )
   const embed = new EmbedBuilder()
     .setTitle(`${member?.nickname} (${user?.tag})` ?? (user?.tag || 'null'))
-    .setColor(member?.displayHexColor || user?.hexAccentColor || 'Blue')
+    .setColor(member?.displayColor || user?.accentColor || [50, 50, 255])
     .setTimestamp()
 
   embed.addFields([

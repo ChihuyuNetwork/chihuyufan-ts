@@ -1,7 +1,7 @@
 import { REST } from '@discordjs/rest'
-import { GatewayIntentBits, Partials } from 'discord.js'
+import { GatewayIntentBits } from 'discord-api-types/v10'
+import { Partials } from 'discord.js'
 import { setMaxListeners } from 'events'
-import { EventEmitter, Stream } from 'stream'
 import { discordBotToken } from './constant'
 import { MyBot } from './lib/discordBot'
 

@@ -1,4 +1,5 @@
-import { ApplicationCommandOptionType, VoiceChannel } from 'discord.js'
+import { ApplicationCommandOptionType } from 'discord-api-types/v10'
+import { VoiceChannel } from 'discord.js'
 import { client } from '..'
 import { guildId } from '../constant'
 

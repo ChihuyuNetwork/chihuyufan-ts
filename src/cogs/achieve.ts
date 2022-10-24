@@ -1,4 +1,6 @@
-import { ApplicationCommandOptionType, GuildMember, Role } from 'discord.js'
+import { ApplicationCommandOptionType } from 'discord-api-types/v10'
+import { GuildMember, Role } from 'discord.js'
+import { type } from 'os'
 import { client } from '..'
 import { guildId } from '../constant'
 
@@ -18,7 +20,7 @@ client.on('commandsReset', async () => {
       options: [
         {
           type: ApplicationCommandOptionType.User,
-          name: 'member',
+          name: 'user',
           description: '対象ユーザー',
           required: true
         },
@@ -41,16 +43,16 @@ client.on('interactionCreate', async (interaction) => {
     interaction.commandName !== 'achieve'
   )
     return
-  if (!interaction.member.permissions.has('Administrator')) {
+  if (!interaction.memberPermissions!.has('Administrator')) {
     await interaction.reply({
       content: 'このコマンドは管理者権限を持つ人のみ実行できます。',
       ephemeral: true
     })
     return
   }
-  const member = interaction.options.getMember('member')!
+  const user = interaction.options.getMember('user')!
   const achieve = interaction.options.getString('achieve', true)
-  if (member.roles.cache.has(achieve)) {
+  if (achieve in user.roles) {
     await interaction.reply({
       content: '既に実績を解除しています。',
       ephemeral: true
@@ -58,23 +60,23 @@ client.on('interactionCreate', async (interaction) => {
     return
   }
   const role =
-    interaction.guild.roles.cache.find((r) => isAchieve(r, achieve)) ||
-    (await interaction.guild.roles.create({ name: achieve }))
-  await member.roles.add(role)
-  await interaction.reply(`${member}が実績解除しました: "**${role.name}**"`)
+    interaction.guild!.roles.cache.find((r) => isAchieve(r, achieve)) ||
+    (await interaction.guild!.roles.create({ name: achieve }))
+  await interaction.guild!.members.addRole({user: user, role: role})
+  await interaction.reply(`${user}が実績解除しました: "**${role.name}**"`)
 })
 
 // client.on('messageCreate', async (message) => {
-//   if (!message.guild || !message.member) return
+//   if (!message.guild || !message.user) return
 //   if (!message.content.startsWith('.achieve')) return
-//   if (!message.member.permissions.has('ADMINISTRATOR')) return
+//   if (!message.user.permissions.has('ADMINISTRATOR')) return
 //
 //   const [prefix, target, ...tmp] = message.content.split(' ')
 //   if (prefix != '.achieve') return
-//   const member =
+//   const user =
 //     message.mentions.members?.first() ||
 //     message.guild.members?.cache.find((m) => isTarget(m, target)) ||
-//     (await message.channel.messages.fetch(message.reference?.messageId!)).member
+//     (await message.channel.messages.fetch(message.reference?.messageId!)).user
 //   let achieve = tmp.join(' ')
 //
 //   if (!achieve && message.reference) {
@@ -82,9 +84,9 @@ client.on('interactionCreate', async (interaction) => {
 //   }
 //
 //   let err: string | undefined
-//   if (member?.roles.cache.has(achieve)) err = '既に実績を解除しています。'
+//   if (user?.roles.cache.has(achieve)) err = '既に実績を解除しています。'
 //   if (!achieve) err = 'ロール名を入力してください。'
-//   if (!member) err = 'ユーザーが見つかりませんでした。'
+//   if (!user) err = 'ユーザーが見つかりませんでした。'
 //   if (err) {
 //     await message.channel.send(err)
 //     return
@@ -93,7 +95,7 @@ client.on('interactionCreate', async (interaction) => {
 //   const role =
 //     message.guild.roles.cache.find((r) => isAchieve(r, achieve)) ||
 //     (await message.guild.roles.create({ name: achieve }))
-//   await member?.roles.add(role)
-//   await message.channel.send(`${member}が実績解除しました: "**${role.name}**"`)
+//   await user?.roles.add(role)
+//   await message.channel.send(`${user}が実績解除しました: "**${role.name}**"`)
 //   await message.delete()
 // })

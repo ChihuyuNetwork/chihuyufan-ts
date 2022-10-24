@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionType } from 'discord.js'
+import { ApplicationCommandOptionType } from 'discord-api-types/v10'
 import { client } from '..'
 import { guildId } from '../constant'
 import { nullableFetch, getChannelName } from '../utils'
@@ -23,6 +23,7 @@ client.on('commandsReset', async () => {
 
 client.on('interactionCreate', async (interaction) => {
   if (
+    !interaction.inCachedGuild() ||
     !interaction.isChatInputCommand() ||
     interaction.commandName !== 'resolve'
   )

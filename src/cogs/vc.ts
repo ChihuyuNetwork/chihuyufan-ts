@@ -1,7 +1,5 @@
-import {
-  ApplicationCommandOptionType,
-  InteractionReplyOptions
-} from 'discord.js'
+import { ApplicationCommandOptionType } from 'discord-api-types/v10'
+import { InteractionReplyOptions } from 'discord.js'
 import { client } from '..'
 import { guildId } from '../constant'
 
@@ -40,7 +38,7 @@ client.on('interactionCreate', async (interaction) => {
     interaction.commandName !== 'vc'
   )
     return
-  const name = interaction.options.getString('name', true).trim()
+  const name = interaction.options.getString('name', true)
   const joinedVC = voiceChannelsId.includes(
     interaction.member.voice.channel?.id!
   )

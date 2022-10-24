@@ -1,5 +1,5 @@
+import { ApplicationCommandOptionType } from 'discord-api-types/v10'
 import {
-  ApplicationCommandOptionType,
   EmbedBuilder,
   GuildMember,
   HexColorString
@@ -122,9 +122,7 @@ client.on('interactionCreate', async (interaction) => {
 
 const user2color = async (user: GuildMember): Promise<HexColorString> => {
   const url = user.displayAvatarURL({
-    extension: 'png',
-    forceStatic: true,
-    size: 16
+    size: 32
   })
   const image = await (await fetch(url)).buffer()
   return (await getAverageColor(image)).hex as HexColorString

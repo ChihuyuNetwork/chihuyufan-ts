@@ -12,7 +12,11 @@ client.on('commandsReset', async () => {
 })
 
 client.on('interactionCreate', async (interaction) => {
-  if (!interaction.isChatInputCommand() || interaction.commandName !== 'neko')
+  if (
+    !interaction.inCachedGuild() ||
+    !interaction.isChatInputCommand() ||
+    interaction.commandName !== 'neko'
+  )
     return
   await interaction.reply('にゃー')
 })
