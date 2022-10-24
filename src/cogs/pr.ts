@@ -12,7 +12,8 @@ client.on('commandsReset', async () => {
 })
 
 client.on('interactionCreate', async (interaction) => {
-  if (!interaction.isCommand() || interaction.commandName !== 'pr') return
+  if (!interaction.isChatInputCommand() || interaction.commandName !== 'pr')
+    return
   await interaction.reply(
     'https://twitter.com/hirosukt/status/1489252498540212224'
   )

@@ -1,3 +1,4 @@
+import { ApplicationCommandOptionType } from 'discord.js'
 import { client } from '..'
 import { guildId } from '../constant'
 import { nullableFetch, getChannelName } from '../utils'
@@ -9,7 +10,7 @@ client.on('commandsReset', async () => {
       description: 'IDから名前を逆引きします',
       options: [
         {
-          type: 'STRING',
+          type: ApplicationCommandOptionType.String,
           name: 'id',
           description: '調べたいID',
           required: true
@@ -21,7 +22,11 @@ client.on('commandsReset', async () => {
 })
 
 client.on('interactionCreate', async (interaction) => {
-  if (!interaction.isCommand() || interaction.commandName !== 'resolve') return
+  if (
+    !interaction.isChatInputCommand() ||
+    interaction.commandName !== 'resolve'
+  )
+    return
   const id = interaction.options.getString('id', true).trim()
   const name =
     (interaction.inCachedGuild()

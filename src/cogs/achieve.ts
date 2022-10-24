@@ -1,4 +1,4 @@
-import { GuildMember, Role } from 'discord.js'
+import { ApplicationCommandOptionType, GuildMember, Role } from 'discord.js'
 import { client } from '..'
 import { guildId } from '../constant'
 
@@ -17,13 +17,13 @@ client.on('commandsReset', async () => {
       description: 'ユーザーの実績を解除します',
       options: [
         {
-          type: 'USER',
+          type: ApplicationCommandOptionType.User,
           name: 'member',
           description: '対象ユーザー',
           required: true
         },
         {
-          type: 'STRING',
+          type: ApplicationCommandOptionType.String,
           name: 'achieve',
           description: '実績名',
           required: true
@@ -37,18 +37,18 @@ client.on('commandsReset', async () => {
 client.on('interactionCreate', async (interaction) => {
   if (
     !interaction.inCachedGuild() ||
-    !interaction.isCommand() ||
+    !interaction.isChatInputCommand() ||
     interaction.commandName !== 'achieve'
   )
     return
-  if (!interaction.member.permissions.has('ADMINISTRATOR')) {
+  if (!interaction.member.permissions.has('Administrator')) {
     await interaction.reply({
       content: 'このコマンドは管理者権限を持つ人のみ実行できます。',
       ephemeral: true
     })
     return
   }
-  const member = interaction.options.getMember('member', true)
+  const member = interaction.options.getMember('member')!
   const achieve = interaction.options.getString('achieve', true)
   if (member.roles.cache.has(achieve)) {
     await interaction.reply({
