@@ -40,21 +40,21 @@ client.on('interactionCreate', async (interaction) => {
     interaction.commandName !== 'vote'
   )
     return
-  const args = (interaction.options.getString('choice') || '').split(/\s+/)
-  if (args.length > 20) {
-    await interaction.reply({
-      content: '選択肢が多すぎます。20個以下にしてください。',
-      ephemeral: true
-    })
-    return
-  }
+  const args = interaction.options.getString('choice')?.split(' ')
   let emojis: string[] = []
   let choices: string[] = []
   const constEmojiLargeA = 0x1f1e6
 
-  if (args[0] === '') {
+  if (!args) {
     emojis = ['<:GOOD:931715830444621824>', '<:NO:931715830620778556>']
   } else {
+    if (args.length > 20) {
+      await interaction.reply({
+        content: '選択肢が多すぎます。20個以下にしてください。',
+        ephemeral: true
+      })
+    }
+
     for (let i = 0; i < args.length; i++) {
       const emoji = String.fromCodePoint(constEmojiLargeA + i)
       emojis.push(emoji)
@@ -66,7 +66,11 @@ client.on('interactionCreate', async (interaction) => {
     .setTitle(interaction.options.getString('title', true))
     .setColor((await user2color(interaction.member)) || '#ffffff')
     .setTimestamp()
+    
+  if (args) {
+    embed
     .setDescription(choices.join('\n'))
+  }
 
   const voteBoard = await interaction.reply({
     embeds: [embed],
