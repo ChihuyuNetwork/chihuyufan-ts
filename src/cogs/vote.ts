@@ -1,9 +1,5 @@
 import { ApplicationCommandOptionType } from 'discord-api-types/v10'
-import {
-  EmbedBuilder,
-  GuildMember,
-  HexColorString
-} from 'discord.js'
+import { EmbedBuilder, GuildMember, HexColorString } from 'discord.js'
 import { getAverageColor } from 'fast-average-color-node'
 import fetch from 'node-fetch'
 import { client } from '..'
@@ -53,6 +49,7 @@ client.on('interactionCreate', async (interaction) => {
         content: '選択肢が多すぎます。20個以下にしてください。',
         ephemeral: true
       })
+      return
     }
 
     for (let i = 0; i < args.length; i++) {
@@ -66,10 +63,9 @@ client.on('interactionCreate', async (interaction) => {
     .setTitle(interaction.options.getString('title', true))
     .setColor((await user2color(interaction.member)) || '#ffffff')
     .setTimestamp()
-    
+
   if (args) {
-    embed
-    .setDescription(choices.join('\n'))
+    embed.setDescription(choices.join('\n'))
   }
 
   const voteBoard = await interaction.reply({
