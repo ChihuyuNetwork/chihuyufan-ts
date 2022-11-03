@@ -23,6 +23,4 @@ const chihuyu = new MyBot({
 
 export const client = chihuyu
 
-export const rest = new REST({ offset: 0, version: '9' }).setToken(
-  discordBotToken!
-)
+export const rest = new REST({ offset: 0, version: '9' }).setToken(discordBotToken!)
