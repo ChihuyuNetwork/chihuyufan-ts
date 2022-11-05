@@ -1,7 +1,7 @@
 import { client } from '..'
 import { guildId } from '../constant'
 
-const zuzudaze = ['ず', 'ず', 'だ', 'ぜ', 'ざ', 'じ', 'ぞ']
+const zuzudaze = ['ず', 'ず', 'だ', 'ぜ', 'ざ', 'じ']
 
 client.on('commandsReset', async () => {
   client.application!.commands.create(
@@ -18,7 +18,7 @@ client.on('interactionCreate', async (interaction) => {
     !interaction.inCachedGuild() ||
     !interaction.isChatInputCommand() ||
     interaction.commandName !== 'zuzudaze'
-  ) 
+  )
     return
   await interaction.reply(makeRanzozo())
 })
