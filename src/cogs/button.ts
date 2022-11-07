@@ -3,11 +3,13 @@ import { ButtonStyle, MessageComponent } from 'discord.js'
 import outdent from 'outdent'
 import { client } from '..'
 
-// const serverIP =
-//   '繋がらない場合は運営に連絡してください。\n\n`mc.hirosuke.works`'
+const serverIP = outdent`
+    繋がらない場合は<@&928978798022631424>か<@&1026898339121340446>に連絡してください。
+
+    アドレス: \`chihuyu.love\`
+    `
 const discordInviteURL = 'https://chihuyu.love/'
-const scrapboxInviteURL =
-  'https://scrapbox.io/projects/hiro-hub/invitations/c687d9ed3a7fdc50a01730e9227d01c5'
+const scrapboxInviteURL ='https://scrapbox.io/projects/hiro-hub/invitations/c687d9ed3a7fdc50a01730e9227d01c5'
 const seesaaWikiURL = 'https://seesaawiki.jp/chihuyu/'
 
 client.on('messageCreate', async (message) => {
@@ -16,23 +18,26 @@ client.on('messageCreate', async (message) => {
 
   if (message.content === '.button') {
     const buttonShowDiscordInviteURL = new ButtonBuilder()
-      // .setCustomId('showDiscordInviteURL')
-      .setStyle(ButtonStyle.Link)
-      .setURL(discordInviteURL)
+      .setCustomId('showDiscordInviteURL')
+      .setStyle(ButtonStyle.Primary)
       .setLabel('Discordの招待リンク')
     const buttonShowScrapboxInviteURL = new ButtonBuilder()
-      // .setCustomId('showScrapboxInviteURL')
-      .setStyle(ButtonStyle.Link)
-      .setURL(scrapboxInviteURL)
+      .setCustomId('showScrapboxInviteURL')
+      .setStyle(ButtonStyle.Primary)
       .setLabel('Scrapboxの招待リンク')
     const buttonShowSeesaaWikiURL = new ButtonBuilder()
-      .setStyle(ButtonStyle.Link)
-      .setURL(seesaaWikiURL)
+    .setCustomId('showSeesaaWikiURL')
+      .setStyle(ButtonStyle.Primary)
       .setLabel('ちふゆ鯖のWiki')
+    const buttonShowMinecraftAddress = new ButtonBuilder()
+      .setCustomId('showMinecraftAddress')
+      .setStyle(ButtonStyle.Primary)
+      .setLabel('マイクラ鯖のアドレス')
     const buttons = [
       buttonShowDiscordInviteURL,
       buttonShowScrapboxInviteURL,
-      buttonShowSeesaaWikiURL
+      buttonShowSeesaaWikiURL,
+      buttonShowMinecraftAddress
     ]
 
     const content = outdent`
@@ -53,31 +58,34 @@ client.on('messageCreate', async (message) => {
   }
 })
 
-// client.on('interactionCreate', async (interaction) => {
-//   if (!interaction.isButton()) return
+client.on('interactionCreate', async (interaction) => {
+  if (!interaction.isButton()) return
 
-//   if (interaction.customId === 'showServerIP') {
-//     await interaction.reply({
-//       content: serverIP,
-//       ephemeral: true
-//     })
-//   }
-//   if (interaction.customId === 'showDiscordInviteURL') {
-//     await interaction.reply({
-//       content: discordInviteURL,
-//       ephemeral: true
-//     })
-//   }
-//   if (interaction.customId === 'showScrapboxInviteURL') {
-//     await interaction.reply({
-//       content: scrapboxInviteURL,
-//       ephemeral: true
-//     })
-//   }
-//   if (interaction.customId === 'showSeesaaWikiURL') {
-//     await interaction.reply({
-//       content: seesaaWikiURL,
-//       ephemeral: true
-//     })
-//   }
-// })
+  if (interaction.customId === 'showDiscordInviteURL') {
+    await interaction.reply({
+      content: discordInviteURL,
+      ephemeral: true
+    })
+  }
+
+  if (interaction.customId === 'showScrapboxInviteURL') {
+    await interaction.reply({
+      content: scrapboxInviteURL,
+      ephemeral: true
+    })
+  }
+
+  if (interaction.customId === 'showSeesaaWikiURL') {
+    await interaction.reply({
+      content: seesaaWikiURL,
+      ephemeral: true
+    })
+  }
+
+  if (interaction.customId === 'showMinecraftAddress') {
+    await interaction.reply({
+      content: serverIP,
+      ephemeral: true
+    })
+  }
+})
