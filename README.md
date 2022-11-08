@@ -6,7 +6,7 @@ Chihuyufan written in typescript.
 1. `.env.sample`を参考に`.env`ファイルを作る
 2. `docker compose up -d`を実行する
 ### ソース更新時の手順
-`docker compose build`
+`docker compose build --pull`
 
 `docker compose restart bot`
 
