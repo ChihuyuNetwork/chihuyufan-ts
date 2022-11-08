@@ -1,11 +1,12 @@
-FROM gcr.io/distroless/nodejs18-debian11 as builder
+FROM node:18.12.0-bullseye as builder
 WORKDIR /opt
 COPY package.json .
 RUN npm i
+COPY tsconfig.json .
 COPY src ./src
 RUN npm run compile
 
-FROM gcr.io/distroless/nodejs18-debian11
+FROM node:18.12.0-bullseye-slim
 WORKDIR /opt
 ENV NODE_ENV="production"
 COPY package.json .
