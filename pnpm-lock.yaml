@@ -1,25 +1,25 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@discordjs/builders': ^1.3.0
-  '@discordjs/rest': ^1.3.0
-  '@types/node': ^18.11.0
-  '@types/node-fetch': ^2.6.2
-  discord-api-types: ^0.37.14
-  discord.js: ^14.6.0
-  dotenv: ^16.0.3
-  fast-average-color-node: ^2.4.0
-  node-fetch: ^2.6.7
-  outdent: ^0.8.0
-  prettier: ^2.7.1
-  run: ^1.4.0
-  ts-node: ^10.9.1
-  typescript: ^4.8.4
+  '@discordjs/builders': 1.3.0
+  '@discordjs/rest': 1.3.0
+  '@types/node': 18.11.9
+  '@types/node-fetch': 2.6.2
+  discord-api-types: 0.37.17
+  discord.js: 14.6.0
+  dotenv: 16.0.3
+  fast-average-color-node: 2.4.0
+  node-fetch: 2.6.7
+  outdent: 0.8.0
+  prettier: 2.7.1
+  run: 1.4.0
+  ts-node: 10.9.1
+  typescript: 4.8.4
 
 dependencies:
   '@discordjs/builders': 1.3.0
   '@discordjs/rest': 1.3.0
-  discord-api-types: 0.37.14
+  discord-api-types: 0.37.17
   discord.js: 14.6.0
   dotenv: 16.0.3
   fast-average-color-node: 2.4.0
@@ -28,10 +28,10 @@ dependencies:
   run: 1.4.0
 
 devDependencies:
-  '@types/node': 18.11.0
+  '@types/node': 18.11.9
   '@types/node-fetch': 2.6.2
   prettier: 2.7.1
-  ts-node: 10.9.1_o6ib7qqltxpe7qrskddglns2ga
+  ts-node: 10.9.1_cbe7ovvae6zqfnmtgctpgpys54
   typescript: 4.8.4
 
 packages:
@@ -49,7 +49,7 @@ packages:
     dependencies:
       '@discordjs/util': 0.1.0
       '@sapphire/shapeshift': 3.7.0
-      discord-api-types: 0.37.14
+      discord-api-types: 0.37.17
       fast-deep-equal: 3.1.3
       ts-mixer: 6.0.1
       tslib: 2.4.0
@@ -68,7 +68,7 @@ packages:
       '@discordjs/util': 0.1.0
       '@sapphire/async-queue': 1.5.0
       '@sapphire/snowflake': 3.2.2
-      discord-api-types: 0.37.14
+      discord-api-types: 0.37.17
       file-type: 18.0.0
       tslib: 2.4.0
       undici: 5.11.0
@@ -136,12 +136,12 @@ packages:
   /@types/node-fetch/2.6.2:
     resolution: {integrity: sha512-DHqhlq5jeESLy19TYhLakJ07kNumXWjcDdxXsLUMJZ6ue8VZJj4kLPQVE/2mdHh3xZziNF1xppu5lwmS53HR+A==}
     dependencies:
-      '@types/node': 18.11.0
+      '@types/node': 18.11.9
       form-data: 3.0.1
     dev: true
 
-  /@types/node/18.11.0:
-    resolution: {integrity: sha512-IOXCvVRToe7e0ny7HpT/X9Rb2RYtElG1a+VshjwT00HxrM2dWBApHQoqsI6WiY7Q03vdf2bCrIGzVrkF/5t10w==}
+  /@types/node/18.11.9:
+    resolution: {integrity: sha512-CRpX21/kGdzjOpFsZSkcrXMGIBWMGNIHXXBVFSH+ggkftxg+XYP20TESbh+zFvFj3EQOl5byk0HTRn1IL6hbqg==}
 
   /@types/offscreencanvas/2019.7.0:
     resolution: {integrity: sha512-PGcyveRIpL1XIqK8eBsmRBt76eFgtzuPiSTyKHZxnGemp2yzGzWpjYKAfK3wIMiU7eH+851yEpiuP8JZerTmWg==}
@@ -150,7 +150,7 @@ packages:
   /@types/ws/8.5.3:
     resolution: {integrity: sha512-6YOoWjruKj1uLf3INHH7D3qTXwFfEsg1kf3c0uDdSBJwfa/llkwIjrAGV7j7mVgGNbzTQ3HiHKKDXl6bJPD97w==}
     dependencies:
-      '@types/node': 18.11.0
+      '@types/node': 18.11.9
     dev: false
 
   /acorn-walk/8.2.0:
@@ -276,8 +276,8 @@ packages:
     engines: {node: '>=0.3.1'}
     dev: true
 
-  /discord-api-types/0.37.14:
-    resolution: {integrity: sha512-byBH7SfDCMJwxdqeS8k5sihltH88/YPhuwx+vF2cftSxFLdxyHyU/ZxDL3bq+LB2c4ls/TymE76/ISlLfniUXg==}
+  /discord-api-types/0.37.17:
+    resolution: {integrity: sha512-5ZIw1VtkmToBy8ziketjHkZnW1FoLevyXdK/TslNFLozijug2RnB3MyBNtSGzML1c72koU3neeGkvFZ8OiU0tQ==}
     dev: false
 
   /discord.js/14.6.0:
@@ -290,7 +290,7 @@ packages:
       '@discordjs/util': 0.1.0
       '@sapphire/snowflake': 3.2.2
       '@types/ws': 8.5.3
-      discord-api-types: 0.37.14
+      discord-api-types: 0.37.17
       fast-deep-equal: 3.1.3
       lodash.snakecase: 4.1.1
       tslib: 2.4.0
@@ -645,7 +645,7 @@ packages:
     resolution: {integrity: sha512-hvE+ZYXuINrx6Ei6D6hz+PTim0Uf++dYbK9FFifLNwQj+RwKquhQpn868yZsCtJYiclZF1u8l6WZxxKi+vv7Rg==}
     dev: false
 
-  /ts-node/10.9.1_o6ib7qqltxpe7qrskddglns2ga:
+  /ts-node/10.9.1_cbe7ovvae6zqfnmtgctpgpys54:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -664,7 +664,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 18.11.0
+      '@types/node': 18.11.9
       acorn: 8.8.0
       acorn-walk: 8.2.0
       arg: 4.1.3
