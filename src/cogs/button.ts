@@ -8,7 +8,7 @@ const serverIP = outdent`
 
     アドレス: \`chihuyu.love\`
     `
-const discordInviteURL = 'https://chihuyu.love/'
+const discordInviteURL = 'discord.gg/XkmSDA6kUn'
 const scrapboxInviteURL ='https://scrapbox.io/projects/hiro-hub/invitations/c687d9ed3a7fdc50a01730e9227d01c5'
 const seesaaWikiURL = 'https://seesaawiki.jp/chihuyu/'
 
