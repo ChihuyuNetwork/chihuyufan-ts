@@ -50,8 +50,12 @@ client.on('interactionCreate', async (interaction) => {
     response = { content: '名前を入力してください。', ephemeral: true }
   else if (noDiff) response = { content: '既にその名前です。', ephemeral: true }
   else {
+    // VoiceChannelの名前変更のレートリミットにひっかかると、レスポンスが追いつかないときがあるので
+    // deferReplyしてから、そのReplyを編集する形にしている。
+    await interaction.deferReply()
     await interaction.member.voice.channel?.edit({ name })
-    response = `チャンネル名を\`${name}\`に変更しました。\n※10分のレートリミットがあります。`
+    await interaction.editReply(`チャンネル名を\`${name}\`に変更しました。\n※10分のレートリミットがあります。`)
+    return
   }
   await interaction.reply(response)
 })
