@@ -1,6 +1,7 @@
+import { Events } from 'discord.js'
 import { client } from '..'
 
-client.on('messageCreate', async (message) => {
+client.on(Events.MessageCreate, async (message) => {
   const pattern = /(しかし|だが)\S+に絡まれ/
   if (pattern.test(message.content)) {
     const channel = message.channel

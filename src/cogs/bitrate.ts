@@ -1,5 +1,5 @@
 import { ApplicationCommandOptionType } from 'discord-api-types/v10'
-import { VoiceChannel } from 'discord.js'
+import { Events, VoiceChannel } from 'discord.js'
 import { client } from '..'
 import { guildId } from '../constant'
 
@@ -20,7 +20,7 @@ client.on('commandsReset', async () => {
   )
 })
 
-client.on('interactionCreate', async (interaction) => {
+client.on(Events.InteractionCreate, async (interaction) => {
   if (
     !interaction.inCachedGuild() ||
     !interaction.isChatInputCommand() ||

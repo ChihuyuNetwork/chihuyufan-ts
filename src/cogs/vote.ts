@@ -1,5 +1,5 @@
 import { ApplicationCommandOptionType } from 'discord-api-types/v10'
-import { EmbedBuilder, GuildMember, HexColorString } from 'discord.js'
+import { EmbedBuilder, Events, GuildMember, HexColorString } from 'discord.js'
 import { getAverageColor } from 'fast-average-color-node'
 import fetch from 'node-fetch'
 import { client } from '..'
@@ -29,7 +29,7 @@ client.on('commandsReset', async () => {
   )
 })
 
-client.on('interactionCreate', async (interaction) => {
+client.on(Events.InteractionCreate, async (interaction) => {
   if (
     !interaction.inCachedGuild() ||
     !interaction.isChatInputCommand() ||

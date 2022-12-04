@@ -1,4 +1,5 @@
 import { EmbedBuilder } from '@discordjs/builders'
+import { Events } from 'discord.js'
 import { client } from '..'
 import { guildId } from '../constant'
 
@@ -12,7 +13,7 @@ client.on('commandsReset', async () => {
   )
 })
 
-client.on('interactionCreate', async (interaction) => {
+client.on(Events.InteractionCreate, async (interaction) => {
   if (
     !interaction.inCachedGuild() ||
     !interaction.isChatInputCommand() ||

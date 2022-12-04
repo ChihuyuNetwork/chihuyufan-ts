@@ -1,5 +1,5 @@
 import { ActionRowBuilder, ButtonBuilder, MessageComponentBuilder } from '@discordjs/builders'
-import { ButtonStyle, MessageComponent } from 'discord.js'
+import { ButtonStyle, Events, MessageComponent } from 'discord.js'
 import outdent from 'outdent'
 import { client } from '..'
 
@@ -12,7 +12,7 @@ const discordInviteURL = 'discord.gg/XkmSDA6kUn'
 const scrapboxInviteURL ='https://scrapbox.io/projects/hiro-hub/invitations/c687d9ed3a7fdc50a01730e9227d01c5'
 const seesaaWikiURL = 'https://seesaawiki.jp/chihuyu/'
 
-client.on('messageCreate', async (message) => {
+client.on(Events.MessageCreate, async (message) => {
   const botAuthors = ['608242236546613259', '743393055113216093']
   if (!botAuthors.includes(message.author.id)) return // hirosuke only
 
@@ -58,7 +58,7 @@ client.on('messageCreate', async (message) => {
   }
 })
 
-client.on('interactionCreate', async (interaction) => {
+client.on(Events.InteractionCreate, async (interaction) => {
   if (!interaction.isButton()) return
 
   if (interaction.customId === 'showDiscordInviteURL') {

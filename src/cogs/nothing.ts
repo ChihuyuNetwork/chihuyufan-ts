@@ -1,4 +1,4 @@
-import { Message, TextChannel } from 'discord.js'
+import { Events, Message, TextChannel } from 'discord.js'
 import { client } from '..'
 import { nothingChannelId } from '../constant'
 
@@ -12,7 +12,7 @@ const deleteLog = async () => {
   await target.delete().catch(() => {})
 }
 
-client.on('ready', async () => {
+client.on(Events.ClientReady, async () => {
   targetChannel = (await client.channels.fetch(nothingChannelId)) as TextChannel
   const messages = await targetChannel.messages.fetch()
   queue.push(...messages.reverse().values())
@@ -21,7 +21,7 @@ client.on('ready', async () => {
   while (queue.length > logCount) await deleteLog()
 })
 
-client.on('messageCreate', async (message) => {
+client.on(Events.MessageCreate, async (message) => {
   if (message.channel.id !== nothingChannelId) return
   if (queue.push(message) <= logCount) return
   await deleteLog()
