@@ -10,7 +10,6 @@ const serverIP = outdent`
     `
 const discordInviteURL = 'discord.gg/XkmSDA6kUn'
 const scrapboxInviteURL ='https://scrapbox.io/projects/hiro-hub/invitations/c687d9ed3a7fdc50a01730e9227d01c5'
-const seesaaWikiURL = 'https://seesaawiki.jp/chihuyu/'
 
 client.on(Events.MessageCreate, async (message) => {
   const botAuthors = ['608242236546613259', '743393055113216093']
@@ -25,10 +24,6 @@ client.on(Events.MessageCreate, async (message) => {
       .setCustomId('showScrapboxInviteURL')
       .setStyle(ButtonStyle.Primary)
       .setLabel('Scrapboxの招待リンク')
-    const buttonShowSeesaaWikiURL = new ButtonBuilder()
-    .setCustomId('showSeesaaWikiURL')
-      .setStyle(ButtonStyle.Primary)
-      .setLabel('ちふゆ鯖のWiki')
     const buttonShowMinecraftAddress = new ButtonBuilder()
       .setCustomId('showMinecraftAddress')
       .setStyle(ButtonStyle.Primary)
@@ -36,7 +31,6 @@ client.on(Events.MessageCreate, async (message) => {
     const buttons = [
       buttonShowDiscordInviteURL,
       buttonShowScrapboxInviteURL,
-      buttonShowSeesaaWikiURL,
       buttonShowMinecraftAddress
     ]
 
@@ -71,13 +65,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
   if (interaction.customId === 'showScrapboxInviteURL') {
     await interaction.reply({
       content: scrapboxInviteURL,
-      ephemeral: true
-    })
-  }
-
-  if (interaction.customId === 'showSeesaaWikiURL') {
-    await interaction.reply({
-      content: seesaaWikiURL,
       ephemeral: true
     })
   }
