@@ -3,15 +3,11 @@ import { Events, InteractionReplyOptions } from 'discord.js'
 import { client } from '..'
 import { guildId } from '../constant'
 
-interface DefaultNameDictionary {
-  [index: string]: string
-}
-
-const defaultNames: DefaultNameDictionary = {
-  '928983010081124393': 'VC',
-  '953922831924731935': 'VC2'
-}
-const voiceChannelsId = ['928983010081124393', '953922831924731935']
+const defaultNames = new Map([
+    ['928983010081124393', 'VC'],
+    ['953922831924731935', 'VC2'],
+    ['1059136138989817897', 'VC3'],
+]);
 
 client.on('commandsReset', async () => {
   client.application!.commands.create(
@@ -36,19 +32,27 @@ client.on(Events.InteractionCreate, async (interaction) => {
     !interaction.inCachedGuild() ||
     !interaction.isChatInputCommand() ||
     interaction.commandName !== 'vc'
-  )
+  ){
     return
+  }
+
   const name = interaction.options.getString('name', true)
-  const joinedVC = voiceChannelsId.includes(
-    interaction.member.voice.channel?.id!
-  )
+  const channelId = interaction.member.voice.channelId
+  const isEditable = !!channelId && defaultNames.has(channelId)
   const noDiff = name === interaction.member.voice.channel?.name
-  let response: string | InteractionReplyOptions | undefined
-  if (!joinedVC)
+  let response: InteractionReplyOptions
+  if (!channelId){
     response = { content: 'チャンネルに参加してください。', ephemeral: true }
-  else if (name === '')
+  }
+  else if(!isEditable){
+    response = { content: '編集できないVCです。\n最近作られたVCであれば、開発者にお知らせください。', ephemeral: true }
+  }
+  else if (name === ''){
     response = { content: '名前を入力してください。', ephemeral: true }
-  else if (noDiff) response = { content: '既にその名前です。', ephemeral: true }
+  }
+  else if (noDiff){
+    response = { content: '既にその名前です。', ephemeral: true }
+  }
   else {
     // VoiceChannelの名前変更のレートリミットにひっかかると、レスポンスが追いつかないときがあるので
     // deferReplyしてから、そのReplyを編集する形にしている。
@@ -84,11 +88,12 @@ client.on('voiceStateUpdate', async (oldState) => {
   const channel = oldState.channel
   if (
     !channel ||
-    !voiceChannelsId.includes(channel.id) ||
-    channel.members.size !== 0 ||
-    channel.name === defaultNames[channel.id]
+    channel.members.size !== 0
   ) {
     return
   }
-  await channel.edit({ name: defaultNames[channel.id] })
+  const defaultName = defaultNames.get(channel.id)
+  if(defaultName && defaultName !== channel.name){
+    await channel.edit({ name: defaultName })
+  }
 })
