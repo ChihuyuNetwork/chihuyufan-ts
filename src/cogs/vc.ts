@@ -1,5 +1,5 @@
 import { ApplicationCommandOptionType } from 'discord-api-types/v10'
-import { Events, InteractionReplyOptions } from 'discord.js'
+import {Events, GuildChannel, InteractionReplyOptions, VoiceChannel} from 'discord.js'
 import { client } from '..'
 import { guildId } from '../constant'
 
@@ -15,7 +15,9 @@ const defaultNames = new Map([
     ['1060436405060386847', 'VC9'],
     ['1060436424538734602', 'VC10'],
 ]);
-
+const allChannelsId = [...defaultNames.keys()];
+const vcCategoryId = "942783290572677121"
+const hiddenVcCategoryId = "1062726985429827584"
 client.on('commandsReset', async () => {
   client.application!.commands.create(
     {
@@ -104,3 +106,57 @@ client.on('voiceStateUpdate', async (oldState) => {
     await channel.edit({ name: defaultName })
   }
 })
+const isShowed = (channel: GuildChannel): boolean => {
+  return channel.parentId === vcCategoryId
+}
+
+const setShow = async (channel: GuildChannel, show: boolean) => {
+  if(show){
+    await channel.edit({parent: vcCategoryId})
+  }
+  else{
+    await channel.edit({parent: hiddenVcCategoryId})
+  }
+}
+
+const onJoinVC = async (channel: VoiceChannel) => {
+  const allChannels = allChannelsId
+      .map((id) => channel.guild.channels.resolve(id))
+      .filter((channel): channel is VoiceChannel =>channel instanceof VoiceChannel)
+  const showedChannels = allChannels.filter(isShowed)
+  const hiddenChannels = allChannels.filter((channel) => !isShowed(channel))
+  // 表示されているVCのなかで空きがあればなにもしない
+  if(showedChannels.every((channel) => channel.members.size === 0)){
+    return
+  }
+  // 隠れているチャンネルを一つ選ぶ(VCが尽きたら何もできない)
+  const newChannel = hiddenChannels.at(0)
+  if(!newChannel){
+    return
+  }
+  await setShow(newChannel, true);
+}
+
+const onLeaveVC = async (channel: VoiceChannel) => {
+  // VC1なら無視する
+  if(channel.id === allChannelsId[0]){
+    return
+  }
+  const allChannels = allChannelsId
+      .map((id) => channel.guild.channels.resolve(id))
+      .filter((channel): channel is VoiceChannel =>channel instanceof VoiceChannel)
+  const showedChannels = allChannels.filter(isShowed)
+  // 表示されているVCの中で空いているVCが２つ以上あれば、退出したVCは非表示にする
+  if(showedChannels.filter((channel) => channel.members.size === 0).length <= 1){
+    return
+  }
+  await setShow(channel, false);
+}
+client.on('voiceStateUpdate', async (oldState, newState) => {
+  if(oldState.channel instanceof VoiceChannel){
+    await onLeaveVC(oldState.channel)
+  }
+  if(newState.channel instanceof VoiceChannel){
+    await onJoinVC(newState.channel)
+  }
+});
