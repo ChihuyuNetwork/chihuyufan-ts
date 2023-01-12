@@ -110,15 +110,15 @@ client.on('voiceStateUpdate', async (oldState) => {
     await channel.edit({ name: defaultName })
   }
 })
-const isShowed = (channel: GuildChannel): boolean => {
+const isVisible = (channel: GuildChannel): boolean => {
   return channel.parentId === vcCategoryId
 }
 
 const setVisibility = async (channel: GuildChannel, show: boolean) => {
   if (show) {
-    await channel.edit({ parent: vcCategoryId })
+    await channel.edit({ parent: vcCategoryId, lockPermissions: true })
   } else {
-    await channel.edit({ parent: hiddenVcCategoryId })
+    await channel.edit({ parent: hiddenVcCategoryId, lockPermissions: true })
   }
 }
 
@@ -128,8 +128,8 @@ const onJoinVC = async (channel: VoiceChannel) => {
     .filter(
       (channel): channel is VoiceChannel => channel instanceof VoiceChannel
     )
-  const showedChannels = allChannels.filter(isShowed)
-  const hiddenChannels = allChannels.filter((channel) => !isShowed(channel))
+  const showedChannels = allChannels.filter(isVisible)
+  const hiddenChannels = allChannels.filter((channel) => !isVisible(channel))
   // 表示されているVCのなかで空きがあればなにもしない
   if (showedChannels.every((channel) => channel.members.size === 0)) {
     return
@@ -143,8 +143,8 @@ const onJoinVC = async (channel: VoiceChannel) => {
 }
 
 const onLeaveVC = async (channel: VoiceChannel) => {
-  // VC1なら無視する
-  if (channel.id === allChannelsId[0]) {
+  // VC1かメンバーが残っているなら無視する
+  if (channel.id === allChannelsId[0] || channel.members.size > 0) {
     return
   }
   const allChannels = allChannelsId
@@ -152,7 +152,7 @@ const onLeaveVC = async (channel: VoiceChannel) => {
     .filter(
       (channel): channel is VoiceChannel => channel instanceof VoiceChannel
     )
-  const showedChannels = allChannels.filter(isShowed)
+  const showedChannels = allChannels.filter(isVisible)
   // 表示されているVCの中で空いているVCが２つ以上あれば、退出したVCは非表示にする
   if (
     showedChannels.filter((channel) => channel.members.size === 0).length <= 1
