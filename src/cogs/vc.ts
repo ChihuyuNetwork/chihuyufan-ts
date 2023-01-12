@@ -143,8 +143,8 @@ const onJoinVC = async (channel: VoiceChannel) => {
 }
 
 const onLeaveVC = async (channel: VoiceChannel) => {
-  // VC1なら無視する
-  if (channel.id === allChannelsId[0]) {
+  // VC1かメンバーが残っているなら無視する
+  if (channel.id === allChannelsId[0] || channel.members.size > 0) {
     return
   }
   const allChannels = allChannelsId
