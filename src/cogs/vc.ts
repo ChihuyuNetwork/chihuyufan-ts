@@ -153,6 +153,9 @@ const onLeaveVC = async (channel: VoiceChannel) => {
   await setShow(channel, false);
 }
 client.on('voiceStateUpdate', async (oldState, newState) => {
+  if(oldState.channelId === newState.channelId){
+    return
+  }
   if(oldState.channel instanceof VoiceChannel){
     await onLeaveVC(oldState.channel)
   }
