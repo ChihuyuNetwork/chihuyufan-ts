@@ -116,9 +116,9 @@ const isShowed = (channel: GuildChannel): boolean => {
 
 const setVisibility = async (channel: GuildChannel, show: boolean) => {
   if (show) {
-    await channel.edit({ parent: vcCategoryId })
+    await channel.edit({ parent: vcCategoryId, lockPermissions: true })
   } else {
-    await channel.edit({ parent: hiddenVcCategoryId })
+    await channel.edit({ parent: hiddenVcCategoryId, lockPermissions: true })
   }
 }
 
