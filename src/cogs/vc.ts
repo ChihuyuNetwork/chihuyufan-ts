@@ -114,7 +114,7 @@ const isShowed = (channel: GuildChannel): boolean => {
   return channel.parentId === vcCategoryId
 }
 
-const setShow = async (channel: GuildChannel, show: boolean) => {
+const setVisibility = async (channel: GuildChannel, show: boolean) => {
   if (show) {
     await channel.edit({ parent: vcCategoryId })
   } else {
@@ -139,7 +139,8 @@ const onJoinVC = async (channel: VoiceChannel) => {
   if (!newChannel) {
     return
   }
-  await setShow(newChannel, true)
+  await setVisibility
+(newChannel, true)
 }
 
 const onLeaveVC = async (channel: VoiceChannel) => {
@@ -159,7 +160,8 @@ const onLeaveVC = async (channel: VoiceChannel) => {
   ) {
     return
   }
-  await setShow(channel, false)
+  await setVisibility
+(channel, false)
 }
 client.on('voiceStateUpdate', async (oldState, newState) => {
   if (oldState.channelId === newState.channelId) {
