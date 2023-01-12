@@ -139,8 +139,7 @@ const onJoinVC = async (channel: VoiceChannel) => {
   if (!newChannel) {
     return
   }
-  await setVisibility
-(newChannel, true)
+  await setVisibility(newChannel, true)
 }
 
 const onLeaveVC = async (channel: VoiceChannel) => {
@@ -160,8 +159,7 @@ const onLeaveVC = async (channel: VoiceChannel) => {
   ) {
     return
   }
-  await setVisibility
-(channel, false)
+  await setVisibility(channel, false)
 }
 client.on('voiceStateUpdate', async (oldState, newState) => {
   if (oldState.channelId === newState.channelId) {
