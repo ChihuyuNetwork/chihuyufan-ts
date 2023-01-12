@@ -131,7 +131,7 @@ const onJoinVC = async (channel: VoiceChannel) => {
   const showedChannels = allChannels.filter(isVisible)
   const hiddenChannels = allChannels.filter((channel) => !isVisible(channel))
   // 表示されているVCのなかで空きがあればなにもしない
-  if (showedChannels.every((channel) => channel.members.size === 0)) {
+  if (showedChannels.some((channel) => channel.members.size === 0)) {
     return
   }
   // 隠れているチャンネルを一つ選ぶ(VCが尽きたら何もできない)
