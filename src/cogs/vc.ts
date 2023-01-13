@@ -1,7 +1,7 @@
 import { ApplicationCommandOptionType } from 'discord-api-types/v10'
 import {
   Events,
-  GuildChannel,
+  GuildChannel, GuildChannelEditOptions,
   InteractionReplyOptions,
   VoiceChannel
 } from 'discord.js'
@@ -100,16 +100,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
 //   await message.channel.send(response)
 // })
 
-client.on('voiceStateUpdate', async (oldState) => {
-  const channel = oldState.channel
-  if (!channel || channel.members.size !== 0) {
-    return
-  }
-  const defaultName = defaultNames.get(channel.id)
-  if (defaultName && defaultName !== channel.name) {
-    await channel.edit({ name: defaultName })
-  }
-})
 const isVisible = (channel: GuildChannel): boolean => {
   return channel.parentId === vcCategoryId
 }
@@ -143,23 +133,46 @@ const onJoinVC = async (channel: VoiceChannel) => {
 }
 
 const onLeaveVC = async (channel: VoiceChannel) => {
-  // VC1かメンバーが残っているなら無視する
-  if (channel.id === allChannelsId[0] || channel.members.size > 0) {
+  // メンバーが残っているなら無視する
+  if (channel.members.size > 0) {
     return
   }
+  // デフォルトネームに戻す
+  const defaultName = defaultNames.get(channel.id)
+  const data: GuildChannelEditOptions = {}
+  if (defaultName && defaultName !== channel.name) {
+    data.name = defaultName
+  }
+  // 空いているVCがあるとそのVCを隠す
   const allChannels = allChannelsId
     .map((id) => channel.guild.channels.resolve(id))
     .filter(
       (channel): channel is VoiceChannel => channel instanceof VoiceChannel
     )
   const showedChannels = allChannels.filter(isVisible)
+  const emptyChannels = showedChannels
+    .filter((channel) => channel.members.size === 0)
   // 表示されているVCの中で空いているVCが２つ以上あれば、退出したVCは非表示にする
   if (
-    showedChannels.filter((channel) => channel.members.size === 0).length <= 1
+    emptyChannels.length >= 2
   ) {
-    return
+    // VC1ならほかの空のチャンネルを隠す
+    if (channel.id === allChannelsId[0]) {
+      const target = emptyChannels
+        .find((channel) => channel.id !== allChannelsId[0])
+      if (target) {
+        await setVisibility(target, false)
+      }
+    }
+    // それ以外なら隠す
+    else {
+      Object.assign(data, { parent: hiddenVcCategoryId, lockPermissions: true })
+    }
   }
-  await setVisibility(channel, false)
+  if (Object.keys(data).length > 0) {
+    await channel.edit(data)
+  }
+
 }
 client.on('voiceStateUpdate', async (oldState, newState) => {
   if (oldState.channelId === newState.channelId) {
