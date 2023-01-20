@@ -1,6 +1,6 @@
-import { ApplicationCommandOptionType } from 'discord-api-types/v10'
+import { ApplicationCommandOptionType, Snowflake } from 'discord-api-types/v10'
 import {
-  Events,
+  Events, GuildBasedChannel,
   GuildChannel, GuildChannelEditOptions,
   InteractionReplyOptions,
   VoiceChannel
@@ -8,9 +8,15 @@ import {
 import { client } from '..'
 import { guildId } from '../constant'
 
-const defaultNames = new Map([
-  ['928983010081124393', 'VC'],
-  ['953922831924731935', 'VC2'],
+type VCConfig = {
+  defaultName: string,
+  textChannelId: Snowflake
+}
+
+const defaultNames = new Map<string, VCConfig>([
+  ['928983010081124393', {defaultName: 'VC', textChannelId: "1058805846756302940"}],
+  ['953922831924731935', {defaultName: 'VC2', textChannelId: "975225417109762068"}],
+  /*
   ['1060436239561523320', 'VC3'],
   ['1060436262101712926', 'VC4'],
   ['1060436286164447292', 'VC5'],
@@ -19,6 +25,8 @@ const defaultNames = new Map([
   ['1060436385036767342', 'VC8'],
   ['1060436405060386847', 'VC9'],
   ['1060436424538734602', 'VC10']
+
+   */
 ])
 const allChannelsId = [...defaultNames.keys()]
 const vcCategoryId = '942783290572677121'
@@ -104,7 +112,7 @@ const isVisible = (channel: GuildChannel): boolean => {
   return channel.parentId === vcCategoryId
 }
 
-const setVisibility = async (channel: GuildChannel, show: boolean) => {
+const setVisibility = async (channel: GuildBasedChannel, show: boolean) => {
   if (show) {
     await channel.edit({ parent: vcCategoryId, lockPermissions: true })
   } else {
@@ -113,8 +121,9 @@ const setVisibility = async (channel: GuildChannel, show: boolean) => {
 }
 
 const onJoinVC = async (channel: VoiceChannel) => {
+  const manager = channel.guild.channels
   const allChannels = allChannelsId
-    .map((id) => channel.guild.channels.resolve(id))
+    .map((id) => manager.resolve(id))
     .filter(
       (channel): channel is VoiceChannel => channel instanceof VoiceChannel
     )
@@ -129,7 +138,11 @@ const onJoinVC = async (channel: VoiceChannel) => {
   if (!newChannel) {
     return
   }
+  const textChannel = manager.resolve(defaultNames.get(newChannel.id)!.textChannelId)
   await setVisibility(newChannel, true)
+  if(textChannel){
+    await setVisibility(textChannel, true)
+  }
 }
 
 const onLeaveVC = async (channel: VoiceChannel) => {
@@ -138,10 +151,10 @@ const onLeaveVC = async (channel: VoiceChannel) => {
     return
   }
   // デフォルトネームに戻す
-  const defaultName = defaultNames.get(channel.id)
+  const vcConfig = defaultNames.get(channel.id)
   const data: GuildChannelEditOptions = {}
-  if (defaultName && defaultName !== channel.name) {
-    data.name = defaultName
+  if (vcConfig && vcConfig.defaultName !== channel.name) {
+    data.name = vcConfig.defaultName
   }
   // 空いているVCがあるとそのVCを隠す
   const allChannels = allChannelsId
@@ -156,17 +169,24 @@ const onLeaveVC = async (channel: VoiceChannel) => {
   if (
     emptyChannels.length >= 2
   ) {
+    const manager = channel.guild.channels
+    let textChannel = null;
     // VC1ならほかの空のチャンネルを隠す
     if (channel.id === allChannelsId[0]) {
       const target = emptyChannels
         .find((channel) => channel.id !== allChannelsId[0])
       if (target) {
+        textChannel = manager.resolve(defaultNames.get(target.id)!.textChannelId)
         await setVisibility(target, false)
       }
     }
     // それ以外なら隠す
     else {
       Object.assign(data, { parent: hiddenVcCategoryId, lockPermissions: true })
+      textChannel = manager.resolve(defaultNames.get(channel.id)!.textChannelId)
+    }
+    if(textChannel){
+      await setVisibility(textChannel, false)
     }
   }
   if (Object.keys(data).length > 0) {
