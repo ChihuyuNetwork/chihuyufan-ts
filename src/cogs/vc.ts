@@ -147,6 +147,7 @@ const onLeaveVC = async (channel: VoiceChannel) => {
   if (channel.members.size > 0) {
     return
   }
+  const channelManager = channel.guild.channels
   // デフォルトネームに戻す
   const vcConfig = defaultNames.get(channel.id)
   const data: GuildChannelEditOptions = {}
@@ -155,34 +156,27 @@ const onLeaveVC = async (channel: VoiceChannel) => {
   }
   // 空いているVCがあるとそのVCを隠す
   const allChannels = allChannelsId
-    .map((id) => channel.guild.channels.resolve(id))
+    .map((id) => channelManager.resolve(id))
     .filter(
       (channel): channel is VoiceChannel => channel instanceof VoiceChannel
     )
   const showedChannels = allChannels.filter(isVisible)
   const emptyChannels = showedChannels
     .filter((channel) => channel.members.size === 0)
-  // 表示されているVCの中で空いているVCが２つ以上あれば、退出したVCは非表示にする
+  // 表示されているVCの中で空いているVCが２つ以上あれば、下位のVCを非表示にする
   if (
     emptyChannels.length >= 2
   ) {
-    const manager = channel.guild.channels
-    let textChannel = null;
-    // VC1ならほかの空のチャンネルを隠す
-    if (channel.id === allChannelsId[0]) {
-      const target = emptyChannels
-        .find((channel) => channel.id !== allChannelsId[0])
-      if (target) {
-        textChannel = manager.resolve(defaultNames.get(target.id)!.textChannelId)
-        await setVisibility(target, false)
-      }
-    }
-    // それ以外なら隠す
-    else {
+    const target = emptyChannels[emptyChannels.length - 1]
+    const textChannel = channelManager.resolve(defaultNames.get(target.id)!.textChannelId)
+    // VCを隠す処理
+    if (target.id === channel.id) {
       Object.assign(data, { parent: hiddenVcCategoryId, lockPermissions: true })
-      textChannel = manager.resolve(defaultNames.get(channel.id)!.textChannelId)
+    } else {
+      await setVisibility(target, false)
     }
-    if(textChannel){
+    // テキストチャンネルを隠す処理
+    if (textChannel) {
       await setVisibility(textChannel, false)
     }
   }
