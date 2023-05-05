@@ -8,7 +8,7 @@ specifiers:
   discord-api-types: 0.37.41
   discord.js: 14.10.2
   dotenv: 16.0.3
-  fast-average-color-node: 2.4.0
+  fast-average-color-node: 2.6.0
   node-fetch: 2.6.9
   outdent: 0.8.0
   prettier: 2.8.0
@@ -22,7 +22,7 @@ dependencies:
   discord-api-types: 0.37.41
   discord.js: 14.10.2
   dotenv: 16.0.3
-  fast-average-color-node: 2.4.0
+  fast-average-color-node: 2.6.0
   node-fetch: 2.6.9
   outdent: 0.8.0
   run: 1.4.0
@@ -218,10 +218,6 @@ packages:
   /@types/node/18.11.10:
     resolution: {integrity: sha512-juG3RWMBOqcOuXC643OAdSA525V44cVgGV6dUDuiFtss+8Fk5x1hI93Rsld43VeJVIeqlP9I7Fn9/qaVqoEAuQ==}
 
-  /@types/offscreencanvas/2019.7.0:
-    resolution: {integrity: sha512-PGcyveRIpL1XIqK8eBsmRBt76eFgtzuPiSTyKHZxnGemp2yzGzWpjYKAfK3wIMiU7eH+851yEpiuP8JZerTmWg==}
-    dev: false
-
   /@types/ws/8.5.4:
     resolution: {integrity: sha512-zdQDHKUgcX/zBc4GrwsE/7dVdAD8JR4EuiAXiiUhhfyIJXXb2+PrGshFyeXWQPMmmZ2XxgaqclgpIC7eTXc1mg==}
     dependencies:
@@ -399,22 +395,20 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
-  /fast-average-color-node/2.4.0:
-    resolution: {integrity: sha512-Vxh2JQWwHETAuIQM966/ULLprPIe78UrvyV+AUYJxyj4nBHwl4QYG6Ym77ZPDO4mYExVk0axKmU5EGXv7uAlaw==}
+  /fast-average-color-node/2.6.0:
+    resolution: {integrity: sha512-dn7ps7AhcsO8Gq4468aAeSVMtYWAGjTIjQ6J83+QueA6UYZ22YeKfIrfKjQiYAjBt+oBWskZ5e1fXtmsm24xMg==}
     engines: {node: '>= 12'}
     dependencies:
-      fast-average-color: 9.1.1
+      fast-average-color: 9.3.0
+      sharp: 0.31.3
       node-fetch: 2.6.9
-      sharp: 0.30.7
     transitivePeerDependencies:
       - encoding
     dev: false
 
-  /fast-average-color/9.1.1:
-    resolution: {integrity: sha512-PJizLBcGb/jqUzrH66385te4+GcOK7wcUiCDvBUszdpzc/pvV1kwifvvsFygV3mS+7qwnWmK9/BrZniaOOC9ag==}
+  /fast-average-color/9.3.0:
+    resolution: {integrity: sha512-FlPROSqDMOnoBgkFhWMHJODPvpS0Od0WDpedcKq4U/t0JVapGAkblNwxOr75qT+ZNd0dQM4qlgqrtnXbCJ8cNg==}
     engines: {node: '>= 12'}
-    dependencies:
-      '@types/offscreencanvas': 2019.7.0
     dev: false
 
   /fast-deep-equal/3.1.3:
@@ -647,9 +641,9 @@ packages:
       lru-cache: 6.0.0
     dev: false
 
-  /sharp/0.30.7:
-    resolution: {integrity: sha512-G+MY2YW33jgflKPTXXptVO28HvNOo9G3j0MybYAHeEmby+QuD2U98dT6ueht9cv/XDqZspSpIhoSW+BAKJ7Hig==}
-    engines: {node: '>=12.13.0'}
+  /sharp/0.31.3:
+    resolution: {integrity: sha512-XcR4+FCLBFKw1bdB+GEhnUNXNXvnt0tDo4WsBsraKymuo/IAuPuCBVAL2wIkUw2r/dwFW5Q5+g66Kwl2dgDFVg==}
+    engines: {node: '>=14.15.0'}
     requiresBuild: true
     dependencies:
       color: 4.2.3
