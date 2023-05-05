@@ -1,28 +1,28 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@discordjs/builders': 1.4.0
+  '@discordjs/builders': 1.6.3
   '@discordjs/rest': 1.4.0
   '@types/node': 18.16.3
   '@types/node-fetch': 2.6.3
   discord-api-types: 0.37.41
   discord.js: 14.10.2
   dotenv: 16.0.3
-  fast-average-color-node: 2.4.0
+  fast-average-color-node: 2.6.0
   node-fetch: 2.6.9
   outdent: 0.8.0
   prettier: 2.8.0
   run: 1.4.0
   ts-node: 10.9.1
-  typescript: 4.9.5
+  typescript: 5.0.4
 
 dependencies:
-  '@discordjs/builders': 1.4.0
+  '@discordjs/builders': 1.6.3
   '@discordjs/rest': 1.4.0
   discord-api-types: 0.37.41
   discord.js: 14.10.2
   dotenv: 16.0.3
-  fast-average-color-node: 2.4.0
+  fast-average-color-node: 2.6.0
   node-fetch: 2.6.9
   outdent: 0.8.0
   run: 1.4.0
@@ -32,7 +32,7 @@ devDependencies:
   '@types/node-fetch': 2.6.3
   prettier: 2.8.0
   ts-node: 10.9.1_hl62ipmltjfz74pvls4whx33xm
-  typescript: 4.9.5
+  typescript: 5.0.4
 
 packages:
 
@@ -42,18 +42,6 @@ packages:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
     dev: true
-
-  /@discordjs/builders/1.4.0:
-    resolution: {integrity: sha512-nEeTCheTTDw5kO93faM1j8ZJPonAX86qpq/QVoznnSa8WWcCgJpjlu6GylfINTDW6o7zZY0my2SYdxx2mfNwGA==}
-    engines: {node: '>=16.9.0'}
-    dependencies:
-      '@discordjs/util': 0.1.0
-      '@sapphire/shapeshift': 3.7.1
-      discord-api-types: 0.37.41
-      fast-deep-equal: 3.1.3
-      ts-mixer: 6.0.2
-      tslib: 2.4.1
-    dev: false
 
   /@discordjs/builders/1.6.3:
     resolution: {integrity: sha512-CTCh8NqED3iecTNuiz49mwSsrc2iQb4d0MjMdmS/8pb69Y4IlzJ/DIy/p5GFlgOrFbNO2WzMHkWKQSiJ3VNXaw==}
@@ -162,14 +150,6 @@ packages:
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dev: false
 
-  /@sapphire/shapeshift/3.7.1:
-    resolution: {integrity: sha512-JmYN/0GW49Vl8Hi4PwrsDBNjcuCylH78vWYolVys74LRIzilAAMINxx4RHQOdvYoz+ceJKVp4+zBbQ5kuIFOLw==}
-    engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
-    dependencies:
-      fast-deep-equal: 3.1.3
-      lodash.uniqwith: 4.5.0
-    dev: false
-
   /@sapphire/shapeshift/3.8.2:
     resolution: {integrity: sha512-NXpnJAsxN3/h9TqQPntOeVWZrpIuucqXI3IWF6tj2fWCoRLCuVK5wx7Dtg7pRrtkYfsMUbDqgKoX26vrC5iYfA==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
@@ -217,10 +197,6 @@ packages:
 
   /@types/node/18.16.3:
     resolution: {integrity: sha512-OPs5WnnT1xkCBiuQrZA4+YAV4HEJejmHneyraIaxsbev5yCEr6KMwINNFP9wQeFIw8FWcoTqF3vQsa5CDaI+8Q==}
-
-  /@types/offscreencanvas/2019.7.0:
-    resolution: {integrity: sha512-PGcyveRIpL1XIqK8eBsmRBt76eFgtzuPiSTyKHZxnGemp2yzGzWpjYKAfK3wIMiU7eH+851yEpiuP8JZerTmWg==}
-    dev: false
 
   /@types/ws/8.5.4:
     resolution: {integrity: sha512-zdQDHKUgcX/zBc4GrwsE/7dVdAD8JR4EuiAXiiUhhfyIJXXb2+PrGshFyeXWQPMmmZ2XxgaqclgpIC7eTXc1mg==}
@@ -399,22 +375,20 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
-  /fast-average-color-node/2.4.0:
-    resolution: {integrity: sha512-Vxh2JQWwHETAuIQM966/ULLprPIe78UrvyV+AUYJxyj4nBHwl4QYG6Ym77ZPDO4mYExVk0axKmU5EGXv7uAlaw==}
+  /fast-average-color-node/2.6.0:
+    resolution: {integrity: sha512-dn7ps7AhcsO8Gq4468aAeSVMtYWAGjTIjQ6J83+QueA6UYZ22YeKfIrfKjQiYAjBt+oBWskZ5e1fXtmsm24xMg==}
     engines: {node: '>= 12'}
     dependencies:
-      fast-average-color: 9.1.1
+      fast-average-color: 9.3.0
+      sharp: 0.31.3
       node-fetch: 2.6.9
-      sharp: 0.30.7
     transitivePeerDependencies:
       - encoding
     dev: false
 
-  /fast-average-color/9.1.1:
-    resolution: {integrity: sha512-PJizLBcGb/jqUzrH66385te4+GcOK7wcUiCDvBUszdpzc/pvV1kwifvvsFygV3mS+7qwnWmK9/BrZniaOOC9ag==}
+  /fast-average-color/9.3.0:
+    resolution: {integrity: sha512-FlPROSqDMOnoBgkFhWMHJODPvpS0Od0WDpedcKq4U/t0JVapGAkblNwxOr75qT+ZNd0dQM4qlgqrtnXbCJ8cNg==}
     engines: {node: '>= 12'}
-    dependencies:
-      '@types/offscreencanvas': 2019.7.0
     dev: false
 
   /fast-deep-equal/3.1.3:
@@ -474,10 +448,6 @@ packages:
 
   /lodash.snakecase/4.1.1:
     resolution: {integrity: sha512-QZ1d4xoBHYUeuouhEq3lk3Uq7ldgyFXGBhg04+oRLnIz8o9T65Eh+8YdroUwn846zchkA9yDsDl5CVVaV2nqYw==}
-    dev: false
-
-  /lodash.uniqwith/4.5.0:
-    resolution: {integrity: sha512-7lYL8bLopMoy4CTICbxygAUq6CdRJ36vFc80DucPueUee+d5NBRxz3FdT9Pes/HEx5mPoT9jwnsEJWz1N7uq7Q==}
     dev: false
 
   /lodash/4.17.21:
@@ -647,9 +617,9 @@ packages:
       lru-cache: 6.0.0
     dev: false
 
-  /sharp/0.30.7:
-    resolution: {integrity: sha512-G+MY2YW33jgflKPTXXptVO28HvNOo9G3j0MybYAHeEmby+QuD2U98dT6ueht9cv/XDqZspSpIhoSW+BAKJ7Hig==}
-    engines: {node: '>=12.13.0'}
+  /sharp/0.31.3:
+    resolution: {integrity: sha512-XcR4+FCLBFKw1bdB+GEhnUNXNXvnt0tDo4WsBsraKymuo/IAuPuCBVAL2wIkUw2r/dwFW5Q5+g66Kwl2dgDFVg==}
+    engines: {node: '>=14.15.0'}
     requiresBuild: true
     dependencies:
       color: 4.2.3
@@ -736,10 +706,6 @@ packages:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
     dev: false
 
-  /ts-mixer/6.0.2:
-    resolution: {integrity: sha512-zvHx3VM83m2WYCE8XL99uaM7mFwYSkjR2OZti98fabHrwkjsCvgwChda5xctein3xGOyaQhtTeDq/1H/GNvF3A==}
-    dev: false
-
   /ts-mixer/6.0.3:
     resolution: {integrity: sha512-k43M7uCG1AkTyxgnmI5MPwKoUvS/bRvLvUb7+Pgpdlmok8AoqmUaZxUUw8zKM5B1lqZrt41GjYgnvAi0fppqgQ==}
     dev: false
@@ -770,7 +736,7 @@ packages:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 4.9.5
+      typescript: 5.0.4
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     dev: true
@@ -789,9 +755,9 @@ packages:
       safe-buffer: 5.2.1
     dev: false
 
-  /typescript/4.9.5:
-    resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
-    engines: {node: '>=4.2.0'}
+  /typescript/5.0.4:
+    resolution: {integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==}
+    engines: {node: '>=12.20'}
     hasBin: true
     dev: true
 
