@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@discordjs/builders': 1.4.0
   '@discordjs/rest': 1.4.0
-  '@types/node': 18.11.10
+  '@types/node': 18.16.3
   '@types/node-fetch': 2.6.3
   discord-api-types: 0.37.41
   discord.js: 14.10.2
@@ -28,10 +28,10 @@ dependencies:
   run: 1.4.0
 
 devDependencies:
-  '@types/node': 18.11.10
+  '@types/node': 18.16.3
   '@types/node-fetch': 2.6.3
   prettier: 2.8.0
-  ts-node: 10.9.1_osscqd4e24dzbeujryu7def2au
+  ts-node: 10.9.1_hl62ipmltjfz74pvls4whx33xm
   typescript: 4.9.5
 
 packages:
@@ -211,12 +211,12 @@ packages:
   /@types/node-fetch/2.6.3:
     resolution: {integrity: sha512-ETTL1mOEdq/sxUtgtOhKjyB2Irra4cjxksvcMUR5Zr4n+PxVhsCD9WS46oPbHL3et9Zde7CNRr+WUNlcHvsX+w==}
     dependencies:
-      '@types/node': 18.11.10
+      '@types/node': 18.16.3
       form-data: 3.0.1
     dev: true
 
-  /@types/node/18.11.10:
-    resolution: {integrity: sha512-juG3RWMBOqcOuXC643OAdSA525V44cVgGV6dUDuiFtss+8Fk5x1hI93Rsld43VeJVIeqlP9I7Fn9/qaVqoEAuQ==}
+  /@types/node/18.16.3:
+    resolution: {integrity: sha512-OPs5WnnT1xkCBiuQrZA4+YAV4HEJejmHneyraIaxsbev5yCEr6KMwINNFP9wQeFIw8FWcoTqF3vQsa5CDaI+8Q==}
 
   /@types/offscreencanvas/2019.7.0:
     resolution: {integrity: sha512-PGcyveRIpL1XIqK8eBsmRBt76eFgtzuPiSTyKHZxnGemp2yzGzWpjYKAfK3wIMiU7eH+851yEpiuP8JZerTmWg==}
@@ -225,7 +225,7 @@ packages:
   /@types/ws/8.5.4:
     resolution: {integrity: sha512-zdQDHKUgcX/zBc4GrwsE/7dVdAD8JR4EuiAXiiUhhfyIJXXb2+PrGshFyeXWQPMmmZ2XxgaqclgpIC7eTXc1mg==}
     dependencies:
-      '@types/node': 18.11.10
+      '@types/node': 18.16.3
     dev: false
 
   /@vladfrangu/async_event_emitter/2.2.1:
@@ -744,7 +744,7 @@ packages:
     resolution: {integrity: sha512-k43M7uCG1AkTyxgnmI5MPwKoUvS/bRvLvUb7+Pgpdlmok8AoqmUaZxUUw8zKM5B1lqZrt41GjYgnvAi0fppqgQ==}
     dev: false
 
-  /ts-node/10.9.1_osscqd4e24dzbeujryu7def2au:
+  /ts-node/10.9.1_hl62ipmltjfz74pvls4whx33xm:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -763,7 +763,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 18.11.10
+      '@types/node': 18.16.3
       acorn: 8.8.1
       acorn-walk: 8.2.0
       arg: 4.1.3
