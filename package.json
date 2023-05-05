@@ -12,24 +12,24 @@
   "author": "hirosuke",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "18.11.10",
-    "@types/node-fetch": "2.6.2",
     "prettier": "2.8.8",
+    "@types/node": "18.16.3",
+    "@types/node-fetch": "2.6.3",
     "ts-node": "10.9.1",
-    "typescript": "4.9.5"
+    "typescript": "5.0.4"
   },
   "dependencies": {
-    "@discordjs/builders": "1.4.0",
-    "@discordjs/rest": "1.4.0",
+    "@discordjs/builders": "1.6.3",
+    "@discordjs/rest": "1.7.1",
     "discord-api-types": "0.37.41",
-    "discord.js": "14.8.0",
+    "discord.js": "14.10.2",
     "dotenv": "16.0.3",
-    "fast-average-color-node": "2.4.0",
-    "node-fetch": "2.6.7",
+    "fast-average-color-node": "2.6.0",
+    "node-fetch": "2.6.9",
     "outdent": "0.8.0",
     "run": "1.4.0"
   },
-  "packageManager": "pnpm@7.18.0",
+  "packageManager": "pnpm@8.4.0",
   "engines": {
     "npm": "This project is configured to use pnpm"
   }
