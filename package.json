@@ -12,9 +12,9 @@
   "author": "hirosuke",
   "license": "MIT",
   "devDependencies": {
+    "prettier": "2.8.8",
     "@types/node": "18.16.3",
     "@types/node-fetch": "2.6.3",
-    "prettier": "2.8.0",
     "ts-node": "10.9.1",
     "typescript": "5.0.4"
   },

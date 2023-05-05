@@ -11,7 +11,7 @@ specifiers:
   fast-average-color-node: 2.6.0
   node-fetch: 2.6.9
   outdent: 0.8.0
-  prettier: 2.8.0
+  prettier: 2.8.8
   run: 1.4.0
   ts-node: 10.9.1
   typescript: 5.0.4
@@ -30,7 +30,7 @@ dependencies:
 devDependencies:
   '@types/node': 18.16.3
   '@types/node-fetch': 2.6.3
-  prettier: 2.8.0
+  prettier: 2.8.8
   ts-node: 10.9.1_tz4znfsbt2bp6kjvaww33rryty
   typescript: 5.0.4
 
@@ -520,8 +520,8 @@ packages:
       tunnel-agent: 0.6.0
     dev: false
 
-  /prettier/2.8.0:
-    resolution: {integrity: sha512-9Lmg8hTFZKG0Asr/kW9Bp8tJjRVluO8EJQVfY2T7FMw9T5jy4I/Uvx0Rca/XWf50QQ1/SS48+6IJWnrb+2yemA==}
+  /prettier/2.8.8:
+    resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
