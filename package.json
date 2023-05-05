@@ -19,7 +19,7 @@
     "typescript": "4.9.5"
   },
   "dependencies": {
-    "@discordjs/builders": "1.4.0",
+    "@discordjs/builders": "1.6.3",
     "@discordjs/rest": "1.4.0",
     "discord-api-types": "0.37.41",
     "discord.js": "14.10.2",
