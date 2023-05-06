@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@discordjs/builders': 1.6.3
   '@discordjs/rest': 1.7.1
-  '@types/node': 18.16.4
+  '@types/node': 18.16.5
   '@types/node-fetch': 2.6.3
   discord-api-types: 0.37.41
   discord.js: 14.10.2
@@ -28,10 +28,10 @@ dependencies:
   run: 1.4.0
 
 devDependencies:
-  '@types/node': 18.16.4
+  '@types/node': 18.16.5
   '@types/node-fetch': 2.6.3
   prettier: 2.8.8
-  ts-node: 10.9.1_ykzkq6tovrvqzpd7ytcrhlfuou
+  ts-node: 10.9.1_x553fjfla674sodvstc3oio7dy
   typescript: 5.0.4
 
 packages:
@@ -162,17 +162,17 @@ packages:
   /@types/node-fetch/2.6.3:
     resolution: {integrity: sha512-ETTL1mOEdq/sxUtgtOhKjyB2Irra4cjxksvcMUR5Zr4n+PxVhsCD9WS46oPbHL3et9Zde7CNRr+WUNlcHvsX+w==}
     dependencies:
-      '@types/node': 18.16.4
+      '@types/node': 18.16.5
       form-data: 3.0.1
     dev: true
 
-  /@types/node/18.16.4:
-    resolution: {integrity: sha512-LUhvPmAKAbgm+p/K11IWszLZVoZDlMF4NRmqbhEzDz/CnCuehPkZXwZbBCKGJsgjnuVejotBwM7B3Scrq4EqDw==}
+  /@types/node/18.16.5:
+    resolution: {integrity: sha512-seOA34WMo9KB+UA78qaJoCO20RJzZGVXQ5Sh6FWu0g/hfT44nKXnej3/tCQl7FL97idFpBhisLYCTB50S0EirA==}
 
   /@types/ws/8.5.4:
     resolution: {integrity: sha512-zdQDHKUgcX/zBc4GrwsE/7dVdAD8JR4EuiAXiiUhhfyIJXXb2+PrGshFyeXWQPMmmZ2XxgaqclgpIC7eTXc1mg==}
     dependencies:
-      '@types/node': 18.16.4
+      '@types/node': 18.16.5
     dev: false
 
   /@vladfrangu/async_event_emitter/2.2.1:
@@ -672,7 +672,7 @@ packages:
     resolution: {integrity: sha512-k43M7uCG1AkTyxgnmI5MPwKoUvS/bRvLvUb7+Pgpdlmok8AoqmUaZxUUw8zKM5B1lqZrt41GjYgnvAi0fppqgQ==}
     dev: false
 
-  /ts-node/10.9.1_ykzkq6tovrvqzpd7ytcrhlfuou:
+  /ts-node/10.9.1_x553fjfla674sodvstc3oio7dy:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -691,7 +691,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 18.16.4
+      '@types/node': 18.16.5
       acorn: 8.8.1
       acorn-walk: 8.2.0
       arg: 4.1.3
