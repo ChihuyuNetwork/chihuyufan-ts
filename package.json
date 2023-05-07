@@ -22,7 +22,7 @@
     "@discordjs/builders": "1.6.3",
     "@discordjs/rest": "1.7.1",
     "discord-api-types": "0.37.41",
-    "discord.js": "14.10.2",
+    "discord.js": "14.11.0",
     "dotenv": "16.0.3",
     "fast-average-color-node": "2.6.0",
     "node-fetch": "2.6.9",
