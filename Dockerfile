@@ -1,4 +1,4 @@
-FROM node:18.16.18-bullseye as builder
+FROM 18.16.0-alpine as builder
 WORKDIR /opt
 COPY package.json .
 RUN npm i
