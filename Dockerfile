@@ -1,4 +1,4 @@
-FROM node:20.3.0-bullseye as builder
+FROM node:18.16.18-bullseye as builder
 WORKDIR /opt
 COPY package.json .
 RUN npm i
@@ -6,7 +6,7 @@ COPY tsconfig.json .
 COPY src ./src
 RUN npm run compile
 
-FROM node:20.3.0-bullseye-slim
+FROM node:18.16.18-bullseye-slim
 WORKDIR /opt
 ENV NODE_ENV="production"
 COPY package.json .
