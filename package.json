@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "a Discord bot",
   "main": "opt/index.js",
-  "type": "module",
   "scripts": {
     "start": "node opt/index.js",
     "debug": "ts-node src/index.ts",
@@ -26,7 +25,7 @@
     "discord.js": "14.11.0",
     "dotenv": "16.2.0",
     "fast-average-color-node": "2.6.0",
-    "node-fetch": "3.3.1",
+    "node-fetch": "2.6.6",
     "outdent": "0.8.0",
     "run": "1.4.0"
   },
