@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "a Discord bot",
   "main": "opt/index.js",
+  "type": "module",
   "scripts": {
     "start": "node opt/index.js",
     "debug": "ts-node src/index.ts",
