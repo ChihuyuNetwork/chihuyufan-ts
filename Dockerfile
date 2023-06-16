@@ -6,7 +6,7 @@ COPY tsconfig.json .
 COPY src ./src
 RUN npm run compile
 
-FROM node:18.16.18-bullseye-slim
+FROM node:18.16.0-alpine
 WORKDIR /opt
 ENV NODE_ENV="production"
 COPY package.json .
