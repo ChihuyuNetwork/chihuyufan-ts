@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@discordjs/builders':
-    specifier: 1.6.3
-    version: 1.6.3
+    specifier: 1.6.4
+    version: 1.6.4
   '@discordjs/rest':
     specifier: 2.0.0
     version: 2.0.0
@@ -59,12 +59,12 @@ packages:
       '@jridgewell/trace-mapping': 0.3.9
     dev: true
 
-  /@discordjs/builders@1.6.3:
-    resolution: {integrity: sha512-CTCh8NqED3iecTNuiz49mwSsrc2iQb4d0MjMdmS/8pb69Y4IlzJ/DIy/p5GFlgOrFbNO2WzMHkWKQSiJ3VNXaw==}
+  /@discordjs/builders@1.6.4:
+    resolution: {integrity: sha512-ARFKvmAkLhfkQQiNxqi0YIWqwUExvBRtvdtMFVJXvJoibsGkFrB/DWTf9byU7BTVUfsmW8w7NM55tYXR5S/iSg==}
     engines: {node: '>=16.9.0'}
     dependencies:
       '@discordjs/formatters': 0.3.1
-      '@discordjs/util': 0.3.1
+      '@discordjs/util': 1.0.0
       '@sapphire/shapeshift': 3.9.2
       discord-api-types: 0.37.51
       fast-deep-equal: 3.1.3
