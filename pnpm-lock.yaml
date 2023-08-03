@@ -41,8 +41,8 @@ devDependencies:
     specifier: 2.6.4
     version: 2.6.4
   prettier:
-    specifier: 3.0.0
-    version: 3.0.0
+    specifier: 3.0.1
+    version: 3.0.1
   ts-node:
     specifier: 10.9.1
     version: 10.9.1(@types/node@18.17.1)(typescript@5.1.6)
@@ -58,19 +58,6 @@ packages:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
     dev: true
-
-  /@discordjs/builders@1.6.4:
-    resolution: {integrity: sha512-ARFKvmAkLhfkQQiNxqi0YIWqwUExvBRtvdtMFVJXvJoibsGkFrB/DWTf9byU7BTVUfsmW8w7NM55tYXR5S/iSg==}
-    engines: {node: '>=16.9.0'}
-    dependencies:
-      '@discordjs/formatters': 0.3.1
-      '@discordjs/util': 1.0.0
-      '@sapphire/shapeshift': 3.9.2
-      discord-api-types: 0.37.51
-      fast-deep-equal: 3.1.3
-      ts-mixer: 6.0.3
-      tslib: 2.6.1
-    dev: false
 
   /@discordjs/builders@1.6.4:
     resolution: {integrity: sha512-ARFKvmAkLhfkQQiNxqi0YIWqwUExvBRtvdtMFVJXvJoibsGkFrB/DWTf9byU7BTVUfsmW8w7NM55tYXR5S/iSg==}
@@ -110,11 +97,6 @@ packages:
       magic-bytes.js: 1.0.15
       tslib: 2.6.1
       undici: 5.22.1
-    dev: false
-
-  /@discordjs/util@0.3.1:
-    resolution: {integrity: sha512-HxXKYKg7vohx2/OupUN/4Sd02Ev3PBJ5q0gtjdcvXb0ErCva8jNHWfe/v5sU3UKjIB/uxOhc+TDOnhqffj9pRA==}
-    engines: {node: '>=16.9.0'}
     dev: false
 
   /@discordjs/util@1.0.0:
@@ -541,8 +523,8 @@ packages:
       tunnel-agent: 0.6.0
     dev: false
 
-  /prettier@3.0.0:
-    resolution: {integrity: sha512-zBf5eHpwHOGPC47h0zrPyNn+eAEIdEzfywMoYn2XPi0P44Zp0tSq64rq0xAREh4auw2cJZHo9QUob+NqCQky4g==}
+  /prettier@3.0.1:
+    resolution: {integrity: sha512-fcOWSnnpCrovBsmFZIGIy9UqK2FaI7Hqax+DIO0A9UxeVoY4iweyaFjS5TavZN97Hfehph0nhsZnjlVKzEQSrQ==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
