@@ -21,7 +21,7 @@
   "dependencies": {
     "@discordjs/builders": "1.6.4",
     "@discordjs/rest": "2.0.0",
-    "discord-api-types": "0.37.52",
+    "discord-api-types": "0.37.53",
     "discord.js": "14.12.1",
     "dotenv": "16.3.1",
     "fast-average-color-node": "2.6.0",
