@@ -367,15 +367,15 @@ packages:
     resolution: {integrity: sha512-dn7ps7AhcsO8Gq4468aAeSVMtYWAGjTIjQ6J83+QueA6UYZ22YeKfIrfKjQiYAjBt+oBWskZ5e1fXtmsm24xMg==}
     engines: {node: '>= 12'}
     dependencies:
-      fast-average-color: 9.3.0
+      fast-average-color: 9.4.0
       node-fetch: 2.7.0
       sharp: 0.31.3
     transitivePeerDependencies:
       - encoding
     dev: false
 
-  /fast-average-color@9.3.0:
-    resolution: {integrity: sha512-FlPROSqDMOnoBgkFhWMHJODPvpS0Od0WDpedcKq4U/t0JVapGAkblNwxOr75qT+ZNd0dQM4qlgqrtnXbCJ8cNg==}
+  /fast-average-color@9.4.0:
+    resolution: {integrity: sha512-bvM8vV6YwK07dPbzFz77zJaBcfF6ABVfgNwaxVgXc2G+o0e/tzLCF9WU8Ryp1r0Nkk6JuJNsWCzbb4cLOMlB+Q==}
     engines: {node: '>= 12'}
     dev: false
 
