@@ -1,4 +1,4 @@
-FROM node:18.16.0-alpine3.18 as builder
+FROM node:18.17.1-alpine3.18 as builder
 WORKDIR /opt
 COPY package.json .
 RUN npm i
@@ -6,7 +6,7 @@ COPY tsconfig.json .
 COPY src ./src
 RUN npm run compile
 
-FROM node:18.16.0-alpine3.18
+FROM node:18.17.1-alpine3.18
 WORKDIR /opt
 ENV NODE_ENV="production"
 COPY package.json .
