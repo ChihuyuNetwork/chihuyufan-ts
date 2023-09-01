@@ -1,12 +1,14 @@
-import { ApplicationCommandOptionType, Snowflake } from 'discord-api-types/v10'
+import {ApplicationCommandOptionType, Snowflake} from 'discord-api-types/v10'
 import {
-  Events, GuildBasedChannel,
-  GuildChannel, GuildChannelEditOptions,
+  Events,
+  GuildBasedChannel,
+  GuildChannel,
+  GuildChannelEditOptions,
   InteractionReplyOptions,
   VoiceChannel
 } from 'discord.js'
-import { client } from '..'
-import { guildId } from '../constant'
+import {client} from '..'
+import {guildId} from '../constant'
 
 type VCConfig = {
   defaultName: string,
@@ -76,7 +78,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
     // VoiceChannelの名前変更のレートリミットにひっかかると、レスポンスが追いつかないときがあるので
     // deferReplyしてから、そのReplyを編集する形にしている。
     await interaction.deferReply()
-    await interaction.member.voice.channel?.edit({ name })
+    // @ts-ignore
+    await interaction.member.voice.channel?.edit({ status: name })
     await interaction.editReply(
       `チャンネル名を\`${name}\`に変更しました。\n※10分のレートリミットがあります。`
     )
