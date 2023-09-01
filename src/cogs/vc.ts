@@ -79,7 +79,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
     // deferReplyしてから、そのReplyを編集する形にしている。
     await interaction.deferReply()
     // @ts-ignore
-    await interaction.member.voice.channel?.edit({ status: name })
+    await interaction.member.voice.channel?.edit({ name })
     await interaction.editReply(
       `チャンネル名を\`${name}\`に変更しました。\n※10分のレートリミットがあります。`
     )
