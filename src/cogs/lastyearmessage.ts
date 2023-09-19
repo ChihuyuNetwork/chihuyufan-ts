@@ -23,6 +23,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
     let message = await interaction.channel!.messages
         .fetch({limit: 1})
         .then(messagePage => (messagePage.size === 1 ? messagePage.at(0) : null))
+    await interaction.deferReply()
     while (message) {
         await interaction.channel!.messages
             .fetch({ limit: 100, before: message.id })
@@ -33,8 +34,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
                 message = 0 < messagePage.size ? messagePage.at(messagePage.size - 1) : null;
             });
 
-        if (Date.now() - message.createdTimestamp <= 365 * 24 * 60 * 60 * 1000) break
+        if (Date.now() - message.createdTimestamp >= 365 * 24 * 60 * 60 * 1000) break
     }
-    await interaction.deferReply()
     await interaction.editReply(messages[messages.length - 1].url)
 })
