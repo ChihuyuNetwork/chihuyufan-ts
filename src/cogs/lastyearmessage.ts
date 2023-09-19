@@ -33,7 +33,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
                 message = 0 < messagePage.size ? messagePage.at(messagePage.size - 1) : null;
             });
 
-        if (Date.now() - message.createdTimestamp >= 365 * 24 * 60 * 60 * 1000) break
+        if (Date.now() - message.createdTimestamp <= 365 * 24 * 60 * 60 * 1000) break
     }
     await interaction.deferReply()
     await interaction.editReply(messages[0].url)
