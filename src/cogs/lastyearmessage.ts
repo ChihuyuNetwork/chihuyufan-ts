@@ -35,5 +35,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
         if (Date.now() - message.createdTimestamp >= 365 * 24 * 60 * 60 * 1000) break
     }
-    await interaction.reply(messages[0].url)
+    await interaction.deferReply()
+    await interaction.editReply(messages[0].url)
 })
