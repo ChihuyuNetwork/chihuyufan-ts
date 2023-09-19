@@ -23,7 +23,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
     const filteredMessages = messages.filter(msg => {
         const timeDiff = Date.now() - msg.createdTimestamp
         const oneYear = 365 * 24 * 60 * 60 * 1000
-        return timeDiff >= oneYear
+        return timeDiff <= oneYear
     })
-    await interaction.reply(filteredMessages.first()!.url)
+    await interaction.reply(filteredMessages.last()!.url)
 })
