@@ -1,6 +1,6 @@
-import { Events } from 'discord.js'
-import { client } from '..'
-import { guildId } from '../constant'
+import {Events} from 'discord.js'
+import {client} from '..'
+import {guildId} from '../constant'
 
 client.on('commandsReset', async () => {
   client.application!.commands.create(
@@ -23,12 +23,3 @@ client.on(Events.InteractionCreate, async (interaction) => {
     'https://twitter.com/hirosukt/status/1489252498540212224'
   )
 })
-
-// client.on('messageCreate', async (message) => {
-//   if (message.content === '.pr') {
-//     const channel = message.channel
-//     await channel.send(
-//       'https://twitter.com/hirosukt/status/1489252498540212224'
-//     )
-//   }
-// })

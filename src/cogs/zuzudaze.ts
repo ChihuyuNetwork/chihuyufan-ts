@@ -1,6 +1,6 @@
-import { Events } from 'discord.js'
-import { client } from '..'
-import { guildId } from '../constant'
+import {Events} from 'discord.js'
+import {client} from '..'
+import {guildId} from '../constant'
 
 const zuzudaze = ['ず', 'ず', 'だ', 'ぜ', 'ざ', 'じ']
 
@@ -23,13 +23,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
     return
   await interaction.reply(makeRanzozo())
 })
-
-// client.on('messageCreate', async (message) => {
-//   if (message.content === '.zuzudaze') {
-//     const channel = message.channel
-//     await channel.send(makeRanzozo())
-//   }
-// })
 
 function makeRanzozo() {
   var zuzudazo = ''
