@@ -1,4 +1,4 @@
-import {Events} from 'discord.js'
+import {Events, Message} from 'discord.js'
 import {client} from '..'
 import {guildId} from '../constant'
 
@@ -19,11 +19,21 @@ client.on(Events.InteractionCreate, async (interaction) => {
         interaction.commandName !== 'last-year-message'
     )
         return
-    const messages = await interaction.channel!.messages.fetch()
-    const filteredMessages = messages.filter(msg => {
-        const timeDiff = Date.now() - msg.createdTimestamp
-        const oneYear = 365 * 24 * 60 * 60 * 1000
-        return timeDiff <= oneYear
-    })
-    await interaction.reply(filteredMessages.last()!.url)
+    let messages: Message[] = []
+    let message = await interaction.channel!.messages
+        .fetch({limit: 1})
+        .then(messagePage => (messagePage.size === 1 ? messagePage.at(0) : null))
+    while (message) {
+        await interaction.channel!.messages
+            .fetch({ limit: 100, before: message.id })
+            .then(messagePage => {
+                messagePage.forEach(msg => messages.push(msg));
+
+                // Update our message pointer to be the last message on the page of messages
+                message = 0 < messagePage.size ? messagePage.at(messagePage.size - 1) : null;
+            });
+
+        if (Date.now() - message.createdTimestamp >= 365 * 24 * 60 * 60 * 1000) break
+    }
+    await interaction.reply(messages[0].url)
 })
