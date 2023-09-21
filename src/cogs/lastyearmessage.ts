@@ -1,4 +1,4 @@
-import {Events, SnowflakeUtil} from 'discord.js'
+import {Collection, Events, Message, SnowflakeUtil} from 'discord.js'
 import {client} from '..'
 import {guildId} from '../constant'
 
@@ -44,7 +44,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
     )
         return
     // @ts-ignore
-    let message = await interaction.channel!.messages
+    let message: Collection<string, Message<true>> = await interaction.channel!.messages
         .fetch({limit: 1, before: snowflake})
-    await interaction.reply({content: message.first()!.url, ephemeral: false})
+    await interaction.reply({content: message.first()?.url, ephemeral: false})
 })
