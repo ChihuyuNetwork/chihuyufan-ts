@@ -46,5 +46,5 @@ client.on(Events.InteractionCreate, async (interaction) => {
     // @ts-ignore
     let message: Collection<string, Message<true>> = await interaction.channel!.messages
         .fetch({limit: 1, before: snowflake})
-    await interaction.reply({content: message.first() === undefined ? message.first()!.url : "null", ephemeral: false})
+    await interaction.reply({content: message.first() !== undefined ? message.first()!.url : "ないっぽいよ", ephemeral: false})
 })
