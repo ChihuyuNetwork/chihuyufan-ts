@@ -1,4 +1,4 @@
-import {Events, Message} from 'discord.js'
+import {Events, SnowflakeUtil} from 'discord.js'
 import {client} from '..'
 import {guildId} from '../constant'
 
@@ -12,6 +12,30 @@ client.on('commandsReset', async () => {
     )
 })
 
+/**
+ * This is a function that ensures the return of JST dates
+ * in environments where Date returns either UTC or JST.
+ * @returns {Date} The current JST Date
+ */
+export const getJstDate = () => {
+    const jstOffsetMinutes = 9 * 60
+    const millisecondsInMinute = 60 * 1000
+
+    // UTC: (   0 + jstOffsetMinutes) * millisecondsInMinute = 32400000
+    // JST: (-540 + jstOffsetMinutes) * millisecondsInMinute = 0
+    const differenceFromJST = (new Date().getTimezoneOffset() + jstOffsetMinutes) * millisecondsInMinute
+
+    // UTC time + 32400000 -> JST time
+    // JST time +        0 -> JST time
+    return new Date(Date.now() + differenceFromJST)
+}
+// ---
+
+const nowDate = getJstDate()
+
+const snowflake = SnowflakeUtil.generate({timestamp: nowDate.setFullYear(nowDate.getFullYear() - 1)})
+// 処理 with snowflake
+
 client.on(Events.InteractionCreate, async (interaction) => {
     if (
         !interaction.inCachedGuild() ||
@@ -19,22 +43,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
         interaction.commandName !== 'last-year-message'
     )
         return
-    let messages: Message[] = []
+    // @ts-ignore
     let message = await interaction.channel!.messages
-        .fetch({limit: 1})
-        .then(messagePage => (messagePage.size === 1 ? messagePage.at(0) : null))
-    await interaction.deferReply()
-    while (message) {
-        await interaction.channel!.messages
-            .fetch({ limit: 100, before: message.id })
-            .then(messagePage => {
-                messagePage.forEach(msg => messages.push(msg));
-
-                // Update our message pointer to be the last message on the page of messages
-                message = 0 < messagePage.size ? messagePage.at(messagePage.size - 1) : null;
-            });
-
-        if (Date.now() - message.createdTimestamp >= 365 * 24 * 60 * 60 * 1000) break
-    }
-    await interaction.editReply(messages[messages.length - 1].url)
+        .fetch({limit: 1, before: snowflake})
+    await interaction.reply({content: message.first()!.url, ephemeral: false})
 })
