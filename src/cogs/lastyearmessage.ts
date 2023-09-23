@@ -1,12 +1,20 @@
 import {Collection, Events, Message, SnowflakeUtil} from 'discord.js'
 import {client} from '..'
 import {guildId} from '../constant'
+import {ApplicationCommandOptionType} from "discord-api-types/v10";
 
 client.on('commandsReset', async () => {
     client.application!.commands.create(
         {
             name: 'last-year-message',
-            description: 'チャンネルにある一年前のメッセージを引っ張り出してきます'
+            description: 'チャンネルにある一年前のメッセージを引っ張り出してきます',
+            options: [
+                {
+                    type: ApplicationCommandOptionType.Channel,
+                    name: 'channel',
+                    description: '歴史を見たいチャンネル'
+                }
+            ]
         },
         guildId
     )
@@ -43,8 +51,9 @@ client.on(Events.InteractionCreate, async (interaction) => {
         interaction.commandName !== 'last-year-message'
     )
         return
+    const channel = interaction.options.getChannel('channel') || interaction.channel
     // @ts-ignore
-    let message: Collection<string, Message<true>> = await interaction.channel!.messages
+    let message: Collection<string, Message<true>> = await channel!.messages
         .fetch({limit: 1, before: snowflake})
     await interaction.reply({content: message.first() !== undefined ? message.first()!.url : "ないっぽいよ", ephemeral: false})
 })
