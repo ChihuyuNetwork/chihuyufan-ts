@@ -9,8 +9,8 @@ dependencies:
     specifier: 1.7.0
     version: 1.7.0
   '@discordjs/rest':
-    specifier: 2.0.1
-    version: 2.0.1
+    specifier: 2.1.0
+    version: 2.1.0
   discord-api-types:
     specifier: 0.37.63
     version: 0.37.63
@@ -87,21 +87,6 @@ packages:
     engines: {node: '>=16.11.0'}
     dependencies:
       discord-api-types: 0.37.61
-    dev: false
-
-  /@discordjs/rest@2.0.1:
-    resolution: {integrity: sha512-/eWAdDRvwX/rIE2tuQUmKaxmWeHmGealttIzGzlYfI4+a7y9b6ZoMp8BG/jaohs8D8iEnCNYaZiOFLVFLQb8Zg==}
-    engines: {node: '>=16.11.0'}
-    dependencies:
-      '@discordjs/collection': 1.5.3
-      '@discordjs/util': 1.0.2
-      '@sapphire/async-queue': 1.5.0
-      '@sapphire/snowflake': 3.5.1
-      '@vladfrangu/async_event_emitter': 2.2.2
-      discord-api-types: 0.37.50
-      magic-bytes.js: 1.5.0
-      tslib: 2.6.2
-      undici: 5.22.1
     dev: false
 
   /@discordjs/rest@2.1.0:
@@ -362,7 +347,7 @@ packages:
       '@discordjs/builders': 1.7.0
       '@discordjs/collection': 1.5.3
       '@discordjs/formatters': 0.3.3
-      '@discordjs/rest': 2.0.1
+      '@discordjs/rest': 2.1.0
       '@discordjs/util': 1.0.2
       '@discordjs/ws': 1.0.2
       '@sapphire/snowflake': 3.5.1
