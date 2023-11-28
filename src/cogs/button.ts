@@ -1,7 +1,7 @@
-import { ActionRowBuilder, ButtonBuilder, MessageComponentBuilder } from '@discordjs/builders'
-import { ButtonStyle, Events, MessageComponent } from 'discord.js'
+import {ActionRowBuilder, ButtonBuilder} from '@discordjs/builders'
+import {ButtonStyle, Events} from 'discord.js'
 import outdent from 'outdent'
-import { client } from '..'
+import {client} from '..'
 
 const serverIP = outdent`
     繋がらない場合は<@&928978798022631424>か<@&1026898339121340446>に連絡してください。
@@ -9,7 +9,7 @@ const serverIP = outdent`
     アドレス: \`chihuyu.love\`
     `
 const discordInviteURL = 'discord.gg/XkmSDA6kUn'
-const scrapboxInviteURL ='https://scrapbox.io/projects/hiro-hub/invitations/c687d9ed3a7fdc50a01730e9227d01c5'
+const scrapboxInviteURL ='https://scrapbox.io/projects/chihuyu-love/invitations/c687d9ed3a7fdc50a01730e9227d01c5'
 
 client.on(Events.MessageCreate, async (message) => {
   const botAuthors = ['608242236546613259', '743393055113216093']
