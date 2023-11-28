@@ -9,7 +9,7 @@ const serverIP = outdent`
     アドレス: \`chihuyu.love\`
     `
 const discordInviteURL = 'discord.gg/XkmSDA6kUn'
-const scrapboxInviteURL ='https://scrapbox.io/projects/chihuyu-love/invitations/c687d9ed3a7fdc50a01730e9227d01c5'
+const scrapboxInviteURL ='https://scrapbox.io/projects/chihuyu/invitations/c687d9ed3a7fdc50a01730e9227d01c5'
 
 client.on(Events.MessageCreate, async (message) => {
   const botAuthors = ['608242236546613259', '743393055113216093']
