@@ -30,8 +30,8 @@ dependencies:
     specifier: 0.8.0
     version: 0.8.0
   run:
-    specifier: 1.4.0
-    version: 1.4.0
+    specifier: 1.5.0
+    version: 1.5.0
 
 devDependencies:
   '@types/node':
@@ -581,8 +581,8 @@ packages:
       util-deprecate: 1.0.2
     dev: false
 
-  /run@1.4.0:
-    resolution: {integrity: sha512-962oBW07IjQ9SizyMHdoteVbDKt/e2nEsnTRZ0WjK/zs+jfQQICqH0qj0D5lqZNuy0JkbzfA6IOqw0Sk7C3DlQ==}
+  /run@1.5.0:
+    resolution: {integrity: sha512-CBPzeX6JQZUdhZpSFyNt2vUk44ivKMWZYCNBYoZYEE46mL9nf6WyMP3320WnzIrJuo89+njiUvlo83jUEXjXLg==}
     engines: {node: '>=v0.9.0'}
     hasBin: true
     dependencies:
