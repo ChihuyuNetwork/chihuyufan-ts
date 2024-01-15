@@ -99,7 +99,7 @@ packages:
       '@sapphire/snowflake': 3.5.2
       '@vladfrangu/async_event_emitter': 2.2.4
       discord-api-types: 0.37.61
-      magic-bytes.js: 1.7.0
+      magic-bytes.js: 1.8.0
       tslib: 2.6.2
       undici: 5.27.2
     dev: false
@@ -210,8 +210,8 @@ packages:
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dev: false
 
-  /acorn-walk@8.3.1:
-    resolution: {integrity: sha512-TgUZgYvqZprrl7YldZNoa9OciCAyZR+Ejm9eXzKCmjsF5IKp/wgQ7Z/ZpjpGTIUPwrHQIcYeI8qDh4PsEwxMbw==}
+  /acorn-walk@8.3.2:
+    resolution: {integrity: sha512-cjkyv4OtNCIeqhHrfS81QWXoCBPExR/J62oyEqepVw8WaQeSqpW2uhuLPh1m9eWhDuOo/jUXVTlifvesOWp/4A==}
     engines: {node: '>=0.4.0'}
     dev: true
 
@@ -449,8 +449,8 @@ packages:
       yallist: 4.0.0
     dev: false
 
-  /magic-bytes.js@1.7.0:
-    resolution: {integrity: sha512-YzVU2+/hrjwx8xcgAw+ffNq3jkactpj+f1iSL4LonrFKhvnwDzHSqtFdk/MMRP53y9ScouJ7cKEnqYsJwsHoYA==}
+  /magic-bytes.js@1.8.0:
+    resolution: {integrity: sha512-lyWpfvNGVb5lu8YUAbER0+UMBTdR63w2mcSUlhhBTyVbxJvjgqwyAf3AZD6MprgK0uHuBoWXSDAMWLupX83o3Q==}
     dev: false
 
   /make-error@1.3.6:
@@ -717,7 +717,7 @@ packages:
       '@tsconfig/node16': 1.0.4
       '@types/node': 20.11.0
       acorn: 8.11.3
-      acorn-walk: 8.3.1
+      acorn-walk: 8.3.2
       arg: 4.1.3
       create-require: 1.1.1
       diff: 4.0.2
