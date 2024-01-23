@@ -24,7 +24,7 @@
     "discord-api-types": "0.37.67",
     "discord.js": "14.14.1",
     "dotenv": "16.3.2",
-    "fast-average-color-node": "2.7.0",
+    "fast-average-color-node": "3.0.0",
     "node-fetch": "2.7.0",
     "outdent": "0.8.0",
     "run": "1.5.0"
