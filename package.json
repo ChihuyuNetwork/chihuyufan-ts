@@ -12,7 +12,7 @@
   "author": "hirosuke",
   "license": "MIT",
   "devDependencies": {
-    "prettier": "3.2.5",
+    "prettier": "3.3.0",
     "@types/node": "20.11.30",
     "@types/node-fetch": "2.6.11",
     "ts-node": "10.9.2",
