@@ -13,7 +13,7 @@
   "license": "MIT",
   "devDependencies": {
     "prettier": "3.3.2",
-    "@types/node": "20.14.6",
+    "@types/node": "20.14.7",
     "@types/node-fetch": "2.6.11",
     "ts-node": "10.9.2",
     "typescript": "5.5.2"
