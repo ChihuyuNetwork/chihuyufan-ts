@@ -29,7 +29,7 @@
     "outdent": "0.8.0",
     "run": "1.5.0"
   },
-  "packageManager": "pnpm@9.8.0",
+  "packageManager": "pnpm@9.9.0",
   "engines": {
     "npm": "This project is configured to use pnpm"
   }
