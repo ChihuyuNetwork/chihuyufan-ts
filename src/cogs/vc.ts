@@ -19,13 +19,7 @@ const defaultNames = new Map<string, VCConfig>([
   ['928983010081124393', {defaultName: 'VC', textChannelId: "1058805846756302940"}],
   ['953922831924731935', {defaultName: 'VC2', textChannelId: "975225417109762068"}],
   ['1060436239561523320', {defaultName: 'VC3', textChannelId: "1059136137618268281"}],
-  ['1060436262101712926', {defaultName: 'VC4', textChannelId: "1060436581862887434"}],
-  ['1060436286164447292', {defaultName: 'VC5', textChannelId: "1060436607557181542"}],
-  ['1060436329277694013', {defaultName: 'VC6', textChannelId: "1060436750624882688"}],
-  ['1060436353696927864', {defaultName: 'VC7', textChannelId: "1060436772737261578"}],
-  ['1060436385036767342', {defaultName: 'VC8', textChannelId: "1060436801506000966"}],
-  ['1060436405060386847', {defaultName: 'VC9', textChannelId: "1060436823484141588"}],
-  ['1060436424538734602', {defaultName: 'VC10', textChannelId: "1060436842501111840"}]
+  ['1060436262101712926', {defaultName: 'VC4', textChannelId: "1060436581862887434"}]
 ])
 const allChannelsId = [...defaultNames.keys()]
 const vcCategoryId = '942783290572677121'
